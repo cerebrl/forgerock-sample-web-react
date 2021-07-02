@@ -1,0 +1,28 @@
+// Todos list styling
+// Floating label for new todo input
+.todos_input {
+  > label {
+    opacity: .50;
+  }
+}
+
+// Todo styling
+.todo_item > label {
+  cursor: pointer;
+}
+.todo_icon_complete,
+.todo_icon_incomplete {
+  margin-top: -0.5rem;
+}
+.todo_icon_complete {
+  fill: $gray-400;
+}
+.todo_icon_incomplete {
+  fill: $gray-600;
+}
+.todo_label_complete {
+  color: $gray-600;
+  font-style: italic;
+  text-decoration: line-through;
+  text-decoration-color: rgba($color: #000000, $alpha: 0.25);
+}
