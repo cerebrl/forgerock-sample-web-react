@@ -57,10 +57,15 @@ export async function checkAccessToken(ctx, next) {
    * Call user info endpoint.Request will succeed if Access Token is valid
    */
   try {
-    await UserManager.getCurrentUser();
+    const { email, username } = await UserManager.getCurrentUser();
+    ctx.setUser(username);
+    ctx.setEmail(email);
+
     next();
   } catch (err) {
     ctx.setAuthentication(false);
+    ctx.setUser('');
+
     ctx.page.redirect('/login');
   }
 }

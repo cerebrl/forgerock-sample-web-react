@@ -11,7 +11,7 @@
 import { v4 as uuid } from 'uuid';
 import { auth } from './server.middleware.mjs';
 
-const todos = [
+let todos = [
   {
     title: 'My first todo',
     completed: false,
@@ -47,5 +47,10 @@ export default async function routes(app) {
     const todo = todos.find((todo) => todo.id === req.params.id);
     todo.completed = !todo.completed;
     res.json(todo);
+  });
+
+  app.delete('/todos/:id', auth, async (req, res) => {
+    todos = todos.filter((todo) => todo.id !== req.params.id);
+    res.status(204).send('OK');
   });
 }

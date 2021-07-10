@@ -9,6 +9,7 @@
  */
 
 import React, { Fragment, useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { AppContext } from '../state.js';
 
@@ -22,25 +23,33 @@ export default function Home() {
    * appropriate navigational items.
    */
   const [state] = useContext(AppContext);
-  const title = state.authenticated ? 'Hello, again!' : 'Hello, visitor!';
-  const message = state.authenticated ? (
+  const title = state.isAuthenticated ? 'Hello, again!' : 'Hello, visitor!';
+  const message = state.isAuthenticated ? (
     <p>
-      Welcome back! Manage <a href="/todos">your todos here</a>.
+      Welcome back! Manage <Link to="/todos">your todos here</Link>.
     </p>
   ) : (
-    <p>
-      <a href="/login">Login</a> or register to get things done!
-    </p>
+    <Fragment>
+      <p>
+        Welcome to ForgeRock's sample app built with React (Web). The purpose of this is
+        to demonstrate how the <a href="https://github.com/ForgeRock/forgerock-javascript-sdk">
+        ForgeRock JavaScript SDK</a> is implemented within a fully functional application.
+      </p>
+      <p>
+        <Link to="/login">Login</Link> to get things done! Don't have an account? Reach out to us,
+        and we'll provide an account for you.
+      </p>
+    </Fragment>
   );
 
   return (
-    <Fragment>
-      <h2 className="mt-4 mb-3">
+    <div className="container">
+      <h1 className="mt-4 mb-3">
         {title}
-      </h2>
+      </h1>
       <div>
         { message }
       </div>
-    </Fragment>
+    </div>
   );
 }

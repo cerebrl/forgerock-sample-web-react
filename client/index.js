@@ -37,7 +37,10 @@ Config.set({
 
 // It's worth noting that all values are strings in session or localStorage.
 const authenticatedString = window.sessionStorage.getItem('sdk_authenticated');
-const currentPage = new URL(window.location.href).pathname.slice(1);
+const isAuthenticated = authenticatedString === 'true';
+const email = window.sessionStorage.getItem('sdk_email');
+const username = window.sessionStorage.getItem('sdk_username');
+const page = new URL(window.location.href).pathname.slice(1);
 
 /**
  * @function Init - Initializes React and global state
@@ -45,11 +48,16 @@ const currentPage = new URL(window.location.href).pathname.slice(1);
  */
 function Init() {
   /**
-   * This initializes the global state with React's Context API
+   * This leverages "global state" with React's Context API.
    * This can be useful to "hydrate" the state with stored data,
    * like this authentication status stored in sessionStorage.
    */
-  const stateMgmt = useStateMgmt(authenticatedString === 'true', currentPage);
+  const stateMgmt = useStateMgmt({
+    page,
+    isAuthenticated,
+    email,
+    username,
+  });
 
   return (
     <AppContext.Provider value={stateMgmt}>

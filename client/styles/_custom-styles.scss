@@ -6,13 +6,36 @@
   }
 }
 
+// Account
+.account_icon {
+  fill: $gray-500;
+}
+.account_dropdown-menu.account_dropdown-menu {
+  margin-top: 0.5rem;
+}
+.alert_icon {
+  fill: $red-800;
+}
+
+.login_reload-btn {
+  display: inline;
+  font-size: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+}
+
 // Todo styling
-.todo_item > label {
+.todo_item {
+  transition: background-color 0.4s;
+}
+.todo_label {
   cursor: pointer;
 }
 .todo_icon_complete,
 .todo_icon_incomplete {
-  margin-top: -0.5rem;
+  transition: fill 0.4s;
 }
 .todo_icon_complete {
   fill: $gray-400;
@@ -25,4 +48,13 @@
   font-style: italic;
   text-decoration: line-through;
   text-decoration-color: rgba($color: #000000, $alpha: 0.25);
+}
+.todo_label_incomplete:hover > .todo_icon_incomplete {
+  fill: $teal;
+}
+.todo_dropdown_actions {
+  fill: $gray-600;
+}
+.todo_dropdown_actions:hover {
+  fill: $gray-800;
 }

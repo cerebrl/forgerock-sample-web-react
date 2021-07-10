@@ -8,12 +8,14 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { FRAuth, TokenManager } from '@forgerock/javascript-sdk';
-import page from 'page';
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import { FRAuth, TokenManager, UserManager } from '@forgerock/javascript-sdk';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
+import AlertIcon from '../components/icons/alert-icon.js';
 import Choice from '../components/login/choice.js';
 import DeviceProfile from '../components/login/device-profile.js';
+import Loading from '../components/loading.js';
 import Password from '../components/login/password.js';
 import Unknown from '../components/login/unknown.js';
 import Username from '../components/login/username.js';
@@ -34,6 +36,7 @@ export default function Login() {
    */
   const [_, methods] = useContext(AppContext);
   const [step, setStep] = useState(null);
+  const history = useHistory();
 
   /**
    * Component types
@@ -43,11 +46,11 @@ export default function Login() {
    * generically rendered.
    * MessageComponent is intended for simply rendering messages to screen.
    */
+  let ErrorComponent;
+  let MessageComponent;
   let StageComponent;
   let StepComponents = [];
-  let MessageComponent;
-
-  let title;
+  let TitleComponent;
 
   /**
    * @function submitStep - Handles the submission of the step to AM
@@ -75,8 +78,12 @@ export default function Login() {
      */
     async function completeAuth() {
       await TokenManager.getTokens({ forceRenew: true });
+      const { email, name: username } = await UserManager.getCurrentUser();
+      methods.setUser(username);
+      methods.setEmail(email);
       methods.setAuthentication(true);
-      page.redirect('/');
+
+      history.push('/');
     }
 
     /**
@@ -100,25 +107,34 @@ export default function Login() {
      * Since there is no step information we need to call AM to retrieve the
      * instructions for rendering the login form.
      */
-    title = 'Loading ... ';
-    MessageComponent = function Loading() {
-      return <p>Checking session ...</p>;
-    };
+    TitleComponent = () => null;
+    MessageComponent = () => <Loading message="Checking your session ..." />;
   } else if (step.type === 'LoginSuccess') {
-    title = 'Hello again!';
-    MessageComponent = function Authenticated(props) {
-      return (
-        <div id="page_body">
-          <p>Redirecting you back to our home page ... </p>
-        </div>
-      );
-    };
-  } else if (step.type === 'LoginFailure') {
-    title = 'Login failure!';
-    MessageComponent = function Error() {
-    return (
-      <p>It looks like there was a login error.</p>
+    TitleComponent = () => null;
+    MessageComponent = () => (
+      <Loading message="Success! Redirecting ..." />
     );
+  } else if (step.type === 'LoginFailure') {
+    ErrorComponent = () => {
+      if (step.type === 'LoginFailure') {
+        return (
+          <p
+            className="alert alert-danger d-flex align-items-center mt-5"
+            role="alert"
+          >
+            <AlertIcon />
+            <span className="ps-2">
+              Your credentials were incorrect.
+              Please <button className="login_reload-btn" onClick={async () => {
+                const nextStep = await FRAuth.next();
+                setStep(nextStep);
+              }}>try again</button>.
+            </span>
+          </p>
+        );
+      } else {
+        return null;
+      }
     };
   } else if (!(step.getStage() === undefined)) {
     /**
@@ -127,32 +143,36 @@ export default function Login() {
      * rendered uniquely, rather than generically.
      */
     if (step.getStage() === 'UsernamePassword') {
-      title = 'Welcome. Please enter your credentials';
+      TitleComponent = () => (
+        <h1 className="mt-4 mb-3">Welcome. Please enter your credentials</h1>
+      );
       StageComponent = UsernamePassword;
     } else {
-      title = 'Oops, sorry!';
-      MessageComponent = function Error() {
+      TitleComponent = 'Oops, sorry!';
+      MessageComponent = () => {
         return <p>Stage unknown.</p>;
       };
     }
   } else if (step.callbacks.length > 0) {
+    TitleComponent = () => <h1 className="mt-4 mb-3">Login</h1>;
+
     /**
      * Iterate through callbacks mapping the callback to the
      * appropriate callback component, pushing that component
      * the StepComponent's array.
      */
-    step.callbacks.map(function (callback) {
-      switch(callback.getType()){
-        case "ChoiceCallback":
+    step.callbacks.map((callback) => {
+      switch (callback.getType()) {
+        case 'ChoiceCallback':
           StepComponents.push(Choice);
           break;
-        case "DeviceProfileCallback":
+        case 'DeviceProfileCallback':
           StepComponents.push(DeviceProfile);
           break;
-        case "NameCallback":
+        case 'NameCallback':
           StepComponents.push(Username);
           break;
-        case "PasswordCallback":
+        case 'PasswordCallback':
           StepComponents.push(Password);
           break;
         default:
@@ -160,11 +180,9 @@ export default function Login() {
           StepComponents.push(Unknown);
       }
     });
-   } else {
-    title = 'Oops, sorry!';
-    MessageComponent = function Error() {
-      return <p>It looks like there was an error.</p>;
-    };
+  } else {
+    TitleComponent = 'Oops, sorry!';
+    MessageComponent = () => <p>It looks like there was an error.</p>;
   }
 
   /**
@@ -173,40 +191,42 @@ export default function Login() {
    */
   if (MessageComponent) {
     return (
-      <Fragment>
-        <h2 className="mt-4 mb-3">
-          {title}
-        </h2>
+      <div className="container">
+        {TitleComponent()}
         <MessageComponent step={step} action={submitStep} />
-      </Fragment>
+      </div>
     );
   } else if (StageComponent) {
     return (
-      <Fragment>
-        <h2 className="mt-4 mb-3">
-          {title}
-        </h2>
+      <div className="container">
+        {TitleComponent()}
         <StageComponent step={step} action={submitStep} />
-      </Fragment>
+      </div>
+    );
+  } else if (ErrorComponent) {
+    return (
+      <div className="container">
+        {ErrorComponent()}
+      </div>
     );
   } else {
     return (
-      <Fragment>
-        <h2 className="mt-4 mb-3">Login</h2>
-        <form onSubmit={ function (event) {
-          event.preventDefault();
-          submitStep(step);
-        } }>
-          {
-            StepComponents.map(function (Component, idx) {
-              return <Component key={idx} step={step} />;
-            })
-          }
+      <div className="container">
+        {TitleComponent()}
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            submitStep(step);
+          }}
+        >
+          {StepComponents.map((Component, idx) => {
+            return <Component key={idx} step={step} />;
+          })}
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>
-      </Fragment>
-    )
+      </div>
+    );
   }
 }

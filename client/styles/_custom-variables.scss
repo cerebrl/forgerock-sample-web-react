@@ -75,7 +75,7 @@ $min-contrast-ratio: 2;
 $body-bg: $gray-100;
 $body-color: $gray-600;
 $headings-color: $gray-900;
-$font-size-base: 0.9375rem !default;
+$font-size-base: 0.9375rem;
 $font-weight-bold: 600;
 $font-weight-normal: 400;
 $font-weight-light: 300;
@@ -98,6 +98,9 @@ $container-max-widths: (
 
 // Override Border Styles
 $border-color: $gray-200;
+
+// Override default features
+$enable-shadows: true;
 
 // Override Fonts
 $font-family-sans-serif: "Open Sans", "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
@@ -126,3 +129,6 @@ $lead-font-weight: 400;
 $text-muted: $gray-500;
 
 $list-group-hover-bg: $highlight-bg;
+
+// Override Dropdown
+$dropdown-box-shadow: $box-shadow;

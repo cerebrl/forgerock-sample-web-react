@@ -10,6 +10,7 @@
 
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 
+import Modal from '../components/modal.js';
 import Todo from '../components/todo.js';
 import apiRequest from '../utilities/request.js';
 
@@ -23,20 +24,8 @@ export default function Todos() {
    * the global state if that's preferred over doing API calls in React views
    */
   const [todos, setTodos] = useState([]);
+  const [todoActionId, setTodoActionId] = useState('');
   const textInput = useRef(null);
-
-  const Todos = !todos.length ? (
-    <p className="d-flex justify-content-center align-items-center border-top px-3">
-      <div className="spinner-border text-primary my-2" role="status"></div>
-      <span className="p-3 fs-5">Collecting your todos ...</span>
-    </p>
-  ) : (
-    <ul className="list-group list-group-flush mb-1">
-      {todos.map(function (todo) {
-        return <Todo key={todo.id} todo={todo} />;
-      })}
-    </ul>
-  );
 
   /**
    * Since we are making an API call, which is a side-effect,
@@ -45,9 +34,13 @@ export default function Todos() {
    */
   useEffect(function () {
     async function getTodos() {
-      // Request the todos from our resource API
-      const todos = await apiRequest('todos', 'GET');
-      setTodos(todos);
+      try {
+        // Request the todos from our resource API
+        const todos = await apiRequest('todos', 'GET');
+        setTodos(todos);
+      } catch (error) {
+        console.log('Turn into redirect to login.');
+      }
     }
     if (!todos.length) {
       getTodos();
@@ -58,34 +51,56 @@ export default function Todos() {
     e.preventDefault();
     const title = e.target.elements[0].value;
     const newTodo = await apiRequest('todos', 'POST', { title });
-    setTodos([ ...todos, newTodo ]);
+    setTodos([...todos, newTodo]);
     textInput.current.value = '';
     return;
-  };
+  }
+
+  async function deleteTodo() {
+    await apiRequest(`todos/${todoActionId}`, 'DELETE');
+    setTodos(todos.filter((todo) => todo.id !== todoActionId));
+    return;
+  }
+
+  const Todos = !todos.length ? (
+    <p className="d-flex justify-content-center align-items-center border-top px-3">
+      <span className="spinner-border text-primary my-2" role="status"></span>
+      <span className="p-3 fs-5">Collecting your todos ...</span>
+    </p>
+  ) : (
+    <ul className="list-group list-group-flush mb-1">
+      {todos.map(function (todo) {
+        return <Todo key={todo.id} todo={todo} setTodoActionId={setTodoActionId} />;
+      })}
+    </ul>
+  );
 
   return (
     <Fragment>
-      <h1 className="mt-4">Your Todos</h1>
-      <div className="card shadow-sm">
-        <form
-          className="p-3"
-          action="https://api.example.com:8443/todos"
-          method="POST"
-          onSubmit={ createTodo }
-        >
-          <div className="form-floating todos_input">
-            <input
-              id="newTodo"
-              type="text"
-              className="form-control"
-              placeholder="What needs doing?"
-              ref={textInput}
-            />
-            <label htmlFor="newTodo">What needs doing?</label>
-          </div>
-        </form>
-        {Todos}
+      <div className="container">
+        <h1 className="mt-4">Your Todos</h1>
+        <div className="card shadow-sm">
+          <form
+            className="p-3"
+            action="https://api.example.com:8443/todos"
+            method="POST"
+            onSubmit={createTodo}
+          >
+            <div className="form-floating todos_input">
+              <input
+                id="newTodo"
+                type="text"
+                className="form-control"
+                placeholder="What needs doing?"
+                ref={textInput}
+              />
+              <label htmlFor="newTodo">What needs doing?</label>
+            </div>
+          </form>
+          {Todos}
+        </div>
       </div>
+      <Modal deleteTodo={deleteTodo} />
     </Fragment>
   );
 }

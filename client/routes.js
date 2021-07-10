@@ -22,7 +22,7 @@ import { checkAccessToken } from './middleware.js';
  * Other than the first * route, all routes just set the requested page value.
  * The global state management handles the event and rerenders the views.
  */
-export default function initRoutes(setAuthentication, setPage) {
+export default function initRoutes(setAuthentication, setEmail, setPage, setUser) {
   /**
    * A route handler that catches all routes. It's used to add
    * state hooks to all route contexts, and then calls next pass
@@ -30,7 +30,9 @@ export default function initRoutes(setAuthentication, setPage) {
    */
   page('*', function addStateHooks(ctx, next) {
     ctx.setAuthentication = setAuthentication;
+    ctx.setEmail = setEmail;
     ctx.setPage = setPage;
+    ctx.setUser = setUser;
     next();
   });
 
@@ -42,7 +44,7 @@ export default function initRoutes(setAuthentication, setPage) {
   });
 
   /**
-   * Protected catalog route (via the checkSession middleware)
+   * Protected todos route (via the checkSession middleware)
    */
   page('/todos', checkAccessToken, async function todos(ctx) {
     ctx.setPage('todos');
@@ -56,8 +58,8 @@ export default function initRoutes(setAuthentication, setPage) {
   });
 
   /**
-   * Handles logout route. This route doesn't have an
-   * associated view that renders to screen.
+   * Handles logout route. This route doesn't have an associated
+   * view that renders to screen.
    */
   page('/logout', async function logout(ctx) {
 
@@ -74,7 +76,8 @@ export default function initRoutes(setAuthentication, setPage) {
   /**
    * Configure Page.js options
    * The "dispatch" option handles initializing within a route, but causes
-   * unnecessary rerenders, so setting to false for now.
+   * unnecessary rerenders in certain circumstances.
+   *
    * The "hashbang" option uses the old school, example.com/#!/home style routes.
    * This works well enough for POCs when you don't have a "real" server.
    */

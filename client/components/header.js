@@ -9,8 +9,11 @@
  */
 
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
+import AccountIcon from './icons/account-icon';
 import { AppContext } from '../state.js';
+import TodosIcon from './icons/todos-icon';
 
 /**
  * @function Header - Header React view
@@ -28,26 +31,43 @@ export default function Header() {
   /**
    * Render different navigational items depending on authenticated status
    */
-  switch (state.authenticated) {
+  switch (state.isAuthenticated) {
     case true:
       TodosItem = (
         <li className="nav-item">
-          <a
+          <Link
             className={`nav-link ${state.page === 'todos' ? 'active' : ''}`}
-            href="/todos"
+            to="/todos"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg>
+            <TodosIcon />
             <span className="px-2">
               Todos
             </span>
-          </a>
+          </Link>
         </li>
       );
       LoginOrOutItem = (
         <div className="d-flex">
-          <a className="btn btn-outline-primary" href="/logout">
-            Logout
-          </a>
+          <div className="dropdown text-end">
+            <button
+              aria-expanded="false"
+              className="account_dropdown-btn btn h-100 p-0"
+              data-bs-toggle="dropdown"
+              data-bs-offset="[20,20]"
+              id="account_dropdown"
+            >
+              <AccountIcon />
+            </button>
+            <ul className="account_dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby="account_dropdown">
+              <li>
+                <div className="dropdown-header border-bottom">
+                  <p className="fw-bold mb-0">{ state.username }</p>
+                  <p className="mb-2">{ state.email }</p>
+                </div>
+              </li>
+              <li><Link className="dropdown-item" to="/logout">Logout</Link></li>
+            </ul>
+          </div>
         </div>
       );
       break;
@@ -55,9 +75,9 @@ export default function Header() {
       TodosItem = null;
       LoginOrOutItem = (
         <div className="d-flex">
-          <a className="btn btn-outline-primary" href="/login">
+          <Link className="btn btn-outline-primary" to="/login">
             Login
-          </a>
+          </Link>
         </div>
       );
   }
@@ -65,12 +85,12 @@ export default function Header() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 border-bottom">
       <div className="container">
-        <a
+        <Link
           className="navbar-brand border-end pe-4"
-          href="/"
+          to="/"
         >
           React
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

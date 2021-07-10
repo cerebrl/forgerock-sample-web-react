@@ -8,44 +8,40 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom';
 
+import { AppContext } from './state.js';
 import Todos from './views/todos.js';
-import Header from "./components/header.js";
+import Header from './components/header.js';
 import Home from './views/home.js';
 import Login from './views/login.js';
-import Footer from "./components/footer.js";
-import { AppContext } from './state.js';
+import Logout from './views/logout.js';
 
 /**
  * @function App - Application React view
  * @returns {Object} - React JSX view
  */
 export default function App() {
-  const [state] = useContext(AppContext);
-  let Main;
-
-  switch (state.page) {
-    case 'home':
-      Main = Home;
-      break;
-    case 'todos':
-      Main = Todos;
-      break;
-    case 'login':
-      Main = Login;
-      break;
-    default:
-      Main = Home;
-  }
+  const [{ isAuthenticated }] = useContext(AppContext);
 
   return (
-    <Fragment>
+    <Router>
       <Header />
-      <div className="container">
-        <Main />
-      </div>
-      <Footer />
-    </Fragment>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/todos">
+          {isAuthenticated ? <Todos /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/logout">
+          <Logout />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
