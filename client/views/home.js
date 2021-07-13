@@ -8,7 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppContext } from '../state.js';
@@ -23,33 +23,52 @@ export default function Home() {
    * appropriate navigational items.
    */
   const [state] = useContext(AppContext);
-  const title = state.isAuthenticated ? 'Hello, again!' : 'Hello, visitor!';
-  const message = state.isAuthenticated ? (
-    <p>
-      Welcome back! Manage <Link to="/todos">your todos here</Link>.
-    </p>
-  ) : (
-    <Fragment>
-      <p>
-        Welcome to ForgeRock's sample app built with React (Web). The purpose of this is
-        to demonstrate how the <a href="https://github.com/ForgeRock/forgerock-javascript-sdk">
-        ForgeRock JavaScript SDK</a> is implemented within a fully functional application.
+  const LoginAlert = () => {
+    return state.isAuthenticated ? (
+      <p
+        className="alert alert-info d-flex align-items-center mt-5"
+        role="alert"
+      >
+        <span className="ps-2">
+          Welcome back, {state.username}!{' '}
+          <Link to="/todos">Manage your todos here</Link>.
+        </span>
       </p>
-      <p>
-        <Link to="/login">Login</Link> to get things done! Don't have an account? Reach out to us,
-        and we'll provide an account for you.
-      </p>
-    </Fragment>
-  );
+    ) : null;
+  };
 
   return (
     <div className="container">
-      <h1 className="mt-4 mb-3">
-        {title}
+      {LoginAlert()}
+      <h1 className="home_head-text text-center">
+        Protect with ForgeRock; Develop with React.js
       </h1>
-      <div>
-        { message }
-      </div>
+      <p className=".home_subhead-text fs-3 mb-4 fw-bold text-muted">
+        Learn how to develop ForgeRock protected, web apps with the{' '}
+        <a
+          className="text-muted text-decoration-underline"
+          href="https://reactjs.org/"
+        >
+          React.js
+        </a>{' '}
+        library and our{' '}
+        <a
+          className="text-muted text-decoration-underline"
+          href="https://github.com/ForgeRock/forgerock-javascript-sdk"
+        >
+          JavaScript SDK
+        </a>
+        .
+      </p>
+      <p>
+        The purpose of this sample web app is to demonstrate how the ForgeRock
+        JavaScript SDK is implemented within a fully-functional application
+        using a popular framework.
+      </p>
+      <p>
+        Don't have an account? <Link to="/register">Create an account now</Link>
+        ! Or, <Link to="/login">Login</Link> to get things done!
+      </p>
     </div>
   );
 }

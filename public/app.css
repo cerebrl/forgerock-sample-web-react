@@ -41,7 +41,7 @@
 body {
   margin: 0;
   font-family: var(--bs-font-sans-serif);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #5e6d82;
@@ -72,42 +72,42 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 }
 
 h1, .h1 {
-  font-size: calc(1.40625rem + 1.875vw);
+  font-size: calc(1.425rem + 2.1vw);
 }
 @media (min-width: 1200px) {
   h1, .h1 {
-    font-size: 2.8125rem;
+    font-size: 3rem;
   }
 }
 
 h2, .h2 {
-  font-size: calc(1.3125rem + 0.75vw);
+  font-size: calc(1.325rem + 0.9vw);
 }
 @media (min-width: 1200px) {
   h2, .h2 {
-    font-size: 1.875rem;
+    font-size: 2rem;
   }
 }
 
 h3, .h3 {
-  font-size: calc(1.265625rem + 0.1875vw);
+  font-size: calc(1.275rem + 0.3vw);
 }
 @media (min-width: 1200px) {
   h3, .h3 {
-    font-size: 1.40625rem;
+    font-size: 1.5rem;
   }
 }
 
 h4, .h4 {
-  font-size: 1.171875rem;
+  font-size: 1.25rem;
 }
 
 h5, .h5 {
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 h6, .h6 {
-  font-size: 0.76171875rem;
+  font-size: 0.8125rem;
 }
 
 p {
@@ -3427,15 +3427,15 @@ textarea.form-control-lg {
 }
 .form-floating > .form-control,
 .form-floating > .form-select {
-  height: calc(3.5rem + 2px);
-  padding: 1rem 0.75rem;
+  height: calc(3rem + 2px);
+  padding: 0.75rem 0.75rem;
 }
 .form-floating > label {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  padding: 1rem 0.75rem;
+  padding: 0.75rem 0.75rem;
   pointer-events: none;
   border: 1px solid transparent;
   transform-origin: 0 0;
@@ -3465,11 +3465,11 @@ textarea.form-control-lg {
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
 .form-floating > .form-select ~ label {
   opacity: 0.65;
-  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  transform: scale(0.85) translateY(-0.6rem) translateX(0.15rem);
 }
 .form-floating > .form-control:-webkit-autofill ~ label {
   opacity: 0.65;
-  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  transform: scale(0.85) translateY(-0.6rem) translateX(0.15rem);
 }
 
 .input-group {
@@ -4881,7 +4881,7 @@ textarea.form-control-lg {
 .popover-header {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   background-color: #f0f0f0;
   border-bottom: 1px solid #d8d8d8;
   border-top-left-radius: calc(0.3rem - 1px);
@@ -9707,12 +9707,66 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+html {
+  height: 100%;
+}
+
+.home_head-text {
+  letter-spacing: -0.01em;
+  margin: 5rem 0;
+}
+
+.home_subhead-text {
+  letter-spacing: -0.01em;
+}
+
+.header_navbar-brand.header_navbar-brand {
+  color: #455469;
+  font-weight: bold;
+}
+.header_navbar-brand.header_navbar-brand.header_navbar-brand_auth {
+  border-right: 1px solid #e7eef4;
+  margin-left: -7.5rem;
+  width: 7.5rem;
+}
+.header_navbar-brand.header_navbar-brand svg {
+  fill: #69788b;
+  padding: 0 0.25rem;
+}
+
+.header_nav-item {
+  border-bottom: 5px solid #f8f9fa;
+}
+.header_nav-item:hover {
+  background-color: #e4f4fd;
+  border-bottom-color: #109cf1;
+}
+.header_nav-item .header_nav-link.header_nav-link {
+  color: #324054;
+}
+
+.header_nav-item_active {
+  border-bottom-color: #109cf1;
+  transition: background-color 0.25s;
+}
+
+.header_account-link {
+  color: #109cf1;
+  text-decoration: none;
+}
+.header_account-link:hover {
+  text-decoration: underline;
+}
+
 .todos_input > label {
   opacity: 0.5;
 }
 
 .account_icon {
   fill: #69788b;
+}
+.account_icon:hover {
+  fill: #109cf1;
 }
 
 .account_dropdown-menu.account_dropdown-menu {
@@ -9721,6 +9775,14 @@ textarea.form-control-lg {
 
 .alert_icon {
   fill: #58151c;
+}
+
+.login_form .btn {
+  padding: 0.75rem 1.25rem;
+}
+
+.login_key-icon {
+  fill: #c0c9d5;
 }
 
 .login_reload-btn {

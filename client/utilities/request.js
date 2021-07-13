@@ -32,6 +32,9 @@ export default async function apiRequest(resource, method, data) {
         body: JSON.stringify(data),
       },
     });
+    if (!response.ok) {
+      throw new Error(`Status ${response.status}: API request failed`)
+    }
     json = await response.json();
   } catch (err) {
     json = {

@@ -1,3 +1,57 @@
+// To allow for vertical centering
+html {
+  height: 100%;
+}
+
+// Home page styling
+.home_head-text {
+  letter-spacing: -0.01em;
+  margin: 5rem 0;
+}
+.home_subhead-text {
+  letter-spacing: -0.01em;
+}
+
+// Header styling
+.header_navbar-brand.header_navbar-brand {
+  color: $gray-700;
+  font-weight: bold;
+
+  &.header_navbar-brand_auth {
+    border-right: 1px solid $gray-200;
+    margin-left: -7.5rem;
+    width: 7.5rem;
+  }
+
+  svg {
+    fill: $gray-500;
+    padding: 0 0.25rem;
+  }
+}
+.header_nav-item {
+  border-bottom: 5px solid $light;
+
+  &:hover {
+    background-color: $light-cyan;
+    border-bottom-color: $primary;
+  }
+  .header_nav-link.header_nav-link {
+    color: $gray-800;
+  }
+}
+.header_nav-item_active {
+  border-bottom-color: $primary;
+  transition: background-color 0.25s;
+}
+.header_account-link {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 // Todos list styling
 // Floating label for new todo input
 .todos_input {
@@ -9,6 +63,10 @@
 // Account
 .account_icon {
   fill: $gray-500;
+
+  &:hover {
+    fill: $primary;
+  }
 }
 .account_dropdown-menu.account_dropdown-menu {
   margin-top: 0.5rem;
@@ -17,6 +75,14 @@
   fill: $red-800;
 }
 
+.login_form {
+  .btn {
+    padding: 0.75rem 1.25rem;
+  }
+}
+.login_key-icon {
+  fill: $gray-400;
+}
 .login_reload-btn {
   display: inline;
   font-size: inherit;

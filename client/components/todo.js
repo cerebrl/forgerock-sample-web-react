@@ -38,15 +38,15 @@ export default function Todo({ setTodoActionId, todo: item }) {
   return (
     <li className="todo_item list-group-item list-group-item-action p-0">
       <div className="row">
-        <label htmlFor={todo.id} className={todoClass}>
+        <label htmlFor={todo._id} className={todoClass}>
           <input
-            id={todo.id}
+            id={todo._id}
             className="form-check-input visually-hidden"
             type="checkbox"
             checked={todo.completed}
             onChange={(e) => {
               e.preventDefault();
-              toggleTodo(todo.id);
+              toggleTodo(todo._id);
             }}
           />
           <TodoIcon completed={todo.completed} />
@@ -56,19 +56,19 @@ export default function Todo({ setTodoActionId, todo: item }) {
           <button
             className="todo_dropdown_actions btn h-100"
             data-bs-toggle="dropdown"
-            id={`todo_action_${todo.id}`}
+            id={`todo_action_${todo._id}`}
           >
             <ActionIcon />
           </button>
           <ul
             className="dropdown-menu dropdown-menu-end"
-            aria-labelledby={`todo_action_${todo.id}`}
+            aria-labelledby={`todo_action_${todo._id}`}
           >
-            {/* <li><a className="dropdown-item" href="todo.id/edit">Edit</a></li> */}
+            {/* <li><a className="dropdown-item" href="todo._id/edit">Edit</a></li> */}
             <li>
               <button
                 className="dropdown-item"
-                onClick={(e) => setTodoActionId(todo.id)}
+                onClick={(e) => setTodoActionId(todo._id)}
                 data-bs-toggle="modal"
                 data-bs-target="#todoModal"
               >

@@ -8,8 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { useEffect, useState } from 'react';
-import initRoutes from './routes.js';
+import React, { useState } from 'react';
 
 /**
  * @function useStateMgmt - The global state/store for managing user authentication and page
@@ -57,19 +56,6 @@ export function useStateMgmt({ isAuthenticated, page, email, username }) {
     window.sessionStorage.setItem('sdk_username', `${value}`);
     setUser(value);
   }
-
-  // /**
-  //  * Since we are setting state from outside of React's scope (from routing layer),
-  //  * that would be considered a side-effect. Hence, the use of useEffect here.
-  //  */
-  // useEffect(function () {
-  //   initRoutes(
-  //     setAuthenticationWrapper,
-  //     setEmailWrapper,
-  //     setPage,
-  //     setUserWrapper
-  //   );
-  // });
 
   /**
    * returns an array with state object as index zero and setters as index one

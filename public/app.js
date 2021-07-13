@@ -7461,14 +7461,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ App)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _state_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state.js */ "./client/state.js");
 /* harmony import */ var _views_todos_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/todos.js */ "./client/views/todos.js");
-/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/header.js */ "./client/components/header.js");
-/* harmony import */ var _views_home_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/home.js */ "./client/views/home.js");
-/* harmony import */ var _views_login_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/login.js */ "./client/views/login.js");
-/* harmony import */ var _views_logout_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/logout.js */ "./client/views/logout.js");
+/* harmony import */ var _components_footer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/footer.js */ "./client/components/footer.js");
+/* harmony import */ var _components_header_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/header.js */ "./client/components/header.js");
+/* harmony import */ var _views_home_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/home.js */ "./client/views/home.js");
+/* harmony import */ var _views_login_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/login.js */ "./client/views/login.js");
+/* harmony import */ var _views_logout_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./views/logout.js */ "./client/views/logout.js");
+/* harmony import */ var _views_register_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./views/register.js */ "./client/views/register.js");
 /*
  * forgerock-sample-web-react
  *
@@ -7486,6 +7488,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 /**
  * @function App - Application React view
  * @returns {Object} - React JSX view
@@ -7495,17 +7499,327 @@ function App() {
   var [{
     isAuthenticated
   }] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_state_js__WEBPACK_IMPORTED_MODULE_1__.AppContext);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_header_js__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
     path: "/login"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_login_js__WEBPACK_IMPORTED_MODULE_5__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_login_js__WEBPACK_IMPORTED_MODULE_6__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+    path: "/register"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_register_js__WEBPACK_IMPORTED_MODULE_8__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
     path: "/todos"
-  }, isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_todos_js__WEBPACK_IMPORTED_MODULE_2__.default, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Redirect, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_header_js__WEBPACK_IMPORTED_MODULE_4__.default, null), isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_todos_js__WEBPACK_IMPORTED_MODULE_2__.default, null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Redirect, {
     to: "/login"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_footer_js__WEBPACK_IMPORTED_MODULE_3__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
     path: "/logout"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_logout_js__WEBPACK_IMPORTED_MODULE_6__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_header_js__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_logout_js__WEBPACK_IMPORTED_MODULE_7__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_footer_js__WEBPACK_IMPORTED_MODULE_3__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
     path: "/"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_home_js__WEBPACK_IMPORTED_MODULE_4__.default, null))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_header_js__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_views_home_js__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_footer_js__WEBPACK_IMPORTED_MODULE_3__.default, null))));
+}
+
+/***/ }),
+
+/***/ "./client/components/footer.js":
+/*!*************************************!*\
+  !*** ./client/components/footer.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Footer)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function Footer() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("small", {
+    className: "border-top d-block mt-5 py-5"
+  }, "The React name and logomark are properties of ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "https://reactjs.org"
+  }, "Facebook"), ", and the use herein is for learning and illustrative purposes only."));
+}
+
+/***/ }),
+
+/***/ "./client/components/form.js":
+/*!***********************************!*\
+  !*** ./client/components/form.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Form)
+/* harmony export */ });
+/* harmony import */ var _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @forgerock/javascript-sdk */ "./node_modules/@forgerock/javascript-sdk/lib-esm/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _components_icons_alert_icon_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/icons/alert-icon.js */ "./client/components/icons/alert-icon.js");
+/* harmony import */ var _components_login_choice_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/login/choice.js */ "./client/components/login/choice.js");
+/* harmony import */ var _components_login_device_profile_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/login/device-profile.js */ "./client/components/login/device-profile.js");
+/* harmony import */ var _components_loading_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/loading.js */ "./client/components/loading.js");
+/* harmony import */ var _components_login_password_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/login/password.js */ "./client/components/login/password.js");
+/* harmony import */ var _components_login_unknown_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/login/unknown.js */ "./client/components/login/unknown.js");
+/* harmony import */ var _components_login_text_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/login/text.js */ "./client/components/login/text.js");
+/* harmony import */ var _state_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../state.js */ "./client/state.js");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+/*
+ * forgerock-sample-web-react
+ *
+ * form.js
+ *
+ * Copyright (c) 2021 ForgeRock. All rights reserved.
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ */
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @function Form - React view for managing the user authentication journey
+ * @returns {Object} - React JSX view
+ */
+
+function Form(_ref) {
+  var {
+    action,
+    followUp
+  } = _ref;
+
+  var reducer = (_, action) => {
+    switch (action.type) {
+      case 'login':
+        return 'UsernamePassword';
+
+      case 'register':
+        return 'Registration';
+
+      case 'forgotPassword':
+        return 'ForgotPassword';
+
+      default:
+        throw new Error('Login action type not recognized.');
+    }
+  };
+  /**
+   * Compose the state used in this view.
+   * First, we will use the global state methods found in the App Context
+   * Then, we will create local state to manage the login journey. The
+   * underscore is an unused variable, since we don't need the current state.
+   */
+
+
+  var [_, methods] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_state_js__WEBPACK_IMPORTED_MODULE_9__.AppContext);
+  var [tree, setTree] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useReducer)(reducer, reducer(null, action));
+  var [renderStep, setRenderStep] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  var [submissionStep, setSubmissionStep] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_10__.useHistory)();
+  /**
+   * Component types
+   * StepComponents are generic callback components that will be
+   * generically rendered.
+   * MessageComponent is intended for simply rendering messages to screen.
+   * ErrorComponent is intended for displaying the error
+   */
+
+  var ErrorComponent;
+  var MessageComponent;
+  var StepComponents = [];
+  /**
+   * Since we have API calls to AM, we need to handle these requests as side-effects
+   * This will allow the view to render, but update/rerender after the request completes
+   */
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    /**
+     * @function completeAuth - The function to call when we get a LoginSuccess
+     */
+    function getOAuth() {
+      return _getOAuth.apply(this, arguments);
+    }
+    /**
+     * @function getInitialStep - The function to call when there's no previous step
+     */
+
+
+    function _getOAuth() {
+      _getOAuth = _asyncToGenerator(function* () {
+        yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.TokenManager.getTokens({
+          forceRenew: true
+        });
+        var {
+          email,
+          name: username
+        } = yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.UserManager.getCurrentUser(); // Set user info on "global state"
+
+        methods.setUser(username);
+        methods.setEmail(email);
+        methods.setAuthentication(true); // Run follow up function if present
+
+        followUp && (yield followUp());
+        history.push('/');
+      });
+      return _getOAuth.apply(this, arguments);
+    }
+
+    function getStep(_x) {
+      return _getStep.apply(this, arguments);
+    }
+
+    function _getStep() {
+      _getStep = _asyncToGenerator(function* (prev) {
+        var nextStep = yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.FRAuth.next(prev, {
+          tree
+        });
+        /**
+         * Condition for handling start and stop of login journey.
+         * Here's where you should add more error handling.
+         */
+
+        if (nextStep.type === 'LoginSuccess') {
+          getOAuth();
+        } else if (!nextStep.type === 'LoginError') {
+          console.log('Error');
+        } else {
+          setRenderStep(nextStep);
+        }
+      });
+      return _getStep.apply(this, arguments);
+    }
+
+    getStep(submissionStep);
+  }, [submissionStep]);
+  /**
+   * Render conditions for presenting appropriate views to user.
+   * Adding more steps to a journey would mean more conditions
+   * to add here. More error conditions would be good here too.
+   */
+
+  if (!renderStep) {
+    /**
+     * Since there is no step information we need to call AM to retrieve the
+     * instructions for rendering the login form.
+     */
+    MessageComponent = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_loading_js__WEBPACK_IMPORTED_MODULE_5__.default, {
+      message: "Checking your session ..."
+    });
+  } else if (renderStep.type === 'LoginSuccess') {
+    MessageComponent = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_loading_js__WEBPACK_IMPORTED_MODULE_5__.default, {
+      message: "Success! Redirecting ..."
+    });
+  } else if (renderStep.type === 'LoginFailure') {
+    ErrorComponent = () => {
+      if (renderStep.type === 'LoginFailure') {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", {
+          className: "alert alert-danger d-flex align-items-center mt-5",
+          role: "alert"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons_alert_icon_js__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", {
+          className: "ps-2"
+        }, "Your credentials were incorrect. Please", ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
+          className: "login_reload-btn",
+          onClick: /*#__PURE__*/_asyncToGenerator(function* () {
+            var nextStep = yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.FRAuth.next();
+            setRenderStep(nextStep);
+          })
+        }, "try again"), "."));
+      } else {
+        return null;
+      }
+    };
+  } else if (renderStep.callbacks.length > 0) {
+    /**
+     * Iterate through callbacks mapping the callback to the
+     * appropriate callback component, pushing that component
+     * the StepComponent's array.
+     */
+    renderStep.callbacks.map(callback => {
+      switch (callback.getType()) {
+        case 'ChoiceCallback':
+          StepComponents.push({
+            Component: _components_login_choice_js__WEBPACK_IMPORTED_MODULE_3__.default,
+            callback
+          });
+          break;
+
+        case 'DeviceProfileCallback':
+          StepComponents.push({
+            Component: _components_login_device_profile_js__WEBPACK_IMPORTED_MODULE_4__.default,
+            callback
+          });
+          break;
+
+        case 'NameCallback':
+        case 'ValidatedCreateUsernameCallback':
+        case 'StringAttributeInputCallback':
+          StepComponents.push({
+            Component: _components_login_text_js__WEBPACK_IMPORTED_MODULE_8__.default,
+            callback
+          });
+          break;
+
+        case 'PasswordCallback':
+        case 'ValidatedCreatePasswordCallback':
+          StepComponents.push({
+            Component: _components_login_password_js__WEBPACK_IMPORTED_MODULE_6__.default,
+            callback
+          });
+          break;
+
+        default:
+          // If we don't recognize the callback, render a warning
+          StepComponents.push({
+            Component: _components_login_unknown_js__WEBPACK_IMPORTED_MODULE_7__.default,
+            callback
+          });
+      }
+    });
+  } else {
+    MessageComponent = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "It looks like there was an error.");
+  }
+  /**
+   * Check if there is an error, a message or components to render.
+   */
+
+
+  if (ErrorComponent) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, ErrorComponent());
+  } else if (MessageComponent) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, MessageComponent());
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
+      className: "login_form",
+      onSubmit: event => {
+        event.preventDefault(); // set current step as previous step
+
+        setSubmissionStep(renderStep);
+      }
+    }, StepComponents.map((_ref3, idx) => {
+      var {
+        Component,
+        callback
+      } = _ref3;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(Component, {
+        key: idx,
+        callback: callback
+      });
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+      type: "submit",
+      className: "btn btn-primary w-100",
+      value: "Submit"
+    })));
+  }
 }
 
 /***/ }),
@@ -7522,10 +7836,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Header)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _icons_account_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./icons/account-icon */ "./client/components/icons/account-icon.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _icons_account_icon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./icons/account-icon.js */ "./client/components/icons/account-icon.js");
 /* harmony import */ var _state_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../state.js */ "./client/state.js");
-/* harmony import */ var _icons_todos_icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icons/todos-icon */ "./client/components/icons/todos-icon.js");
+/* harmony import */ var _icons_forgerock_icon_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icons/forgerock-icon.js */ "./client/components/icons/forgerock-icon.js");
+/* harmony import */ var _icons_react_icon_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icons/react-icon.js */ "./client/components/icons/react-icon.js");
+/* harmony import */ var _icons_todos_icon_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icons/todos-icon.js */ "./client/components/icons/todos-icon.js");
 /*
  * forgerock-sample-web-react
  *
@@ -7535,6 +7852,8 @@ __webpack_require__.r(__webpack_exports__);
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
  */
+
+
 
 
 
@@ -7551,6 +7870,7 @@ function Header() {
    * appropriate navigational items.
    */
   var [state] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_state_js__WEBPACK_IMPORTED_MODULE_2__.AppContext);
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useLocation)();
   var TodosItem;
   var LoginOrOutItem;
   /**
@@ -7560,12 +7880,12 @@ function Header() {
   switch (state.isAuthenticated) {
     case true:
       TodosItem = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-        className: "nav-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-        className: "nav-link ".concat(state.page === 'todos' ? 'active' : ''),
+        className: "header_nav-item ".concat(location.pathname === '/todos' ? 'header_nav-item_active' : '', " nav-item")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+        className: "header_nav-link nav-link d-flex align-items-center h-100",
         to: "/todos"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_icons_todos_icon__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "px-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_icons_todos_icon_js__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+        className: "px-2 fs-5"
       }, "Todos")));
       LoginOrOutItem = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "d-flex"
@@ -7577,7 +7897,7 @@ function Header() {
         "data-bs-toggle": "dropdown",
         "data-bs-offset": "[20,20]",
         id: "account_dropdown"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_icons_account_icon__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_icons_account_icon_js__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "account_dropdown-menu dropdown-menu dropdown-menu-end",
         "aria-labelledby": "account_dropdown"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -7586,7 +7906,7 @@ function Header() {
         className: "fw-bold mb-0"
       }, state.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         className: "mb-2"
-      }, state.email))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      }, state.email))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
         className: "dropdown-item",
         to: "/logout"
       }, "Logout")))));
@@ -7595,21 +7915,23 @@ function Header() {
     default:
       TodosItem = null;
       LoginOrOutItem = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "d-flex"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-        className: "btn btn-outline-primary",
+        className: "d-flex py-3"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+        className: "header_account-link py-2 px-3 mx-1",
         to: "/login"
-      }, "Login"));
+      }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+        className: "btn btn-outline-secondary",
+        to: "/register"
+      }, "Register"));
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-    className: "navbar navbar-expand-lg navbar-light bg-white py-3 border-bottom"
+    className: "navbar navbar-expand-lg navbar-light bg-white py-0 border-bottom"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-    className: "navbar-brand border-end pe-4",
-    to: "/"
-  }, "React"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "container d-flex align-items-stretch"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "header_navbar-brand ".concat(state.isAuthenticated ? 'header_navbar-brand_auth' : '', " navbar-brand py-3 pe-4 me-4")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_icons_forgerock_icon_js__WEBPACK_IMPORTED_MODULE_3__.default, null), " + ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_icons_react_icon_js__WEBPACK_IMPORTED_MODULE_4__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "navbar-toggler",
     type: "button",
     "data-bs-toggle": "collapse",
@@ -7620,10 +7942,10 @@ function Header() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "navbar-toggler-icon"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "collapse navbar-collapse",
+    className: "collapse navbar-collapse d-flex align-items-stretch",
     id: "navbarNav"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-    className: "navbar-nav me-auto"
+    className: "navbar-nav d-flex align-items-stretch me-auto"
   }, TodosItem), LoginOrOutItem)));
 }
 
@@ -7713,6 +8035,129 @@ function ActionIcon(props) {
     fill: "none"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     d: "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+  }));
+}
+
+/***/ }),
+
+/***/ "./client/components/icons/forgerock-icon.js":
+/*!***************************************************!*\
+  !*** ./client/components/icons/forgerock-icon.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ForgeRockIcon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function ForgeRockIcon() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    viewBox: "0 0 64 64",
+    version: "1.1",
+    height: "31px"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("g", {
+    transform: "matrix(0.18538366,0,0,0.18538366,-64.077863,86.24418)"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("polygon", {
+    transform: "translate(0,-465.21997)",
+    points: "603.99,87.77 571.17,29.85 469.15,209.14 502.22,267.59 "
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("polygon", {
+    transform: "translate(0,-465.21997)",
+    points: "673.05,209.61 621.45,118.47 519.7,298.1 546.04,345.23 596.04,345.23 672.95,209.78 "
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("polygon", {
+    transform: "translate(0,-465.21997)",
+    points: "554.19,0 455.85,32.41 363.87,194.61 443.62,194.55 "
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("polygon", {
+    transform: "translate(0,-465.21997)",
+    points: "431.64,345.23 511.42,345.23 443.1,224.89 363.48,224.78 "
+  })));
+}
+
+/***/ }),
+
+/***/ "./client/components/icons/key-icon.js":
+/*!*********************************************!*\
+  !*** ./client/components/icons/key-icon.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AccountIcon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function AccountIcon(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "48px",
+    viewBox: "0 0 24 24",
+    width: "48px"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
+  }));
+}
+
+/***/ }),
+
+/***/ "./client/components/icons/new-user-icon.js":
+/*!**************************************************!*\
+  !*** ./client/components/icons/new-user-icon.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AccountIcon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function AccountIcon(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "48px",
+    viewBox: "0 0 24 24",
+    width: "48px"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+  }));
+}
+
+/***/ }),
+
+/***/ "./client/components/icons/react-icon.js":
+/*!***********************************************!*\
+  !*** ./client/components/icons/react-icon.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ReactIcon)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function ReactIcon(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    "aria-hidden": "true",
+    focusable: "false",
+    role: "img",
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "38px",
+    viewBox: "0 0 512 512"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M418.2 177.2c-5.4-1.8-10.8-3.5-16.2-5.1.9-3.7 1.7-7.4 2.5-11.1 12.3-59.6 4.2-107.5-23.1-123.3-26.3-15.1-69.2.6-112.6 38.4-4.3 3.7-8.5 7.6-12.5 11.5-2.7-2.6-5.5-5.2-8.3-7.7-45.5-40.4-91.1-57.4-118.4-41.5-26.2 15.2-34 60.3-23 116.7 1.1 5.6 2.3 11.1 3.7 16.7-6.4 1.8-12.7 3.8-18.6 5.9C38.3 196.2 0 225.4 0 255.6c0 31.2 40.8 62.5 96.3 81.5 4.5 1.5 9 3 13.6 4.3-1.5 6-2.8 11.9-4 18-10.5 55.5-2.3 99.5 23.9 114.6 27 15.6 72.4-.4 116.6-39.1 3.5-3.1 7-6.3 10.5-9.7 4.4 4.3 9 8.4 13.6 12.4 42.8 36.8 85.1 51.7 111.2 36.6 27-15.6 35.8-62.9 24.4-120.5-.9-4.4-1.9-8.9-3-13.5 3.2-.9 6.3-1.9 9.4-2.9 57.7-19.1 99.5-50 99.5-81.7 0-30.3-39.4-59.7-93.8-78.4zM282.9 92.3c37.2-32.4 71.9-45.1 87.7-36 16.9 9.7 23.4 48.9 12.8 100.4-.7 3.4-1.4 6.7-2.3 10-22.2-5-44.7-8.6-67.3-10.6-13-18.6-27.2-36.4-42.6-53.1 3.9-3.7 7.7-7.2 11.7-10.7zM167.2 307.5c5.1 8.7 10.3 17.4 15.8 25.9-15.6-1.7-31.1-4.2-46.4-7.5 4.4-14.4 9.9-29.3 16.3-44.5 4.6 8.8 9.3 17.5 14.3 26.1zm-30.3-120.3c14.4-3.2 29.7-5.8 45.6-7.8-5.3 8.3-10.5 16.8-15.4 25.4-4.9 8.5-9.7 17.2-14.2 26-6.3-14.9-11.6-29.5-16-43.6zm27.4 68.9c6.6-13.8 13.8-27.3 21.4-40.6s15.8-26.2 24.4-38.9c15-1.1 30.3-1.7 45.9-1.7s31 .6 45.9 1.7c8.5 12.6 16.6 25.5 24.3 38.7s14.9 26.7 21.7 40.4c-6.7 13.8-13.9 27.4-21.6 40.8-7.6 13.3-15.7 26.2-24.2 39-14.9 1.1-30.4 1.6-46.1 1.6s-30.9-.5-45.6-1.4c-8.7-12.7-16.9-25.7-24.6-39s-14.8-26.8-21.5-40.6zm180.6 51.2c5.1-8.8 9.9-17.7 14.6-26.7 6.4 14.5 12 29.2 16.9 44.3-15.5 3.5-31.2 6.2-47 8 5.4-8.4 10.5-17 15.5-25.6zm14.4-76.5c-4.7-8.8-9.5-17.6-14.5-26.2-4.9-8.5-10-16.9-15.3-25.2 16.1 2 31.5 4.7 45.9 8-4.6 14.8-10 29.2-16.1 43.4zM256.2 118.3c10.5 11.4 20.4 23.4 29.6 35.8-19.8-.9-39.7-.9-59.5 0 9.8-12.9 19.9-24.9 29.9-35.8zM140.2 57c16.8-9.8 54.1 4.2 93.4 39 2.5 2.2 5 4.6 7.6 7-15.5 16.7-29.8 34.5-42.9 53.1-22.6 2-45 5.5-67.2 10.4-1.3-5.1-2.4-10.3-3.5-15.5-9.4-48.4-3.2-84.9 12.6-94zm-24.5 263.6c-4.2-1.2-8.3-2.5-12.4-3.9-21.3-6.7-45.5-17.3-63-31.2-10.1-7-16.9-17.8-18.8-29.9 0-18.3 31.6-41.7 77.2-57.6 5.7-2 11.5-3.8 17.3-5.5 6.8 21.7 15 43 24.5 63.6-9.6 20.9-17.9 42.5-24.8 64.5zm116.6 98c-16.5 15.1-35.6 27.1-56.4 35.3-11.1 5.3-23.9 5.8-35.3 1.3-15.9-9.2-22.5-44.5-13.5-92 1.1-5.6 2.3-11.2 3.7-16.7 22.4 4.8 45 8.1 67.9 9.8 13.2 18.7 27.7 36.6 43.2 53.4-3.2 3.1-6.4 6.1-9.6 8.9zm24.5-24.3c-10.2-11-20.4-23.2-30.3-36.3 9.6.4 19.5.6 29.5.6 10.3 0 20.4-.2 30.4-.7-9.2 12.7-19.1 24.8-29.6 36.4zm130.7 30c-.9 12.2-6.9 23.6-16.5 31.3-15.9 9.2-49.8-2.8-86.4-34.2-4.2-3.6-8.4-7.5-12.7-11.5 15.3-16.9 29.4-34.8 42.2-53.6 22.9-1.9 45.7-5.4 68.2-10.5 1 4.1 1.9 8.2 2.7 12.2 4.9 21.6 5.7 44.1 2.5 66.3zm18.2-107.5c-2.8.9-5.6 1.8-8.5 2.6-7-21.8-15.6-43.1-25.5-63.8 9.6-20.4 17.7-41.4 24.5-62.9 5.2 1.5 10.2 3.1 15 4.7 46.6 16 79.3 39.8 79.3 58 0 19.6-34.9 44.9-84.8 61.4zm-149.7-15c25.3 0 45.8-20.5 45.8-45.8s-20.5-45.8-45.8-45.8c-25.3 0-45.8 20.5-45.8 45.8s20.5 45.8 45.8 45.8z"
   }));
 }
 
@@ -7874,17 +8319,19 @@ __webpack_require__.r(__webpack_exports__);
  * @returns {Object} - React JSX view
  */
 
-function Choice(props) {
-  var choiceCb = props.step.getCallbackOfType('ChoiceCallback');
-  var prompt = choiceCb.getPrompt();
-  var choiceOptions = choiceCb.getChoices();
+function Choice(_ref) {
+  var {
+    callback
+  } = _ref;
+  var prompt = callback.getPrompt();
+  var choiceOptions = callback.getChoices();
   /**
    * @function setValue - Sets the value on the callback on element blur (lose focus)
    * @param {Object} event
    */
 
   function setValue(event) {
-    choiceCb.setChoiceIndex(event.target.value);
+    callback.setChoiceIndex(event.target.value);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -7940,11 +8387,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  * @returns {Object} - React JSX view
  */
 
-function DeviceProfile(props) {
-  var deviceCollectorCb = props.step.getCallbackOfType('DeviceProfileCallback');
-  var isLocationRequired = deviceCollectorCb.isLocationRequired();
-  var isMetadataRequired = deviceCollectorCb.isMetadataRequired();
-  var message = deviceCollectorCb.getMessage();
+function DeviceProfile(_ref) {
+  var {
+    callback
+  } = _ref;
+  var isLocationRequired = callback.isLocationRequired();
+  var isMetadataRequired = callback.isMetadataRequired();
+  var message = callback.getMessage();
   /**
    * Create state for this component in order to update the view upon change
    * `deviceProfile` is the actual JSON intended for sending to AM
@@ -7979,7 +8428,7 @@ function DeviceProfile(props) {
         updateDeviceProfile(profile);
         updateDeviceProfileString(JSON.stringify(profile, false, 2)); // Sets value on callback
 
-        deviceCollectorCb.setProfile(profile);
+        callback.setProfile(profile);
       });
       return _getDeviceProfile.apply(this, arguments);
     }
@@ -8026,16 +8475,18 @@ __webpack_require__.r(__webpack_exports__);
  * @returns {Object} - React JSX view
  */
 
-function Password(props) {
-  var passwordCb = props.step.getCallbackOfType('PasswordCallback');
-  var passwordLabel = passwordCb.getPrompt();
+function Password(_ref) {
+  var {
+    callback
+  } = _ref;
+  var passwordLabel = callback.getPrompt();
   /**
    * @function setValue - Sets the value on the callback on element blur (lose focus)
    * @param {Object} event
    */
 
   function setValue(event) {
-    passwordCb.setPassword(event.target.value);
+    callback.setPassword(event.target.value);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -8043,13 +8494,72 @@ function Password(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     onBlur: setValue,
     type: "password",
-    name: "password",
+    name: callback.payload.input[0].name,
     className: "form-control",
-    id: "passwordInput",
+    id: callback.payload.input[0].name,
     placeholder: passwordLabel
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    htmlFor: "passwordInput"
+    htmlFor: callback.payload.input[0].name
   }, passwordLabel));
+}
+
+/***/ }),
+
+/***/ "./client/components/login/text.js":
+/*!*****************************************!*\
+  !*** ./client/components/login/text.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Text)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/*
+ * forgerock-sample-web-react
+ *
+ * username.js
+ *
+ * Copyright (c) 2021 ForgeRock. All rights reserved.
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ */
+
+/**
+ * @function Text- React component used for displaying username callback
+ * @param {Object} props - React props object passed from parent
+ * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
+ * @returns {Object} - React JSX view
+ */
+
+function Text(_ref) {
+  var {
+    callback
+  } = _ref;
+  var textInputLabel = callback.getPrompt();
+  /**
+   * @function setValue - Sets the value on the callback on element blur (lose focus)
+   * @param {Object} event
+   */
+
+  function setValue(event) {
+    callback.setInputValue(event.target.value);
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "form-floating mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    onBlur: setValue,
+    type: "text",
+    name: callback.payload.input[0].name,
+    className: "form-control",
+    id: callback.payload.input[0].name,
+    placeholder: textInputLabel
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    htmlFor: callback.payload.input[0].name
+  }, textInputLabel));
 }
 
 /***/ }),
@@ -8087,145 +8597,6 @@ function Unknown(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Warning: an unknown Callback is present!"));
-}
-
-/***/ }),
-
-/***/ "./client/components/login/username-password.js":
-/*!******************************************************!*\
-  !*** ./client/components/login/username-password.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ UsernamePassword)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/*
- * forgerock-sample-web-react
- *
- * username-password.js
- *
- * Copyright (c) 2021 ForgeRock. All rights reserved.
- * This software may be modified and distributed under the terms
- * of the MIT license. See the LICENSE file for details.
- */
-
-/**
- * @function UsernamePassword - React component used for displaying username and password step
- * @param {Object} props - React props object passed from parent
- * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
- * @returns {Object} - React JSX view
- */
-
-function UsernamePassword(props) {
-  var usernameCb = props.step.getCallbackOfType('NameCallback');
-  var passwordCb = props.step.getCallbackOfType('PasswordCallback');
-  var usernameLabel = usernameCb.getPrompt();
-  var passwordLabel = passwordCb.getPrompt();
-  /**
-   * @function submitForm - Handles the submission of the form
-   * @param {Object} event - Synthetic event object from the DOM event
-   */
-
-  function submitForm(event) {
-    // Prevent a traditional form submission
-    event.preventDefault();
-    var un = event.target.elements.username.value;
-    var pw = event.target.elements.password.value;
-    usernameCb.setName(un);
-    passwordCb.setPassword(pw); // Call the parent function with the captured data
-
-    props.action(props.step);
-  }
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    id: "page_body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-    onSubmit: submitForm
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    htmlFor: "usernameInput"
-  }, usernameLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    type: "username",
-    name: "username",
-    className: "form-control",
-    id: "usernameInput",
-    "aria-describedby": "emailHelp"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    htmlFor: "passwordInput"
-  }, passwordLabel), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    type: "password",
-    name: "password",
-    className: "form-control",
-    id: "passwordInput"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    type: "submit",
-    className: "btn btn-primary"
-  }, "Submit")));
-}
-
-/***/ }),
-
-/***/ "./client/components/login/username.js":
-/*!*********************************************!*\
-  !*** ./client/components/login/username.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Username)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/*
- * forgerock-sample-web-react
- *
- * username.js
- *
- * Copyright (c) 2021 ForgeRock. All rights reserved.
- * This software may be modified and distributed under the terms
- * of the MIT license. See the LICENSE file for details.
- */
-
-/**
- * @function Username- React component used for displaying username callback
- * @param {Object} props - React props object passed from parent
- * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
- * @returns {Object} - React JSX view
- */
-
-function Username(props) {
-  var usernameCb = props.step.getCallbackOfType('NameCallback');
-  var usernameLabel = usernameCb.getPrompt();
-  /**
-   * @function setValue - Sets the value on the callback on element blur (lose focus)
-   * @param {Object} event
-   */
-
-  function setValue(event) {
-    usernameCb.setName(event.target.value);
-  }
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "form-floating mb-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    onBlur: setValue,
-    type: "username",
-    name: "username",
-    className: "form-control",
-    id: "usernameInput",
-    "aria-describedby": "emailHelp",
-    placeholder: usernameLabel
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    htmlFor: "usernameInput"
-  }, usernameLabel));
 }
 
 /***/ }),
@@ -8369,16 +8740,16 @@ function Todo(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    htmlFor: todo.id,
+    htmlFor: todo._id,
     className: todoClass
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    id: todo.id,
+    id: todo._id,
     className: "form-check-input visually-hidden",
     type: "checkbox",
     checked: todo.completed,
     onChange: e => {
       e.preventDefault();
-      toggleTodo(todo.id);
+      toggleTodo(todo._id);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_icons_todo_icon__WEBPACK_IMPORTED_MODULE_3__.default, {
     completed: todo.completed
@@ -8388,13 +8759,13 @@ function Todo(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "todo_dropdown_actions btn h-100",
     "data-bs-toggle": "dropdown",
-    id: "todo_action_".concat(todo.id)
+    id: "todo_action_".concat(todo._id)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_icons_action_icon__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "dropdown-menu dropdown-menu-end",
-    "aria-labelledby": "todo_action_".concat(todo.id)
+    "aria-labelledby": "todo_action_".concat(todo._id)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     className: "dropdown-item",
-    onClick: e => setTodoActionId(todo.id),
+    onClick: e => setTodoActionId(todo._id),
     "data-bs-toggle": "modal",
     "data-bs-target": "#todoModal"
   }, "Delete"))))));
@@ -8427,236 +8798,10 @@ __webpack_require__.r(__webpack_exports__);
  * of the MIT license. See the LICENSE file for details.
  */
 var AM_URL = 'https://openam-crbrl-01.forgeblocks.com/am/';
-var APP_URL = 'https://react.example.com:8443';
-var API_URL = 'https://api.example.com:9443';
+var APP_URL = 'https://fr-react-todos.crbrl.io';
+var API_URL = 'https://fr-todos-api.crbrl.io';
 var REALM_PATH = 'alpha';
 var SESSION_URL = "".concat(AM_URL, "json/realms/root/sessions");
-
-/***/ }),
-
-/***/ "./client/middleware.js":
-/*!******************************!*\
-  !*** ./client/middleware.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "checkSession": () => (/* binding */ checkSession),
-/* harmony export */   "checkAccessToken": () => (/* binding */ checkAccessToken)
-/* harmony export */ });
-/* harmony import */ var _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @forgerock/javascript-sdk */ "./node_modules/@forgerock/javascript-sdk/lib-esm/index.js");
-/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants.js */ "./client/constants.js");
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-/*
- * forgerock-sample-web-react
- *
- * middleware.js
- *
- * Copyright (c) 2021 ForgeRock. All rights reserved.
- * This software may be modified and distributed under the terms
- * of the MIT license. See the LICENSE file for details.
- */
-
-
-/**
- * @function checkSession - Auth middleware for protecting local routes
- * @param {Object} ctx - The context object from a Page.js route
- * @param {*} next - The function call to proceed to the next middleware
- * @returns {void}
- */
-
-function checkSession(_x, _x2) {
-  return _checkSession.apply(this, arguments);
-}
-/**
- * @function checkAccessToken - Auth middleware for protecting local routes
- * @param {Object} ctx - The context object from a Page.js route
- * @param {*} next - The function call to proceed to the next middleware
- */
-
-function _checkSession() {
-  _checkSession = _asyncToGenerator(function* (ctx, next) {
-    var json;
-
-    try {
-      var response = yield fetch("".concat(_constants_js__WEBPACK_IMPORTED_MODULE_1__.SESSION_URL, "?_action=validate"), {
-        credentials: 'include',
-        headers: {
-          'content-type': 'application/json',
-          'accept-api-version': 'protocol=1.0,resource=2.0',
-          'x-requested-with': 'forgerock-sdk'
-        },
-        method: 'POST'
-      });
-      json = yield response.json();
-    } catch (err) {
-      console.error('User session has been revoked or expired');
-      json = {};
-    }
-
-    if (json.valid) {
-      ctx.setAuthentication(true);
-      next();
-    } else {
-      ctx.setAuthentication(false);
-      ctx.page.redirect('/login');
-    }
-  });
-  return _checkSession.apply(this, arguments);
-}
-
-function checkAccessToken(_x3, _x4) {
-  return _checkAccessToken.apply(this, arguments);
-}
-
-function _checkAccessToken() {
-  _checkAccessToken = _asyncToGenerator(function* (ctx, next) {
-    /**
-     * Call user info endpoint.Request will succeed if Access Token is valid
-     */
-    try {
-      var {
-        email,
-        username
-      } = yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.UserManager.getCurrentUser();
-      ctx.setUser(username);
-      ctx.setEmail(email);
-      next();
-    } catch (err) {
-      ctx.setAuthentication(false);
-      ctx.setUser('');
-      ctx.page.redirect('/login');
-    }
-  });
-  return _checkAccessToken.apply(this, arguments);
-}
-
-/***/ }),
-
-/***/ "./client/routes.js":
-/*!**************************!*\
-  !*** ./client/routes.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ initRoutes)
-/* harmony export */ });
-/* harmony import */ var _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @forgerock/javascript-sdk */ "./node_modules/@forgerock/javascript-sdk/lib-esm/index.js");
-/* harmony import */ var page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! page */ "./node_modules/page/page.js");
-/* harmony import */ var page__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(page__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _middleware_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./middleware.js */ "./client/middleware.js");
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-/*
- * forgerock-sample-web-react
- *
- * routes.js
- *
- * Copyright (c) 2021 ForgeRock. All rights reserved.
- * This software may be modified and distributed under the terms
- * of the MIT license. See the LICENSE file for details.
- */
-
-
-
-/**
- * @function initRoutes – initializes routes and route handlers
- * @param {function} setAuthentication - sets boolean on global state for user authentication
- * @param {function} setPage - sets requested page on global state
- * @return {void}
- *
- * Other than the first * route, all routes just set the requested page value.
- * The global state management handles the event and rerenders the views.
- */
-
-function initRoutes(setAuthentication, setEmail, setPage, setUser) {
-  /**
-   * A route handler that catches all routes. It's used to add
-   * state hooks to all route contexts, and then calls next pass
-   * event to the next matching route.
-   */
-  page__WEBPACK_IMPORTED_MODULE_1___default()('*', function addStateHooks(ctx, next) {
-    ctx.setAuthentication = setAuthentication;
-    ctx.setEmail = setEmail;
-    ctx.setPage = setPage;
-    ctx.setUser = setUser;
-    next();
-  });
-  /**
-   * Handles index (aka "root") route
-   */
-
-  page__WEBPACK_IMPORTED_MODULE_1___default()('/', function initialDisplay(ctx) {
-    ctx.setPage('home');
-  });
-  /**
-   * Protected todos route (via the checkSession middleware)
-   */
-
-  page__WEBPACK_IMPORTED_MODULE_1___default()('/todos', _middleware_js__WEBPACK_IMPORTED_MODULE_2__.checkAccessToken, /*#__PURE__*/function () {
-    var _todos = _asyncToGenerator(function* (ctx) {
-      ctx.setPage('todos');
-    });
-
-    function todos(_x) {
-      return _todos.apply(this, arguments);
-    }
-
-    return todos;
-  }());
-  /**
-   * Handles the login route
-   */
-
-  page__WEBPACK_IMPORTED_MODULE_1___default()('/login', function login(ctx) {
-    ctx.setPage('login');
-  });
-  /**
-   * Handles logout route. This route doesn't have an associated
-   * view that renders to screen.
-   */
-
-  page__WEBPACK_IMPORTED_MODULE_1___default()('/logout', /*#__PURE__*/function () {
-    var _logout = _asyncToGenerator(function* (ctx) {
-      try {
-        yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.FRUser.logout();
-        ctx.setAuthentication(false);
-        ctx.page.redirect('/?action=logout');
-      } catch (error) {
-        console.error(error);
-      }
-    });
-
-    function logout(_x2) {
-      return _logout.apply(this, arguments);
-    }
-
-    return logout;
-  }());
-  /**
-   * Configure Page.js options
-   * The "dispatch" option handles initializing within a route, but causes
-   * unnecessary rerenders in certain circumstances.
-   *
-   * The "hashbang" option uses the old school, example.com/#!/home style routes.
-   * This works well enough for POCs when you don't have a "real" server.
-   */
-
-  page__WEBPACK_IMPORTED_MODULE_1___default()({
-    dispatch: true,
-    hashbang: false
-  });
-}
 
 /***/ }),
 
@@ -8673,7 +8818,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AppContext": () => (/* binding */ AppContext)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes.js */ "./client/routes.js");
 /*
  * forgerock-sample-web-react
  *
@@ -8683,7 +8827,6 @@ __webpack_require__.r(__webpack_exports__);
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
  */
-
 
 /**
  * @function useStateMgmt - The global state/store for managing user authentication and page
@@ -8740,19 +8883,7 @@ function useStateMgmt(_ref) {
   function setUserWrapper(value) {
     window.sessionStorage.setItem('sdk_username', "".concat(value));
     setUser(value);
-  } // /**
-  //  * Since we are setting state from outside of React's scope (from routing layer),
-  //  * that would be considered a side-effect. Hence, the use of useEffect here.
-  //  */
-  // useEffect(function () {
-  //   initRoutes(
-  //     setAuthenticationWrapper,
-  //     setEmailWrapper,
-  //     setPage,
-  //     setUserWrapper
-  //   );
-  // });
-
+  }
   /**
    * returns an array with state object as index zero and setters as index one
    */
@@ -8835,6 +8966,11 @@ function _apiRequest() {
           body: JSON.stringify(data)
         }
       });
+
+      if (!response.ok) {
+        throw new Error("Status ".concat(response.status, ": API request failed"));
+      }
+
       json = yield response.json();
     } catch (err) {
       json = {
@@ -8886,19 +9022,35 @@ function Home() {
    * appropriate navigational items.
    */
   var [state] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_state_js__WEBPACK_IMPORTED_MODULE_1__.AppContext);
-  var title = state.isAuthenticated ? 'Hello, again!' : 'Hello, visitor!';
-  var message = state.isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Welcome back! Manage ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    to: "/todos"
-  }, "your todos here"), ".") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Welcome to ForgeRock's sample app built with React (Web). The purpose of this is to demonstrate how the ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "https://github.com/ForgeRock/forgerock-javascript-sdk"
-  }, "ForgeRock JavaScript SDK"), " is implemented within a fully functional application."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    to: "/login"
-  }, "Login"), " to get things done! Don't have an account? Reach out to us, and we'll provide an account for you."));
+
+  var LoginAlert = () => {
+    return state.isAuthenticated ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+      className: "alert alert-info d-flex align-items-center mt-5",
+      role: "alert"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      className: "ps-2"
+    }, "Welcome back, ", state.username, "!", ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      to: "/todos"
+    }, "Manage your todos here"), ".")) : null;
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    className: "mt-4 mb-3"
-  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, message));
+  }, LoginAlert(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "home_head-text text-center"
+  }, "Protect with ForgeRock; Develop with React.js"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: ".home_subhead-text fs-3 mb-4 fw-bold text-muted"
+  }, "Learn how to develop ForgeRock protected, web apps with the", ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    className: "text-muted text-decoration-underline",
+    href: "https://reactjs.org/"
+  }, "React.js"), ' ', "library and our", ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    className: "text-muted text-decoration-underline",
+    href: "https://github.com/ForgeRock/forgerock-javascript-sdk"
+  }, "JavaScript SDK"), "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "The purpose of this sample web app is to demonstrate how the ForgeRock JavaScript SDK is implemented within a fully-functional application using a popular framework."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Don't have an account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+    to: "/register"
+  }, "Create an account now"), "! Or, ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+    to: "/login"
+  }, "Login"), " to get things done!"));
 }
 
 /***/ }),
@@ -8914,22 +9066,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Login)
 /* harmony export */ });
-/* harmony import */ var _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @forgerock/javascript-sdk */ "./node_modules/@forgerock/javascript-sdk/lib-esm/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _components_icons_alert_icon_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/icons/alert-icon.js */ "./client/components/icons/alert-icon.js");
-/* harmony import */ var _components_login_choice_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/login/choice.js */ "./client/components/login/choice.js");
-/* harmony import */ var _components_login_device_profile_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/login/device-profile.js */ "./client/components/login/device-profile.js");
-/* harmony import */ var _components_loading_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/loading.js */ "./client/components/loading.js");
-/* harmony import */ var _components_login_password_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/login/password.js */ "./client/components/login/password.js");
-/* harmony import */ var _components_login_unknown_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/login/unknown.js */ "./client/components/login/unknown.js");
-/* harmony import */ var _components_login_username_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/login/username.js */ "./client/components/login/username.js");
-/* harmony import */ var _components_login_username_password_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/login/username-password.js */ "./client/components/login/username-password.js");
-/* harmony import */ var _state_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../state.js */ "./client/state.js");
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _components_icons_key_icon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/icons/key-icon.js */ "./client/components/icons/key-icon.js");
+/* harmony import */ var _components_form_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/form.js */ "./client/components/form.js");
 /*
  * forgerock-sample-web-react
  *
@@ -8942,259 +9081,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-
-
-
-
-
-
-
-
-
 /**
- * @function Login - React view for managing the user authentication journey
+ * @function Login - React view for Login
  * @returns {Object} - React JSX view
  */
 
 function Login() {
-  /**
-   * Compose the state used in this view.
-   * First, we will use the global state methods found in the App Context
-   * Then, we will create local state to manage the login journey. The
-   * underscore is an unused variable, since we don't need the current state.
-   */
-  var [_, methods] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(_state_js__WEBPACK_IMPORTED_MODULE_10__.AppContext);
-  var [step, setStep] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
-  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useHistory)();
-  /**
-   * Component types
-   * StageComponent is intended for uniquely rendering a Step that is
-   * defined by the stage property of a page node.
-   * StepComponents are generic callback components that will be
-   * generically rendered.
-   * MessageComponent is intended for simply rendering messages to screen.
-   */
-
-  var ErrorComponent;
-  var MessageComponent;
-  var StageComponent;
-  var StepComponents = [];
-  var TitleComponent;
-  /**
-   * @function submitStep - Handles the submission of the step to AM
-   * @param {Object} previousStep - Previous step in the login journey
-   */
-
-  function submitStep(_x) {
-    return _submitStep.apply(this, arguments);
-  }
-  /**
-   * Since we have API calls to AM, we need to handle these requests as side-effects
-   * This will allow the view to render, but update/rerender after the request completes
-   */
-
-
-  function _submitStep() {
-    _submitStep = _asyncToGenerator(function* (previousStep) {
-      var nextStep = yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.FRAuth.next(previousStep);
-      setStep(nextStep);
-    });
-    return _submitStep.apply(this, arguments);
-  }
-
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    /**
-     * @function getInitialStep - The function to call when there's no previous step
-     */
-    function getInitialStep() {
-      return _getInitialStep.apply(this, arguments);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "container h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "d-flex align-items-center h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card shadow-sm p-5 w-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "login_key-icon align-self-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_icons_key_icon_js__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "text-center fs-2 mb-3"
+  }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_form_js__WEBPACK_IMPORTED_MODULE_2__.default, {
+    action: {
+      type: 'login'
     }
-    /**
-     * @function completeAuth - The function to call when we get a LoginSuccess
-     */
-
-
-    function _getInitialStep() {
-      _getInitialStep = _asyncToGenerator(function* () {
-        var nextStep = yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.FRAuth.next();
-        setStep(nextStep);
-      });
-      return _getInitialStep.apply(this, arguments);
-    }
-
-    function completeAuth() {
-      return _completeAuth.apply(this, arguments);
-    }
-    /**
-     * Condition for handling start and stop of login journey.
-     * Here's where you should add more error handling.
-     */
-
-
-    function _completeAuth() {
-      _completeAuth = _asyncToGenerator(function* () {
-        yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.TokenManager.getTokens({
-          forceRenew: true
-        });
-        var {
-          email,
-          name: username
-        } = yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.UserManager.getCurrentUser();
-        methods.setUser(username);
-        methods.setEmail(email);
-        methods.setAuthentication(true);
-        history.push('/');
-      });
-      return _completeAuth.apply(this, arguments);
-    }
-
-    if (!step) {
-      getInitialStep();
-    } else if (step.type === 'LoginSuccess') {
-      completeAuth();
-    }
-  });
-  /**
-   * Render conditions for presenting appropriate views to user.
-   * Adding more steps to a journey would mean more conditions
-   * to add here. More error conditions would be good here too.
-   */
-
-  if (!step) {
-    /**
-     * Since there is no step information we need to call AM to retrieve the
-     * instructions for rendering the login form.
-     */
-    TitleComponent = () => null;
-
-    MessageComponent = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_loading_js__WEBPACK_IMPORTED_MODULE_5__.default, {
-      message: "Checking your session ..."
-    });
-  } else if (step.type === 'LoginSuccess') {
-    TitleComponent = () => null;
-
-    MessageComponent = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_loading_js__WEBPACK_IMPORTED_MODULE_5__.default, {
-      message: "Success! Redirecting ..."
-    });
-  } else if (step.type === 'LoginFailure') {
-    ErrorComponent = () => {
-      if (step.type === 'LoginFailure') {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", {
-          className: "alert alert-danger d-flex align-items-center mt-5",
-          role: "alert"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_components_icons_alert_icon_js__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", {
-          className: "ps-2"
-        }, "Your credentials were incorrect. Please ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
-          className: "login_reload-btn",
-          onClick: /*#__PURE__*/_asyncToGenerator(function* () {
-            var nextStep = yield _forgerock_javascript_sdk__WEBPACK_IMPORTED_MODULE_0__.FRAuth.next();
-            setStep(nextStep);
-          })
-        }, "try again"), "."));
-      } else {
-        return null;
-      }
-    };
-  } else if (!(step.getStage() === undefined)) {
-    /**
-     * Since a stage value is used, let's map the stage to an
-     * appropriate StageComponent as it will need to be
-     * rendered uniquely, rather than generically.
-     */
-    if (step.getStage() === 'UsernamePassword') {
-      TitleComponent = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", {
-        className: "mt-4 mb-3"
-      }, "Welcome. Please enter your credentials");
-
-      StageComponent = _components_login_username_password_js__WEBPACK_IMPORTED_MODULE_9__.default;
-    } else {
-      TitleComponent = 'Oops, sorry!';
-
-      MessageComponent = () => {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "Stage unknown.");
-      };
-    }
-  } else if (step.callbacks.length > 0) {
-    TitleComponent = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("h1", {
-      className: "mt-4 mb-3"
-    }, "Login");
-    /**
-     * Iterate through callbacks mapping the callback to the
-     * appropriate callback component, pushing that component
-     * the StepComponent's array.
-     */
-
-
-    step.callbacks.map(callback => {
-      switch (callback.getType()) {
-        case 'ChoiceCallback':
-          StepComponents.push(_components_login_choice_js__WEBPACK_IMPORTED_MODULE_3__.default);
-          break;
-
-        case 'DeviceProfileCallback':
-          StepComponents.push(_components_login_device_profile_js__WEBPACK_IMPORTED_MODULE_4__.default);
-          break;
-
-        case 'NameCallback':
-          StepComponents.push(_components_login_username_js__WEBPACK_IMPORTED_MODULE_8__.default);
-          break;
-
-        case 'PasswordCallback':
-          StepComponents.push(_components_login_password_js__WEBPACK_IMPORTED_MODULE_6__.default);
-          break;
-
-        default:
-          // If we don't recognize the callback, render a warning
-          StepComponents.push(_components_login_unknown_js__WEBPACK_IMPORTED_MODULE_7__.default);
-      }
-    });
-  } else {
-    TitleComponent = 'Oops, sorry!';
-
-    MessageComponent = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("p", null, "It looks like there was an error.");
-  }
-  /**
-   * Check if this is a stage, which will render its own form,
-   * or a single step or compound step (more than 1 callback).
-   */
-
-
-  if (MessageComponent) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-      className: "container"
-    }, TitleComponent(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(MessageComponent, {
-      step: step,
-      action: submitStep
-    }));
-  } else if (StageComponent) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-      className: "container"
-    }, TitleComponent(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(StageComponent, {
-      step: step,
-      action: submitStep
-    }));
-  } else if (ErrorComponent) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-      className: "container"
-    }, ErrorComponent());
-  } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-      className: "container"
-    }, TitleComponent(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("form", {
-      onSubmit: event => {
-        event.preventDefault();
-        submitStep(step);
-      }
-    }, StepComponents.map((Component, idx) => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(Component, {
-        key: idx,
-        step: step
-      });
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
-      type: "submit",
-      className: "btn btn-primary"
-    }, "Submit")));
-  }
+  }))));
 }
 
 /***/ }),
@@ -9253,6 +9160,75 @@ function Logout() {
 
 /***/ }),
 
+/***/ "./client/views/register.js":
+/*!**********************************!*\
+  !*** ./client/views/register.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Login)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utilities_request_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utilities/request.js */ "./client/utilities/request.js");
+/* harmony import */ var _components_icons_new_user_icon_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/icons/new-user-icon.js */ "./client/components/icons/new-user-icon.js");
+/* harmony import */ var _components_form_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/form.js */ "./client/components/form.js");
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+/*
+ * forgerock-sample-web-react
+ *
+ * register.js
+ *
+ * Copyright (c) 2021 ForgeRock. All rights reserved.
+ * This software may be modified and distributed under the terms
+ * of the MIT license. See the LICENSE file for details.
+ */
+
+
+
+
+/**
+ * @function Login - React view for Login
+ * @returns {Object} - React JSX view
+ */
+
+function Login() {
+  function initUserInDb() {
+    return _initUserInDb.apply(this, arguments);
+  }
+
+  function _initUserInDb() {
+    _initUserInDb = _asyncToGenerator(function* () {
+      yield (0,_utilities_request_js__WEBPACK_IMPORTED_MODULE_1__.default)("users", 'POST');
+    });
+    return _initUserInDb.apply(this, arguments);
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "container h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "d-flex align-items-center h-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card shadow-sm p-5 w-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "login_key-icon align-self-center mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_icons_new_user_icon_js__WEBPACK_IMPORTED_MODULE_2__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "text-center fs-2 mb-3"
+  }, "Register"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_form_js__WEBPACK_IMPORTED_MODULE_3__.default, {
+    action: {
+      type: 'register'
+    },
+    followUp: initUserInDb
+  }))));
+}
+
+/***/ }),
+
 /***/ "./client/views/todos.js":
 /*!*******************************!*\
   !*** ./client/views/todos.js ***!
@@ -9265,6 +9241,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Todos)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/modal.js */ "./client/components/modal.js");
 /* harmony import */ var _components_todo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/todo.js */ "./client/components/todo.js");
 /* harmony import */ var _utilities_request_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utilities/request.js */ "./client/utilities/request.js");
@@ -9285,6 +9262,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /**
  * @function Todos - React view component for retrieving and displaying todos
  * @returns {Object} - React JSX view
@@ -9295,9 +9273,11 @@ function Todos() {
    * Use local, component state for todos. Though, this could be moved to
    * the global state if that's preferred over doing API calls in React views
    */
+  var [hasFetched, setFetched] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   var [todos, setTodos] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   var [todoActionId, setTodoActionId] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   var textInput = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useHistory)();
   /**
    * Since we are making an API call, which is a side-effect,
    * we will wrap this in a useEffect, which will re-render the
@@ -9311,14 +9291,15 @@ function Todos() {
 
     function _getTodos() {
       _getTodos = _asyncToGenerator(function* () {
-        try {
-          // Request the todos from our resource API
-          var _todos = yield (0,_utilities_request_js__WEBPACK_IMPORTED_MODULE_3__.default)('todos', 'GET');
+        // Request the todos from our resource API
+        var todos = yield (0,_utilities_request_js__WEBPACK_IMPORTED_MODULE_3__.default)('todos', 'GET');
 
-          setTodos(_todos);
-        } catch (error) {
-          console.log('Turn into redirect to login.');
+        if (todos.error) {
+          return history.push('/login');
         }
+
+        setFetched(true);
+        setTodos(todos);
       });
       return _getTodos.apply(this, arguments);
     }
@@ -9339,7 +9320,7 @@ function Todos() {
       var newTodo = yield (0,_utilities_request_js__WEBPACK_IMPORTED_MODULE_3__.default)('todos', 'POST', {
         title
       });
-      setTodos([...todos, newTodo]);
+      setTodos([newTodo, ...todos]);
       textInput.current.value = '';
       return;
     });
@@ -9353,34 +9334,42 @@ function Todos() {
   function _deleteTodo() {
     _deleteTodo = _asyncToGenerator(function* () {
       yield (0,_utilities_request_js__WEBPACK_IMPORTED_MODULE_3__.default)("todos/".concat(todoActionId), 'DELETE');
-      setTodos(todos.filter(todo => todo.id !== todoActionId));
+      setTodos(todos.filter(todo => todo._id !== todoActionId));
       return;
     });
     return _deleteTodo.apply(this, arguments);
   }
 
-  var Todos = !todos.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+  var Todos = hasFetched ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: "list-group list-group-flush mb-1"
+  }, todos.length > 0 ? todos.map(function (todo) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_todo_js__WEBPACK_IMPORTED_MODULE_2__.default, {
+      key: todo._id,
+      todo: todo,
+      setTodoActionId: setTodoActionId
+    });
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "todo_item list-group-item list-group-item-action p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "col d-flex align-items-center fs-5 text-muted w-100 ms-3 p-3"
+  }, "No todos yet. Create one above!")))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "d-flex justify-content-center align-items-center border-top px-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "spinner-border text-primary my-2",
     role: "status"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
     className: "p-3 fs-5"
-  }, "Collecting your todos ...")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-    className: "list-group list-group-flush mb-1"
-  }, todos.map(function (todo) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_todo_js__WEBPACK_IMPORTED_MODULE_2__.default, {
-      key: todo.id,
-      todo: todo,
-      setTodoActionId: setTodoActionId
-    });
-  }));
+  }, "Collecting your todos ..."));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-    className: "mt-4"
-  }, "Your Todos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "card shadow-sm"
+    className: "mt-5"
+  }, "Your Todos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "fs-6 text-muted"
+  }, "Create and manage your todos."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "card shadow-sm mb-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
     className: "p-3",
     action: "https://api.example.com:8443/todos",
@@ -10765,1239 +10754,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 	return to;
 };
-
-
-/***/ }),
-
-/***/ "./node_modules/page/page.js":
-/*!***********************************!*\
-  !*** ./node_modules/page/page.js ***!
-  \***********************************/
-/***/ (function(module) {
-
-(function (global, factory) {
-	 true ? module.exports = factory() :
-	0;
-}(this, (function () { 'use strict';
-
-var isarray = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
-
-/**
- * Expose `pathToRegexp`.
- */
-var pathToRegexp_1 = pathToRegexp;
-var parse_1 = parse;
-var compile_1 = compile;
-var tokensToFunction_1 = tokensToFunction;
-var tokensToRegExp_1 = tokensToRegExp;
-
-/**
- * The main path matching regexp utility.
- *
- * @type {RegExp}
- */
-var PATH_REGEXP = new RegExp([
-  // Match escaped characters that would otherwise appear in future matches.
-  // This allows the user to escape special characters that won't transform.
-  '(\\\\.)',
-  // Match Express-style parameters and un-named parameters with a prefix
-  // and optional suffixes. Matches appear as:
-  //
-  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
-  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
-  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
-  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^()])+)\\))?|\\(((?:\\\\.|[^()])+)\\))([+*?])?|(\\*))'
-].join('|'), 'g');
-
-/**
- * Parse a string for the raw tokens.
- *
- * @param  {String} str
- * @return {Array}
- */
-function parse (str) {
-  var tokens = [];
-  var key = 0;
-  var index = 0;
-  var path = '';
-  var res;
-
-  while ((res = PATH_REGEXP.exec(str)) != null) {
-    var m = res[0];
-    var escaped = res[1];
-    var offset = res.index;
-    path += str.slice(index, offset);
-    index = offset + m.length;
-
-    // Ignore already escaped sequences.
-    if (escaped) {
-      path += escaped[1];
-      continue
-    }
-
-    // Push the current path onto the tokens.
-    if (path) {
-      tokens.push(path);
-      path = '';
-    }
-
-    var prefix = res[2];
-    var name = res[3];
-    var capture = res[4];
-    var group = res[5];
-    var suffix = res[6];
-    var asterisk = res[7];
-
-    var repeat = suffix === '+' || suffix === '*';
-    var optional = suffix === '?' || suffix === '*';
-    var delimiter = prefix || '/';
-    var pattern = capture || group || (asterisk ? '.*' : '[^' + delimiter + ']+?');
-
-    tokens.push({
-      name: name || key++,
-      prefix: prefix || '',
-      delimiter: delimiter,
-      optional: optional,
-      repeat: repeat,
-      pattern: escapeGroup(pattern)
-    });
-  }
-
-  // Match any characters still remaining.
-  if (index < str.length) {
-    path += str.substr(index);
-  }
-
-  // If the path exists, push it onto the end.
-  if (path) {
-    tokens.push(path);
-  }
-
-  return tokens
-}
-
-/**
- * Compile a string to a template function for the path.
- *
- * @param  {String}   str
- * @return {Function}
- */
-function compile (str) {
-  return tokensToFunction(parse(str))
-}
-
-/**
- * Expose a method for transforming tokens into the path function.
- */
-function tokensToFunction (tokens) {
-  // Compile all the tokens into regexps.
-  var matches = new Array(tokens.length);
-
-  // Compile all the patterns before compilation.
-  for (var i = 0; i < tokens.length; i++) {
-    if (typeof tokens[i] === 'object') {
-      matches[i] = new RegExp('^' + tokens[i].pattern + '$');
-    }
-  }
-
-  return function (obj) {
-    var path = '';
-    var data = obj || {};
-
-    for (var i = 0; i < tokens.length; i++) {
-      var token = tokens[i];
-
-      if (typeof token === 'string') {
-        path += token;
-
-        continue
-      }
-
-      var value = data[token.name];
-      var segment;
-
-      if (value == null) {
-        if (token.optional) {
-          continue
-        } else {
-          throw new TypeError('Expected "' + token.name + '" to be defined')
-        }
-      }
-
-      if (isarray(value)) {
-        if (!token.repeat) {
-          throw new TypeError('Expected "' + token.name + '" to not repeat, but received "' + value + '"')
-        }
-
-        if (value.length === 0) {
-          if (token.optional) {
-            continue
-          } else {
-            throw new TypeError('Expected "' + token.name + '" to not be empty')
-          }
-        }
-
-        for (var j = 0; j < value.length; j++) {
-          segment = encodeURIComponent(value[j]);
-
-          if (!matches[i].test(segment)) {
-            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
-          }
-
-          path += (j === 0 ? token.prefix : token.delimiter) + segment;
-        }
-
-        continue
-      }
-
-      segment = encodeURIComponent(value);
-
-      if (!matches[i].test(segment)) {
-        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
-      }
-
-      path += token.prefix + segment;
-    }
-
-    return path
-  }
-}
-
-/**
- * Escape a regular expression string.
- *
- * @param  {String} str
- * @return {String}
- */
-function escapeString (str) {
-  return str.replace(/([.+*?=^!:${}()[\]|\/])/g, '\\$1')
-}
-
-/**
- * Escape the capturing group by escaping special characters and meaning.
- *
- * @param  {String} group
- * @return {String}
- */
-function escapeGroup (group) {
-  return group.replace(/([=!:$\/()])/g, '\\$1')
-}
-
-/**
- * Attach the keys as a property of the regexp.
- *
- * @param  {RegExp} re
- * @param  {Array}  keys
- * @return {RegExp}
- */
-function attachKeys (re, keys) {
-  re.keys = keys;
-  return re
-}
-
-/**
- * Get the flags for a regexp from the options.
- *
- * @param  {Object} options
- * @return {String}
- */
-function flags (options) {
-  return options.sensitive ? '' : 'i'
-}
-
-/**
- * Pull out keys from a regexp.
- *
- * @param  {RegExp} path
- * @param  {Array}  keys
- * @return {RegExp}
- */
-function regexpToRegexp (path, keys) {
-  // Use a negative lookahead to match only capturing groups.
-  var groups = path.source.match(/\((?!\?)/g);
-
-  if (groups) {
-    for (var i = 0; i < groups.length; i++) {
-      keys.push({
-        name: i,
-        prefix: null,
-        delimiter: null,
-        optional: false,
-        repeat: false,
-        pattern: null
-      });
-    }
-  }
-
-  return attachKeys(path, keys)
-}
-
-/**
- * Transform an array into a regexp.
- *
- * @param  {Array}  path
- * @param  {Array}  keys
- * @param  {Object} options
- * @return {RegExp}
- */
-function arrayToRegexp (path, keys, options) {
-  var parts = [];
-
-  for (var i = 0; i < path.length; i++) {
-    parts.push(pathToRegexp(path[i], keys, options).source);
-  }
-
-  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options));
-
-  return attachKeys(regexp, keys)
-}
-
-/**
- * Create a path regexp from string input.
- *
- * @param  {String} path
- * @param  {Array}  keys
- * @param  {Object} options
- * @return {RegExp}
- */
-function stringToRegexp (path, keys, options) {
-  var tokens = parse(path);
-  var re = tokensToRegExp(tokens, options);
-
-  // Attach keys back to the regexp.
-  for (var i = 0; i < tokens.length; i++) {
-    if (typeof tokens[i] !== 'string') {
-      keys.push(tokens[i]);
-    }
-  }
-
-  return attachKeys(re, keys)
-}
-
-/**
- * Expose a function for taking tokens and returning a RegExp.
- *
- * @param  {Array}  tokens
- * @param  {Array}  keys
- * @param  {Object} options
- * @return {RegExp}
- */
-function tokensToRegExp (tokens, options) {
-  options = options || {};
-
-  var strict = options.strict;
-  var end = options.end !== false;
-  var route = '';
-  var lastToken = tokens[tokens.length - 1];
-  var endsWithSlash = typeof lastToken === 'string' && /\/$/.test(lastToken);
-
-  // Iterate over the tokens and create our regexp string.
-  for (var i = 0; i < tokens.length; i++) {
-    var token = tokens[i];
-
-    if (typeof token === 'string') {
-      route += escapeString(token);
-    } else {
-      var prefix = escapeString(token.prefix);
-      var capture = token.pattern;
-
-      if (token.repeat) {
-        capture += '(?:' + prefix + capture + ')*';
-      }
-
-      if (token.optional) {
-        if (prefix) {
-          capture = '(?:' + prefix + '(' + capture + '))?';
-        } else {
-          capture = '(' + capture + ')?';
-        }
-      } else {
-        capture = prefix + '(' + capture + ')';
-      }
-
-      route += capture;
-    }
-  }
-
-  // In non-strict mode we allow a slash at the end of match. If the path to
-  // match already ends with a slash, we remove it for consistency. The slash
-  // is valid at the end of a path match, not in the middle. This is important
-  // in non-ending mode, where "/test/" shouldn't match "/test//route".
-  if (!strict) {
-    route = (endsWithSlash ? route.slice(0, -2) : route) + '(?:\\/(?=$))?';
-  }
-
-  if (end) {
-    route += '$';
-  } else {
-    // In non-ending mode, we need the capturing groups to match as much as
-    // possible by using a positive lookahead to the end or next path segment.
-    route += strict && endsWithSlash ? '' : '(?=\\/|$)';
-  }
-
-  return new RegExp('^' + route, flags(options))
-}
-
-/**
- * Normalize the given path string, returning a regular expression.
- *
- * An empty array can be passed in for the keys, which will hold the
- * placeholder key descriptions. For example, using `/user/:id`, `keys` will
- * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
- *
- * @param  {(String|RegExp|Array)} path
- * @param  {Array}                 [keys]
- * @param  {Object}                [options]
- * @return {RegExp}
- */
-function pathToRegexp (path, keys, options) {
-  keys = keys || [];
-
-  if (!isarray(keys)) {
-    options = keys;
-    keys = [];
-  } else if (!options) {
-    options = {};
-  }
-
-  if (path instanceof RegExp) {
-    return regexpToRegexp(path, keys, options)
-  }
-
-  if (isarray(path)) {
-    return arrayToRegexp(path, keys, options)
-  }
-
-  return stringToRegexp(path, keys, options)
-}
-
-pathToRegexp_1.parse = parse_1;
-pathToRegexp_1.compile = compile_1;
-pathToRegexp_1.tokensToFunction = tokensToFunction_1;
-pathToRegexp_1.tokensToRegExp = tokensToRegExp_1;
-
-/**
-   * Module dependencies.
-   */
-
-  
-
-  /**
-   * Short-cuts for global-object checks
-   */
-
-  var hasDocument = ('undefined' !== typeof document);
-  var hasWindow = ('undefined' !== typeof window);
-  var hasHistory = ('undefined' !== typeof history);
-  var hasProcess = typeof process !== 'undefined';
-
-  /**
-   * Detect click event
-   */
-  var clickEvent = hasDocument && document.ontouchstart ? 'touchstart' : 'click';
-
-  /**
-   * To work properly with the URL
-   * history.location generated polyfill in https://github.com/devote/HTML5-History-API
-   */
-
-  var isLocation = hasWindow && !!(window.history.location || window.location);
-
-  /**
-   * The page instance
-   * @api private
-   */
-  function Page() {
-    // public things
-    this.callbacks = [];
-    this.exits = [];
-    this.current = '';
-    this.len = 0;
-
-    // private things
-    this._decodeURLComponents = true;
-    this._base = '';
-    this._strict = false;
-    this._running = false;
-    this._hashbang = false;
-
-    // bound functions
-    this.clickHandler = this.clickHandler.bind(this);
-    this._onpopstate = this._onpopstate.bind(this);
-  }
-
-  /**
-   * Configure the instance of page. This can be called multiple times.
-   *
-   * @param {Object} options
-   * @api public
-   */
-
-  Page.prototype.configure = function(options) {
-    var opts = options || {};
-
-    this._window = opts.window || (hasWindow && window);
-    this._decodeURLComponents = opts.decodeURLComponents !== false;
-    this._popstate = opts.popstate !== false && hasWindow;
-    this._click = opts.click !== false && hasDocument;
-    this._hashbang = !!opts.hashbang;
-
-    var _window = this._window;
-    if(this._popstate) {
-      _window.addEventListener('popstate', this._onpopstate, false);
-    } else if(hasWindow) {
-      _window.removeEventListener('popstate', this._onpopstate, false);
-    }
-
-    if (this._click) {
-      _window.document.addEventListener(clickEvent, this.clickHandler, false);
-    } else if(hasDocument) {
-      _window.document.removeEventListener(clickEvent, this.clickHandler, false);
-    }
-
-    if(this._hashbang && hasWindow && !hasHistory) {
-      _window.addEventListener('hashchange', this._onpopstate, false);
-    } else if(hasWindow) {
-      _window.removeEventListener('hashchange', this._onpopstate, false);
-    }
-  };
-
-  /**
-   * Get or set basepath to `path`.
-   *
-   * @param {string} path
-   * @api public
-   */
-
-  Page.prototype.base = function(path) {
-    if (0 === arguments.length) return this._base;
-    this._base = path;
-  };
-
-  /**
-   * Gets the `base`, which depends on whether we are using History or
-   * hashbang routing.
-
-   * @api private
-   */
-  Page.prototype._getBase = function() {
-    var base = this._base;
-    if(!!base) return base;
-    var loc = hasWindow && this._window && this._window.location;
-
-    if(hasWindow && this._hashbang && loc && loc.protocol === 'file:') {
-      base = loc.pathname;
-    }
-
-    return base;
-  };
-
-  /**
-   * Get or set strict path matching to `enable`
-   *
-   * @param {boolean} enable
-   * @api public
-   */
-
-  Page.prototype.strict = function(enable) {
-    if (0 === arguments.length) return this._strict;
-    this._strict = enable;
-  };
-
-
-  /**
-   * Bind with the given `options`.
-   *
-   * Options:
-   *
-   *    - `click` bind to click events [true]
-   *    - `popstate` bind to popstate [true]
-   *    - `dispatch` perform initial dispatch [true]
-   *
-   * @param {Object} options
-   * @api public
-   */
-
-  Page.prototype.start = function(options) {
-    var opts = options || {};
-    this.configure(opts);
-
-    if (false === opts.dispatch) return;
-    this._running = true;
-
-    var url;
-    if(isLocation) {
-      var window = this._window;
-      var loc = window.location;
-
-      if(this._hashbang && ~loc.hash.indexOf('#!')) {
-        url = loc.hash.substr(2) + loc.search;
-      } else if (this._hashbang) {
-        url = loc.search + loc.hash;
-      } else {
-        url = loc.pathname + loc.search + loc.hash;
-      }
-    }
-
-    this.replace(url, null, true, opts.dispatch);
-  };
-
-  /**
-   * Unbind click and popstate event handlers.
-   *
-   * @api public
-   */
-
-  Page.prototype.stop = function() {
-    if (!this._running) return;
-    this.current = '';
-    this.len = 0;
-    this._running = false;
-
-    var window = this._window;
-    this._click && window.document.removeEventListener(clickEvent, this.clickHandler, false);
-    hasWindow && window.removeEventListener('popstate', this._onpopstate, false);
-    hasWindow && window.removeEventListener('hashchange', this._onpopstate, false);
-  };
-
-  /**
-   * Show `path` with optional `state` object.
-   *
-   * @param {string} path
-   * @param {Object=} state
-   * @param {boolean=} dispatch
-   * @param {boolean=} push
-   * @return {!Context}
-   * @api public
-   */
-
-  Page.prototype.show = function(path, state, dispatch, push) {
-    var ctx = new Context(path, state, this),
-      prev = this.prevContext;
-    this.prevContext = ctx;
-    this.current = ctx.path;
-    if (false !== dispatch) this.dispatch(ctx, prev);
-    if (false !== ctx.handled && false !== push) ctx.pushState();
-    return ctx;
-  };
-
-  /**
-   * Goes back in the history
-   * Back should always let the current route push state and then go back.
-   *
-   * @param {string} path - fallback path to go back if no more history exists, if undefined defaults to page.base
-   * @param {Object=} state
-   * @api public
-   */
-
-  Page.prototype.back = function(path, state) {
-    var page = this;
-    if (this.len > 0) {
-      var window = this._window;
-      // this may need more testing to see if all browsers
-      // wait for the next tick to go back in history
-      hasHistory && window.history.back();
-      this.len--;
-    } else if (path) {
-      setTimeout(function() {
-        page.show(path, state);
-      });
-    } else {
-      setTimeout(function() {
-        page.show(page._getBase(), state);
-      });
-    }
-  };
-
-  /**
-   * Register route to redirect from one path to other
-   * or just redirect to another route
-   *
-   * @param {string} from - if param 'to' is undefined redirects to 'from'
-   * @param {string=} to
-   * @api public
-   */
-  Page.prototype.redirect = function(from, to) {
-    var inst = this;
-
-    // Define route from a path to another
-    if ('string' === typeof from && 'string' === typeof to) {
-      page.call(this, from, function(e) {
-        setTimeout(function() {
-          inst.replace(/** @type {!string} */ (to));
-        }, 0);
-      });
-    }
-
-    // Wait for the push state and replace it with another
-    if ('string' === typeof from && 'undefined' === typeof to) {
-      setTimeout(function() {
-        inst.replace(from);
-      }, 0);
-    }
-  };
-
-  /**
-   * Replace `path` with optional `state` object.
-   *
-   * @param {string} path
-   * @param {Object=} state
-   * @param {boolean=} init
-   * @param {boolean=} dispatch
-   * @return {!Context}
-   * @api public
-   */
-
-
-  Page.prototype.replace = function(path, state, init, dispatch) {
-    var ctx = new Context(path, state, this),
-      prev = this.prevContext;
-    this.prevContext = ctx;
-    this.current = ctx.path;
-    ctx.init = init;
-    ctx.save(); // save before dispatching, which may redirect
-    if (false !== dispatch) this.dispatch(ctx, prev);
-    return ctx;
-  };
-
-  /**
-   * Dispatch the given `ctx`.
-   *
-   * @param {Context} ctx
-   * @api private
-   */
-
-  Page.prototype.dispatch = function(ctx, prev) {
-    var i = 0, j = 0, page = this;
-
-    function nextExit() {
-      var fn = page.exits[j++];
-      if (!fn) return nextEnter();
-      fn(prev, nextExit);
-    }
-
-    function nextEnter() {
-      var fn = page.callbacks[i++];
-
-      if (ctx.path !== page.current) {
-        ctx.handled = false;
-        return;
-      }
-      if (!fn) return unhandled.call(page, ctx);
-      fn(ctx, nextEnter);
-    }
-
-    if (prev) {
-      nextExit();
-    } else {
-      nextEnter();
-    }
-  };
-
-  /**
-   * Register an exit route on `path` with
-   * callback `fn()`, which will be called
-   * on the previous context when a new
-   * page is visited.
-   */
-  Page.prototype.exit = function(path, fn) {
-    if (typeof path === 'function') {
-      return this.exit('*', path);
-    }
-
-    var route = new Route(path, null, this);
-    for (var i = 1; i < arguments.length; ++i) {
-      this.exits.push(route.middleware(arguments[i]));
-    }
-  };
-
-  /**
-   * Handle "click" events.
-   */
-
-  /* jshint +W054 */
-  Page.prototype.clickHandler = function(e) {
-    if (1 !== this._which(e)) return;
-
-    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
-    if (e.defaultPrevented) return;
-
-    // ensure link
-    // use shadow dom when available if not, fall back to composedPath()
-    // for browsers that only have shady
-    var el = e.target;
-    var eventPath = e.path || (e.composedPath ? e.composedPath() : null);
-
-    if(eventPath) {
-      for (var i = 0; i < eventPath.length; i++) {
-        if (!eventPath[i].nodeName) continue;
-        if (eventPath[i].nodeName.toUpperCase() !== 'A') continue;
-        if (!eventPath[i].href) continue;
-
-        el = eventPath[i];
-        break;
-      }
-    }
-
-    // continue ensure link
-    // el.nodeName for svg links are 'a' instead of 'A'
-    while (el && 'A' !== el.nodeName.toUpperCase()) el = el.parentNode;
-    if (!el || 'A' !== el.nodeName.toUpperCase()) return;
-
-    // check if link is inside an svg
-    // in this case, both href and target are always inside an object
-    var svg = (typeof el.href === 'object') && el.href.constructor.name === 'SVGAnimatedString';
-
-    // Ignore if tag has
-    // 1. "download" attribute
-    // 2. rel="external" attribute
-    if (el.hasAttribute('download') || el.getAttribute('rel') === 'external') return;
-
-    // ensure non-hash for the same path
-    var link = el.getAttribute('href');
-    if(!this._hashbang && this._samePath(el) && (el.hash || '#' === link)) return;
-
-    // Check for mailto: in the href
-    if (link && link.indexOf('mailto:') > -1) return;
-
-    // check target
-    // svg target is an object and its desired value is in .baseVal property
-    if (svg ? el.target.baseVal : el.target) return;
-
-    // x-origin
-    // note: svg links that are not relative don't call click events (and skip page.js)
-    // consequently, all svg links tested inside page.js are relative and in the same origin
-    if (!svg && !this.sameOrigin(el.href)) return;
-
-    // rebuild path
-    // There aren't .pathname and .search properties in svg links, so we use href
-    // Also, svg href is an object and its desired value is in .baseVal property
-    var path = svg ? el.href.baseVal : (el.pathname + el.search + (el.hash || ''));
-
-    path = path[0] !== '/' ? '/' + path : path;
-
-    // strip leading "/[drive letter]:" on NW.js on Windows
-    if (hasProcess && path.match(/^\/[a-zA-Z]:\//)) {
-      path = path.replace(/^\/[a-zA-Z]:\//, '/');
-    }
-
-    // same page
-    var orig = path;
-    var pageBase = this._getBase();
-
-    if (path.indexOf(pageBase) === 0) {
-      path = path.substr(pageBase.length);
-    }
-
-    if (this._hashbang) path = path.replace('#!', '');
-
-    if (pageBase && orig === path && (!isLocation || this._window.location.protocol !== 'file:')) {
-      return;
-    }
-
-    e.preventDefault();
-    this.show(orig);
-  };
-
-  /**
-   * Handle "populate" events.
-   * @api private
-   */
-
-  Page.prototype._onpopstate = (function () {
-    var loaded = false;
-    if ( ! hasWindow ) {
-      return function () {};
-    }
-    if (hasDocument && document.readyState === 'complete') {
-      loaded = true;
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          loaded = true;
-        }, 0);
-      });
-    }
-    return function onpopstate(e) {
-      if (!loaded) return;
-      var page = this;
-      if (e.state) {
-        var path = e.state.path;
-        page.replace(path, e.state);
-      } else if (isLocation) {
-        var loc = page._window.location;
-        page.show(loc.pathname + loc.search + loc.hash, undefined, undefined, false);
-      }
-    };
-  })();
-
-  /**
-   * Event button.
-   */
-  Page.prototype._which = function(e) {
-    e = e || (hasWindow && this._window.event);
-    return null == e.which ? e.button : e.which;
-  };
-
-  /**
-   * Convert to a URL object
-   * @api private
-   */
-  Page.prototype._toURL = function(href) {
-    var window = this._window;
-    if(typeof URL === 'function' && isLocation) {
-      return new URL(href, window.location.toString());
-    } else if (hasDocument) {
-      var anc = window.document.createElement('a');
-      anc.href = href;
-      return anc;
-    }
-  };
-
-  /**
-   * Check if `href` is the same origin.
-   * @param {string} href
-   * @api public
-   */
-  Page.prototype.sameOrigin = function(href) {
-    if(!href || !isLocation) return false;
-
-    var url = this._toURL(href);
-    var window = this._window;
-
-    var loc = window.location;
-
-    /*
-       When the port is the default http port 80 for http, or 443 for
-       https, internet explorer 11 returns an empty string for loc.port,
-       so we need to compare loc.port with an empty string if url.port
-       is the default port 80 or 443.
-       Also the comparition with `port` is changed from `===` to `==` because
-       `port` can be a string sometimes. This only applies to ie11.
-    */
-    return loc.protocol === url.protocol &&
-      loc.hostname === url.hostname &&
-      (loc.port === url.port || loc.port === '' && (url.port == 80 || url.port == 443)); // jshint ignore:line
-  };
-
-  /**
-   * @api private
-   */
-  Page.prototype._samePath = function(url) {
-    if(!isLocation) return false;
-    var window = this._window;
-    var loc = window.location;
-    return url.pathname === loc.pathname &&
-      url.search === loc.search;
-  };
-
-  /**
-   * Remove URL encoding from the given `str`.
-   * Accommodates whitespace in both x-www-form-urlencoded
-   * and regular percent-encoded form.
-   *
-   * @param {string} val - URL component to decode
-   * @api private
-   */
-  Page.prototype._decodeURLEncodedURIComponent = function(val) {
-    if (typeof val !== 'string') { return val; }
-    return this._decodeURLComponents ? decodeURIComponent(val.replace(/\+/g, ' ')) : val;
-  };
-
-  /**
-   * Create a new `page` instance and function
-   */
-  function createPage() {
-    var pageInstance = new Page();
-
-    function pageFn(/* args */) {
-      return page.apply(pageInstance, arguments);
-    }
-
-    // Copy all of the things over. In 2.0 maybe we use setPrototypeOf
-    pageFn.callbacks = pageInstance.callbacks;
-    pageFn.exits = pageInstance.exits;
-    pageFn.base = pageInstance.base.bind(pageInstance);
-    pageFn.strict = pageInstance.strict.bind(pageInstance);
-    pageFn.start = pageInstance.start.bind(pageInstance);
-    pageFn.stop = pageInstance.stop.bind(pageInstance);
-    pageFn.show = pageInstance.show.bind(pageInstance);
-    pageFn.back = pageInstance.back.bind(pageInstance);
-    pageFn.redirect = pageInstance.redirect.bind(pageInstance);
-    pageFn.replace = pageInstance.replace.bind(pageInstance);
-    pageFn.dispatch = pageInstance.dispatch.bind(pageInstance);
-    pageFn.exit = pageInstance.exit.bind(pageInstance);
-    pageFn.configure = pageInstance.configure.bind(pageInstance);
-    pageFn.sameOrigin = pageInstance.sameOrigin.bind(pageInstance);
-    pageFn.clickHandler = pageInstance.clickHandler.bind(pageInstance);
-
-    pageFn.create = createPage;
-
-    Object.defineProperty(pageFn, 'len', {
-      get: function(){
-        return pageInstance.len;
-      },
-      set: function(val) {
-        pageInstance.len = val;
-      }
-    });
-
-    Object.defineProperty(pageFn, 'current', {
-      get: function(){
-        return pageInstance.current;
-      },
-      set: function(val) {
-        pageInstance.current = val;
-      }
-    });
-
-    // In 2.0 these can be named exports
-    pageFn.Context = Context;
-    pageFn.Route = Route;
-
-    return pageFn;
-  }
-
-  /**
-   * Register `path` with callback `fn()`,
-   * or route `path`, or redirection,
-   * or `page.start()`.
-   *
-   *   page(fn);
-   *   page('*', fn);
-   *   page('/user/:id', load, user);
-   *   page('/user/' + user.id, { some: 'thing' });
-   *   page('/user/' + user.id);
-   *   page('/from', '/to')
-   *   page();
-   *
-   * @param {string|!Function|!Object} path
-   * @param {Function=} fn
-   * @api public
-   */
-
-  function page(path, fn) {
-    // <callback>
-    if ('function' === typeof path) {
-      return page.call(this, '*', path);
-    }
-
-    // route <path> to <callback ...>
-    if ('function' === typeof fn) {
-      var route = new Route(/** @type {string} */ (path), null, this);
-      for (var i = 1; i < arguments.length; ++i) {
-        this.callbacks.push(route.middleware(arguments[i]));
-      }
-      // show <path> with [state]
-    } else if ('string' === typeof path) {
-      this['string' === typeof fn ? 'redirect' : 'show'](path, fn);
-      // start [options]
-    } else {
-      this.start(path);
-    }
-  }
-
-  /**
-   * Unhandled `ctx`. When it's not the initial
-   * popstate then redirect. If you wish to handle
-   * 404s on your own use `page('*', callback)`.
-   *
-   * @param {Context} ctx
-   * @api private
-   */
-  function unhandled(ctx) {
-    if (ctx.handled) return;
-    var current;
-    var page = this;
-    var window = page._window;
-
-    if (page._hashbang) {
-      current = isLocation && this._getBase() + window.location.hash.replace('#!', '');
-    } else {
-      current = isLocation && window.location.pathname + window.location.search;
-    }
-
-    if (current === ctx.canonicalPath) return;
-    page.stop();
-    ctx.handled = false;
-    isLocation && (window.location.href = ctx.canonicalPath);
-  }
-
-  /**
-   * Escapes RegExp characters in the given string.
-   *
-   * @param {string} s
-   * @api private
-   */
-  function escapeRegExp(s) {
-    return s.replace(/([.+*?=^!:${}()[\]|/\\])/g, '\\$1');
-  }
-
-  /**
-   * Initialize a new "request" `Context`
-   * with the given `path` and optional initial `state`.
-   *
-   * @constructor
-   * @param {string} path
-   * @param {Object=} state
-   * @api public
-   */
-
-  function Context(path, state, pageInstance) {
-    var _page = this.page = pageInstance || page;
-    var window = _page._window;
-    var hashbang = _page._hashbang;
-
-    var pageBase = _page._getBase();
-    if ('/' === path[0] && 0 !== path.indexOf(pageBase)) path = pageBase + (hashbang ? '#!' : '') + path;
-    var i = path.indexOf('?');
-
-    this.canonicalPath = path;
-    var re = new RegExp('^' + escapeRegExp(pageBase));
-    this.path = path.replace(re, '') || '/';
-    if (hashbang) this.path = this.path.replace('#!', '') || '/';
-
-    this.title = (hasDocument && window.document.title);
-    this.state = state || {};
-    this.state.path = path;
-    this.querystring = ~i ? _page._decodeURLEncodedURIComponent(path.slice(i + 1)) : '';
-    this.pathname = _page._decodeURLEncodedURIComponent(~i ? path.slice(0, i) : path);
-    this.params = {};
-
-    // fragment
-    this.hash = '';
-    if (!hashbang) {
-      if (!~this.path.indexOf('#')) return;
-      var parts = this.path.split('#');
-      this.path = this.pathname = parts[0];
-      this.hash = _page._decodeURLEncodedURIComponent(parts[1]) || '';
-      this.querystring = this.querystring.split('#')[0];
-    }
-  }
-
-  /**
-   * Push state.
-   *
-   * @api private
-   */
-
-  Context.prototype.pushState = function() {
-    var page = this.page;
-    var window = page._window;
-    var hashbang = page._hashbang;
-
-    page.len++;
-    if (hasHistory) {
-        window.history.pushState(this.state, this.title,
-          hashbang && this.path !== '/' ? '#!' + this.path : this.canonicalPath);
-    }
-  };
-
-  /**
-   * Save the context state.
-   *
-   * @api public
-   */
-
-  Context.prototype.save = function() {
-    var page = this.page;
-    if (hasHistory) {
-        page._window.history.replaceState(this.state, this.title,
-          page._hashbang && this.path !== '/' ? '#!' + this.path : this.canonicalPath);
-    }
-  };
-
-  /**
-   * Initialize `Route` with the given HTTP `path`,
-   * and an array of `callbacks` and `options`.
-   *
-   * Options:
-   *
-   *   - `sensitive`    enable case-sensitive routes
-   *   - `strict`       enable strict matching for trailing slashes
-   *
-   * @constructor
-   * @param {string} path
-   * @param {Object=} options
-   * @api private
-   */
-
-  function Route(path, options, page) {
-    var _page = this.page = page || globalPage;
-    var opts = options || {};
-    opts.strict = opts.strict || _page._strict;
-    this.path = (path === '*') ? '(.*)' : path;
-    this.method = 'GET';
-    this.regexp = pathToRegexp_1(this.path, this.keys = [], opts);
-  }
-
-  /**
-   * Return route middleware with
-   * the given callback `fn()`.
-   *
-   * @param {Function} fn
-   * @return {Function}
-   * @api public
-   */
-
-  Route.prototype.middleware = function(fn) {
-    var self = this;
-    return function(ctx, next) {
-      if (self.match(ctx.path, ctx.params)) {
-        ctx.routePath = self.path;
-        return fn(ctx, next);
-      }
-      next();
-    };
-  };
-
-  /**
-   * Check if this route matches `path`, if so
-   * populate `params`.
-   *
-   * @param {string} path
-   * @param {Object} params
-   * @return {boolean}
-   * @api private
-   */
-
-  Route.prototype.match = function(path, params) {
-    var keys = this.keys,
-      qsIndex = path.indexOf('?'),
-      pathname = ~qsIndex ? path.slice(0, qsIndex) : path,
-      m = this.regexp.exec(decodeURIComponent(pathname));
-
-    if (!m) return false;
-
-    delete params[0];
-
-    for (var i = 1, len = m.length; i < len; ++i) {
-      var key = keys[i - 1];
-      var val = this.page._decodeURLEncodedURIComponent(m[i]);
-      if (val !== undefined || !(hasOwnProperty.call(params, key.name))) {
-        params[key.name] = val;
-      }
-    }
-
-    return true;
-  };
-
-
-  /**
-   * Module exports.
-   */
-
-  var globalPage = createPage();
-  var page_js = globalPage;
-  var default_1 = globalPage;
-
-page_js.default = default_1;
-
-return page_js;
-
-})));
 
 
 /***/ }),
@@ -44849,7 +43605,7 @@ function valueEqual(a, b) {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;

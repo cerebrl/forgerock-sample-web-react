@@ -11,11 +11,11 @@
 import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import { createServer } from 'https';
+import { createServer } from 'http';
 import { env } from 'process';
 
-import { key, cert } from './server.certs.mjs';
-import routes from './server.routes.mjs';
+// import { key, cert } from './certs.mjs';
+import routes from './routes.mjs';
 
 /**
  * Create and configure Express
@@ -54,5 +54,9 @@ env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 /**
  * Attach application to port and listen for requests
  */
-createServer({ key, cert }, app).listen(9443);
-console.log(`Listening to HTTPS on secure port: 9443`);
+createServer(/* { key, cert }, */ app).listen(
+  `${process.env.PORT}`
+);
+console.log(
+  `Listening to HTTPS on secure port: ${process.env.PORT}`
+);

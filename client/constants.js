@@ -9,7 +9,7 @@
  */
 
 export const AM_URL = 'https://openam-crbrl-01.forgeblocks.com/am/';
-export const APP_URL = 'https://react.example.com:8443';
-export const API_URL = 'https://api.example.com:9443';
+export const APP_URL = 'https://fr-react-todos.crbrl.io';
+export const API_URL = 'https://fr-todos-api.crbrl.io';
 export const REALM_PATH = 'alpha';
 export const SESSION_URL = `${AM_URL}json/realms/root/sessions`;

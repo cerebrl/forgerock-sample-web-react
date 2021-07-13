@@ -10,8 +10,8 @@
 
 import request from 'superagent';
 
-import { key, cert } from './server.certs.mjs';
-import { AM_URL, CONFIDENTIAL_CLIENT, REALM_PATH } from './server.constants.mjs';
+import { key, cert } from './certs.mjs';
+import { AM_URL, CONFIDENTIAL_CLIENT, REALM_PATH } from './constants.mjs';
 
 /**
  * @function auth - Auth middleware for checking the validity of user's auth
@@ -22,6 +22,8 @@ import { AM_URL, CONFIDENTIAL_CLIENT, REALM_PATH } from './server.constants.mjs'
  */
 export async function auth(req, res, next) {
   let response;
+  console.log(key);
+  console.log(cert);
   try {
     if (req.headers.authorization) {
       // Call OAuth introspect endpoint
@@ -48,14 +50,17 @@ export async function auth(req, res, next) {
         .send({ tokenId: req.cookies.iPlanetDirectoryPro });
     }
   } catch (err) {
+    console.log(`Error: auth middleware: ${err}`);
     response = {
       body: {},
     };
   }
 
   if (response.body.active || response.body.valid) {
+    req.user = response.body;
     next();
   } else {
+    console.log(JSON.stringify(response));
     res.status(401).send();
   }
 }

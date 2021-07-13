@@ -16,17 +16,16 @@ import React, { Fragment } from 'react';
  * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
  * @returns {Object} - React JSX view
  */
-export default function Choice(props) {
-  const choiceCb = props.step.getCallbackOfType('ChoiceCallback');
-  const prompt = choiceCb.getPrompt();
-  const choiceOptions = choiceCb.getChoices();
+export default function Choice({ callback }) {
+  const prompt = callback.getPrompt();
+  const choiceOptions = callback.getChoices();
 
   /**
    * @function setValue - Sets the value on the callback on element blur (lose focus)
    * @param {Object} event
    */
   function setValue(event) {
-    choiceCb.setChoiceIndex(event.target.value);
+    callback.setChoiceIndex(event.target.value);
   }
 
   return (

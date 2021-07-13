@@ -9,6 +9,6 @@
  */
 
 export const AM_URL = 'https://openam-crbrl-01.forgeblocks.com/am/';
-// Base64 encoded string of `RestOAuthClient:0tg8s3s35L7zHr0df34kZZ`
-export const CONFIDENTIAL_CLIENT = 'UmVzdE9BdXRoQ2xpZW50OjB0ZzhzM3MzNUw3ekhyMGRmMzRrWlo=';
+// Base64 encoded string of `ClientName:ClientSecret`
+export const CONFIDENTIAL_CLIENT = process.env.OAUTH_SECRET;
 export const REALM_PATH = 'alpha';

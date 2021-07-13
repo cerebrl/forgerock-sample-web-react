@@ -16,16 +16,15 @@ import React from 'react';
  * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
  * @returns {Object} - React JSX view
  */
-export default function Password(props) {
-  const passwordCb= props.step.getCallbackOfType('PasswordCallback');
-  const passwordLabel = passwordCb.getPrompt();
+export default function Password({ callback }) {
+  const passwordLabel = callback.getPrompt();
 
   /**
    * @function setValue - Sets the value on the callback on element blur (lose focus)
    * @param {Object} event
    */
   function setValue(event) {
-    passwordCb.setPassword(event.target.value);
+    callback.setPassword(event.target.value);
   }
 
   return (
@@ -33,12 +32,12 @@ export default function Password(props) {
       <input
         onBlur={ setValue }
         type="password"
-        name="password"
+        name={callback.payload.input[0].name}
         className="form-control"
-        id="passwordInput"
+        id={callback.payload.input[0].name}
         placeholder={ passwordLabel }
       />
-      <label htmlFor="passwordInput">{ passwordLabel }</label>
+      <label htmlFor={callback.payload.input[0].name}>{ passwordLabel }</label>
     </div>
   );
 }

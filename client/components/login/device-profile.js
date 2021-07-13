@@ -17,11 +17,10 @@ import { FRDevice } from '@forgerock/javascript-sdk';
  * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
  * @returns {Object} - React JSX view
  */
-export default function DeviceProfile(props) {
-  const deviceCollectorCb =  props.step.getCallbackOfType('DeviceProfileCallback');
-  const isLocationRequired = deviceCollectorCb.isLocationRequired();
-  const isMetadataRequired = deviceCollectorCb.isMetadataRequired();
-  const message = deviceCollectorCb.getMessage();
+export default function DeviceProfile({ callback }) {
+  const isLocationRequired = callback.isLocationRequired();
+  const isMetadataRequired = callback.isMetadataRequired();
+  const message = callback.getMessage();
 
   /**
    * Create state for this component in order to update the view upon change
@@ -52,7 +51,7 @@ export default function DeviceProfile(props) {
       updateDeviceProfileString(JSON.stringify(profile, false, 2));
 
       // Sets value on callback
-      deviceCollectorCb.setProfile(profile);
+      callback.setProfile(profile);
     }
     // Only call if there is no profile
     if (!deviceProfile) {

@@ -11,35 +11,33 @@
 import React from 'react';
 
 /**
- * @function Username- React component used for displaying username callback
+ * @function Text- React component used for displaying username callback
  * @param {Object} props - React props object passed from parent
  * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
  * @returns {Object} - React JSX view
  */
-export default function Username(props) {
-  const usernameCb = props.step.getCallbackOfType('NameCallback')
-  const usernameLabel = usernameCb.getPrompt();
+export default function Text({ callback }) {
+  const textInputLabel = callback.getPrompt();
 
   /**
    * @function setValue - Sets the value on the callback on element blur (lose focus)
    * @param {Object} event
    */
   function setValue(event) {
-    usernameCb.setName(event.target.value);
+    callback.setInputValue(event.target.value);
   }
 
   return (
     <div className="form-floating mb-3">
       <input
-        onBlur={ setValue }
-        type="username"
-        name="username"
+        onBlur={setValue}
+        type="text"
+        name={callback.payload.input[0].name}
         className="form-control"
-        id="usernameInput"
-        aria-describedby="emailHelp"
-        placeholder={ usernameLabel }
+        id={callback.payload.input[0].name}
+        placeholder={textInputLabel}
       />
-      <label htmlFor="usernameInput">{ usernameLabel }</label>
+      <label htmlFor={callback.payload.input[0].name}>{textInputLabel}</label>
     </div>
   );
 }

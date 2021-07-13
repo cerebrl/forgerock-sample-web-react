@@ -9,11 +9,13 @@
  */
 
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-import AccountIcon from './icons/account-icon';
+import AccountIcon from './icons/account-icon.js';
 import { AppContext } from '../state.js';
-import TodosIcon from './icons/todos-icon';
+import ForgeRockIcon from './icons/forgerock-icon.js';
+import ReactIcon from './icons/react-icon.js';
+import TodosIcon from './icons/todos-icon.js';
 
 /**
  * @function Header - Header React view
@@ -25,6 +27,7 @@ export default function Header() {
    * appropriate navigational items.
    */
   const [state] = useContext(AppContext);
+  const location = useLocation();
   let TodosItem;
   let LoginOrOutItem;
 
@@ -34,15 +37,14 @@ export default function Header() {
   switch (state.isAuthenticated) {
     case true:
       TodosItem = (
-        <li className="nav-item">
-          <Link
-            className={`nav-link ${state.page === 'todos' ? 'active' : ''}`}
-            to="/todos"
-          >
+        <li
+          className={`header_nav-item ${
+            location.pathname === '/todos' ? 'header_nav-item_active' : ''
+          } nav-item`}
+        >
+          <Link className="header_nav-link nav-link d-flex align-items-center h-100" to="/todos">
             <TodosIcon />
-            <span className="px-2">
-              Todos
-            </span>
+            <span className="px-2 fs-5">Todos</span>
           </Link>
         </li>
       );
@@ -58,14 +60,21 @@ export default function Header() {
             >
               <AccountIcon />
             </button>
-            <ul className="account_dropdown-menu dropdown-menu dropdown-menu-end" aria-labelledby="account_dropdown">
+            <ul
+              className="account_dropdown-menu dropdown-menu dropdown-menu-end"
+              aria-labelledby="account_dropdown"
+            >
               <li>
                 <div className="dropdown-header border-bottom">
-                  <p className="fw-bold mb-0">{ state.username }</p>
-                  <p className="mb-2">{ state.email }</p>
+                  <p className="fw-bold mb-0">{state.username}</p>
+                  <p className="mb-2">{state.email}</p>
                 </div>
               </li>
-              <li><Link className="dropdown-item" to="/logout">Logout</Link></li>
+              <li>
+                <Link className="dropdown-item" to="/logout">
+                  Logout
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -74,23 +83,27 @@ export default function Header() {
     default:
       TodosItem = null;
       LoginOrOutItem = (
-        <div className="d-flex">
-          <Link className="btn btn-outline-primary" to="/login">
+        <div className="d-flex py-3">
+          <Link className="header_account-link py-2 px-3 mx-1" to="/login">
             Login
+          </Link>
+          <Link className="btn btn-outline-secondary" to="/register">
+            Register
           </Link>
         </div>
       );
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 border-bottom">
-      <div className="container">
-        <Link
-          className="navbar-brand border-end pe-4"
-          to="/"
+    <nav className="navbar navbar-expand-lg navbar-light bg-white py-0 border-bottom">
+      <div className="container d-flex align-items-stretch">
+        <div
+          className={`header_navbar-brand ${
+            state.isAuthenticated ? 'header_navbar-brand_auth' : ''
+          } navbar-brand py-3 pe-4 me-4`}
         >
-          React
-        </Link>
+          <ForgeRockIcon /> + <ReactIcon />
+        </div>
         <button
           className="navbar-toggler"
           type="button"
@@ -102,10 +115,8 @@ export default function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto">
-            {TodosItem}
-          </ul>
+        <div className="collapse navbar-collapse d-flex align-items-stretch" id="navbarNav">
+          <ul className="navbar-nav d-flex align-items-stretch me-auto">{TodosItem}</ul>
           {LoginOrOutItem}
         </div>
       </div>
