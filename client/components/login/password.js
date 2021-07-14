@@ -13,7 +13,7 @@ import React from 'react';
 /**
  * @function Password - React component used for displaying password callback
  * @param {Object} props - React props object passed from parent
- * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
+ * @param {Object} props.callback - The callback object from AM
  * @returns {Object} - React JSX view
  */
 export default function Password({ callback }) {

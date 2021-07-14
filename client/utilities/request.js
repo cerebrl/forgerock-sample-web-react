@@ -16,6 +16,7 @@ import { API_URL } from '../constants.js';
  * @function request - A convenience function for wrapping around HttpClient
  * @param {string} resource - the resource path for the API server
  * @param {string} method - the method (GET, POST, etc) for the API server
+ * @param {string} data - the data to POST against the API server
  * @return {Object} - JSON response from API
  */
 export default async function apiRequest(resource, method, data) {
@@ -29,7 +30,7 @@ export default async function apiRequest(resource, method, data) {
           'Content-Type': 'application/json'
         },
         method: method,
-        body: JSON.stringify(data),
+        body: data && JSON.stringify(data),
       },
     });
     if (!response.ok) {

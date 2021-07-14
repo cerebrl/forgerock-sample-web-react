@@ -10,7 +10,7 @@
 
 import request from 'superagent';
 
-import { key, cert } from './certs.mjs';
+import { SEC_KEY, SEC_CERT } from './constants.mjs';
 import { AM_URL, CONFIDENTIAL_CLIENT, REALM_PATH } from './constants.mjs';
 
 /**
@@ -22,16 +22,15 @@ import { AM_URL, CONFIDENTIAL_CLIENT, REALM_PATH } from './constants.mjs';
  */
 export async function auth(req, res, next) {
   let response;
-  console.log(key);
-  console.log(cert);
+
   try {
     if (req.headers.authorization) {
       // Call OAuth introspect endpoint
       const [ _, token ] = req.headers.authorization.split(' ');
       response = await request
         .post(`${AM_URL}oauth2/realms/root/realms/${REALM_PATH}/introspect`)
-        .key(key)
-        .cert(cert)
+        .key(SEC_KEY)
+        .cert(SEC_CERT)
         .set('Content-Type', 'application/json')
         .set(
           'Authorization',
@@ -42,8 +41,8 @@ export async function auth(req, res, next) {
       // Call session validate endpoint
       response = await request
         .post(`${AM_URL}json/sessions/?_action=validate`)
-        .key(key)
-        .cert(cert)
+        .key(SEC_KEY)
+        .cert(SEC_CERT)
         .set('Content-Type', 'application/json')
         .set('iPlanetDirectoryPro', req.cookies.iPlanetDirectoryPro)
         .set('Accept-API-Version', 'resource=2.1, protocol=1.0')
@@ -60,6 +59,7 @@ export async function auth(req, res, next) {
     req.user = response.body;
     next();
   } else {
+    console.log('Error: user failed auth validation');
     console.log(JSON.stringify(response));
     res.status(401).send();
   }

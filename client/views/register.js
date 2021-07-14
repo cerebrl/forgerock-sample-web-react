@@ -15,10 +15,10 @@ import NewUserIcon from '../components/icons/new-user-icon.js';
 import Form from '../components/form.js';
 
 /**
- * @function Login - React view for Login
+ * @function Register - React view for Register
  * @returns {Object} - React JSX view
  */
-export default function Login() {
+export default function Register() {
   async function initUserInDb() {
     await apiRequest(`users`, 'POST');
   }

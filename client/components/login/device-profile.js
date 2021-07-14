@@ -1,7 +1,7 @@
 /*
  * forgerock-sample-web-react
  *
- * choice.js
+ * device-profile.js
  *
  * Copyright (c) 2021 ForgeRock. All rights reserved.
  * This software may be modified and distributed under the terms
@@ -14,7 +14,7 @@ import { FRDevice } from '@forgerock/javascript-sdk';
 /**
  * @function DeviceProfile - React component used for retrieving the device profile
  * @param {Object} props - React props object passed from parent
- * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
+ * @param {Object} props.callback - The callback object from AM
  * @returns {Object} - React JSX view
  */
 export default function DeviceProfile({ callback }) {
@@ -24,8 +24,10 @@ export default function DeviceProfile({ callback }) {
 
   /**
    * Create state for this component in order to update the view upon change
-   * `deviceProfile` is the actual JSON intended for sending to AM
-   * `deviceProfileString` is intended only for rendering within the view
+   * `deviceProfile` is the actual JSON intended for sending to AM.
+   * `deviceProfileString` is intended only for rendering within the view.
+   * The destructing of the hook's array results in index 0 having the state value,
+   * and index 1 having the "setter" method to set new state values.
    */
   const [ deviceProfile, updateDeviceProfile ] = useState(null);
   const [ deviceProfileString, updateDeviceProfileString ] = useState('Collecting profile ...');

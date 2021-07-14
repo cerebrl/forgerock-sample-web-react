@@ -17,10 +17,15 @@ import TodoIcon from './icons/todo-icon';
 /**
  * @function Todo - Used for display a single todo and its details
  * @param {Object} props - The object representing React's props
+ * @param {Object} props.setTodoActionId - Method from parent for passing the ID of todo
  * @param {Object} props.todo - The todo object passed from the parent component
  * @returns {Object} - React JSX view
  */
 export default function Todo({ setTodoActionId, todo: item }) {
+  /**
+   * The destructing of the hook's array results in index 0 having the state value,
+   * and index 1 having the "setter" method to set new state values.
+   */
   const [todo, updateTodo] = useState(item);
   const todoClass = `todo_label ${
     todo.completed ? 'todo_label_complete' : 'todo_label_incomplete'
@@ -52,6 +57,7 @@ export default function Todo({ setTodoActionId, todo: item }) {
           <TodoIcon completed={todo.completed} />
           {todo.title}
         </label>
+
         <div className="dropdown col-2 text-end" aria-expanded="false">
           <button
             className="todo_dropdown_actions btn h-100"
@@ -64,7 +70,6 @@ export default function Todo({ setTodoActionId, todo: item }) {
             className="dropdown-menu dropdown-menu-end"
             aria-labelledby={`todo_action_${todo._id}`}
           >
-            {/* <li><a className="dropdown-item" href="todo._id/edit">Edit</a></li> */}
             <li>
               <button
                 className="dropdown-item"

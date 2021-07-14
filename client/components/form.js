@@ -18,7 +18,7 @@ import React, {
 } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import AlertIcon from '../components/icons/alert-icon.js';
+import LoginFailure from './login/login-failure.js';
 import Choice from '../components/login/choice.js';
 import DeviceProfile from '../components/login/device-profile.js';
 import Loading from '../components/loading.js';
@@ -33,6 +33,12 @@ import { AppContext } from '../state.js';
  * @returns {Object} - React JSX view
  */
 export default function Form({ action, followUp }) {
+  /**
+   * @function reducer - A simple reducer for determining what tree to call
+   * @param {*} _ - Normally the current state, but it's not being used
+   * @param {*} action - Object with the property `type` that represents the user action
+   * @returns
+   */
   const reducer = (_, action) => {
     switch (action.type) {
       case 'login':
@@ -47,12 +53,14 @@ export default function Form({ action, followUp }) {
   };
   /**
    * Compose the state used in this view.
-   * First, we will use the global state methods found in the App Context
+   * First, we will use the global state methods found in the App Context.
    * Then, we will create local state to manage the login journey. The
    * underscore is an unused variable, since we don't need the current state.
+   * The destructing of the hook's array results in index 0 having the state value,
+   * and index 1 having the "setter" method to set new state values.
    */
   const [_, methods] = useContext(AppContext);
-  const [tree, setTree] = useReducer(reducer, reducer(null, action));
+  const [tree] = useReducer(reducer, reducer(null, action));
   const [renderStep, setRenderStep] = useState(null);
   const [submissionStep, setSubmissionStep] = useState(null);
   const history = useHistory();
@@ -69,31 +77,46 @@ export default function Form({ action, followUp }) {
   let StepComponents = [];
 
   /**
-   * Since we have API calls to AM, we need to handle these requests as side-effects
-   * This will allow the view to render, but update/rerender after the request completes
+   * Since we have API calls to AM, we need to handle these requests as side-effects.
+   * This will allow the view to render, but update/rerender after the request completes.
    */
   useEffect(
     function () {
       /**
-       * @function completeAuth - The function to call when we get a LoginSuccess
+       * @function getOAuth - The function to call when we get a LoginSuccess
+       * @returns {undefined}
        */
       async function getOAuth() {
+        /**
+         * Get OAuth/OIDC tokens through the the Authorization Code Flow w/PKCE.
+         * We are passing the `forceRenew` option to ensure we get fresh tokens,
+         * regardless of existing tokens.
+         */
         await TokenManager.getTokens({ forceRenew: true });
+
+        /**
+         * Now that we have tokens, call the user info endpoint for some basic user data.
+         */
         const { email, name: username } = await UserManager.getCurrentUser();
 
-        // Set user info on "global state"
+        /**
+         * Set user info on "global state"
+         */
         methods.setUser(username);
         methods.setEmail(email);
         methods.setAuthentication(true);
 
-        // Run follow up function if present
-        followUp && await followUp();
+        // Run follow-up function if present
+        followUp && (await followUp());
 
+        // Redirect back to the home page
         history.push('/');
       }
 
       /**
-       * @function getInitialStep - The function to call when there's no previous step
+       * @function getStep - The function for calling AM with a previous step to get a new step
+       * @param {Object} prev - This is the previous step that should contain the input for AM
+       * @returns {undefined}
        */
       async function getStep(prev) {
         const nextStep = await FRAuth.next(prev, { tree });
@@ -102,14 +125,17 @@ export default function Form({ action, followUp }) {
          * Here's where you should add more error handling.
          */
         if (nextStep.type === 'LoginSuccess') {
+          // User is authenticated, now call for OAuth tokens
           getOAuth();
-        } else if (!nextStep.type === 'LoginError') {
-          console.log('Error');
         } else {
           setRenderStep(nextStep);
         }
       }
 
+      /**
+       * Kickstart the authentication journey!
+       * submissionStep will initially be `null`, and that's intended.
+       */
       getStep(submissionStep);
     },
     [submissionStep]
@@ -117,8 +143,13 @@ export default function Form({ action, followUp }) {
 
   /**
    * Render conditions for presenting appropriate views to user.
-   * Adding more steps to a journey would mean more conditions
-   * to add here. More error conditions would be good here too.
+   * First, we need to handle no "step", which means we are waiting for
+   * the initial response from AM for authentication.
+   *
+   * Once we have a step, we then need to ensure we don't already have a
+   * success or failure. If we have a step but don't have a success or
+   * failure, we will likely have callbacks that we will need to present'
+   * to the user in their render component form.
    */
   if (!renderStep) {
     /**
@@ -129,33 +160,14 @@ export default function Form({ action, followUp }) {
   } else if (renderStep.type === 'LoginSuccess') {
     MessageComponent = () => <Loading message="Success! Redirecting ..." />;
   } else if (renderStep.type === 'LoginFailure') {
-    ErrorComponent = () => {
-      if (renderStep.type === 'LoginFailure') {
-        return (
-          <p
-            className="alert alert-danger d-flex align-items-center mt-5"
-            role="alert"
-          >
-            <AlertIcon />
-            <span className="ps-2">
-              Your credentials were incorrect. Please{' '}
-              <button
-                className="login_reload-btn"
-                onClick={async () => {
-                  const nextStep = await FRAuth.next();
-                  setRenderStep(nextStep);
-                }}
-              >
-                try again
-              </button>
-              .
-            </span>
-          </p>
-        );
-      } else {
-        return null;
-      }
-    };
+    ErrorComponent = () => (
+      <LoginFailure
+        reload={async () => {
+          const nextStep = await FRAuth.next();
+          setRenderStep(nextStep);
+        }}
+      />
+    );
   } else if (renderStep.callbacks.length > 0) {
     /**
      * Iterate through callbacks mapping the callback to the
@@ -180,11 +192,14 @@ export default function Form({ action, followUp }) {
           StepComponents.push({ Component: Password, callback });
           break;
         default:
-          // If we don't recognize the callback, render a warning
+          // If current callback is not supported it, render a warning
           StepComponents.push({ Component: Unknown, callback });
       }
     });
   } else {
+    /**
+     * This shouldn't be reached, but it's here just in case things blow up.
+     */
     MessageComponent = () => <p>It looks like there was an error.</p>;
   }
 
@@ -202,14 +217,25 @@ export default function Form({ action, followUp }) {
           className="login_form"
           onSubmit={(event) => {
             event.preventDefault();
-            // set current step as previous step
+            // set currently rendered step as step to be submitted
             setSubmissionStep(renderStep);
           }}
         >
-          {StepComponents.map(({ Component, callback }, idx) => {
-            return <Component key={idx} callback={callback} />;
-          })}
-          <input type="submit" className="btn btn-primary w-100" value="Submit" />
+          {
+            /**
+             * Take the StepComponent array (callbacks mapped to components),
+             * and iteratively render the collection as one form. This way,
+             * it can render a single component or any number of components.
+             */
+            StepComponents.map(({ Component, callback }, idx) => {
+              return <Component key={idx} callback={callback} />;
+            })
+          }
+          <input
+            type="submit"
+            className="btn btn-primary w-100"
+            value="Submit"
+          />
         </form>
       </Fragment>
     );

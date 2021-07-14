@@ -1,8 +1,11 @@
 /node_modules
 *.pem
+.env
 
 .DS_Store
 .vscode
+
+/public/app*
 
 /todos
 /users

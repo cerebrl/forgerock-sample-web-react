@@ -7,6 +7,7 @@
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:client": "ws -d public/ --spa index.html -p 8443 --cert example.com+5.pem --key example.com+5-key.pem",
+    "start:dev-server": "node -r dotenv/config ./server/index.mjs",
     "start:server": "node ./server/index.mjs",
     "watch": "webpack -w"
   },
@@ -38,7 +39,7 @@
   "dependencies": {
     "@forgerock/javascript-sdk": "^3.0.0",
     "body-parser": "^1.19.0",
-    "page": "^1.11.6",
+    "dotenv": "^10.0.0",
     "pouchdb": "^7.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

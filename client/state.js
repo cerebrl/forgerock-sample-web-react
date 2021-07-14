@@ -12,14 +12,18 @@ import React, { useState } from 'react';
 
 /**
  * @function useStateMgmt - The global state/store for managing user authentication and page
- * @param {boolean} isAuthenticated - Stored authentication state of user
- * @returns {Array} - Global state
+ * @param {Object} props - The object representing React's props
+ * @param {Object} props.isAuthenticated - Boolean value of user's auth status
+ * @param {Object} props.page - Currently requested page
+ * @param {Object} props.email - User's email
+ * @param {Object} props.username - User's username
+ * @returns {Array} - Global state values and state methods
  */
 export function useStateMgmt({ isAuthenticated, page, email, username }) {
   /**
-   * Create state properties for global state.
-   * Using internal names that differ from external.
-   * The destructing of the array results in index 0 having the state value,
+   * Create state properties for "global" state.
+   * Using internal names that differ from external to prevent shadowing.
+   * The destructing of the hook's array results in index 0 having the state value,
    * and index 1 having the "setter" method to set new state values.
    */
   const [authenticated, setAuthentication] = useState(isAuthenticated || false);
@@ -38,8 +42,8 @@ export function useStateMgmt({ isAuthenticated, page, email, username }) {
   }
 
   /**
-   * @function setUserWrapper - A wrapper for storing authentication in sessionStorage
-   * @param {boolean} value - current user authentication
+   * @function setEmailWrapper - A wrapper for storing authentication in sessionStorage
+   * @param {string} value - current user's email
    * @returns {void}
    */
   function setEmailWrapper(value) {
@@ -49,7 +53,7 @@ export function useStateMgmt({ isAuthenticated, page, email, username }) {
 
   /**
    * @function setUserWrapper - A wrapper for storing authentication in sessionStorage
-   * @param {boolean} value - current user authentication
+   * @param {string} value - current user's username
    * @returns {void}
    */
   function setUserWrapper(value) {

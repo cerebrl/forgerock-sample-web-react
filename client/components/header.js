@@ -25,6 +25,8 @@ export default function Header() {
   /**
    * Collects the global state for detecting user auth for rendering
    * appropriate navigational items.
+   * The destructing of the hook's array results in index 0 having the state value,
+   * and index 1 having the "setter" method to set new state values.
    */
   const [state] = useContext(AppContext);
   const location = useLocation();

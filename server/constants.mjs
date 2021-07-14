@@ -8,7 +8,9 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-export const AM_URL = 'https://openam-crbrl-01.forgeblocks.com/am/';
+export const AM_URL = process.env.AM_URL;
 // Base64 encoded string of `ClientName:ClientSecret`
 export const CONFIDENTIAL_CLIENT = process.env.OAUTH_SECRET;
-export const REALM_PATH = 'alpha';
+export const REALM_PATH = process.env.REALM_PATH;
+export const SEC_KEY = process.env.SEC_KEY.replace(/\\n/gm, '\n');
+export const SEC_CERT = process.env.SEC_CERT.replace(/\\n/gm, '\n');

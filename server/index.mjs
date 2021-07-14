@@ -12,9 +12,9 @@ import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { createServer } from 'http';
+import { createServer as createSecureServer } from 'https';
 import { env } from 'process';
 
-// import { key, cert } from './certs.mjs';
 import routes from './routes.mjs';
 
 /**
@@ -47,16 +47,25 @@ app.use((req, res, next) => {
 routes(app);
 
 /**
- * Ignore self-signed cert warning
- */
-env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
-
-/**
  * Attach application to port and listen for requests
  */
-createServer(/* { key, cert }, */ app).listen(
-  `${process.env.PORT}`
-);
-console.log(
-  `Listening to HTTPS on secure port: ${process.env.PORT}`
-);
+if (process.env.DEVELOPMENT) {
+  /**
+   * Ignore self-signed cert warning
+   */
+  env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+
+  console.log('Creating secure server');
+  createSecureServer(
+    {
+      key: process.env.SEC_KEY.replace(/\\n/gm, '\n'),
+      cert: process.env.SEC_CERT.replace(/\\n/gm, '\n'),
+    },
+    app
+  ).listen(`${process.env.PORT}`);
+} else {
+  // Prod uses Nginx, so run regular server
+  console.log('Creating regular server');
+  createServer(app).listen(`${process.env.PORT}`);
+}
+console.log(`Listening to HTTPS on secure port: ${process.env.PORT}`);

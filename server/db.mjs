@@ -17,7 +17,15 @@ export async function initUser(user) {
 }
 
 export async function getAll(user) {
-  const userData = await getUser(user.user_id);
+  let userData;
+
+  try {
+    userData = await getUser(user.user_id);
+  } catch (err) {
+    console.log(`Error: retrieving user meta: ${err}`);
+    await initUser(user);
+    userData = await getUser(user.user_id);
+  }
 
   if (userData.todos.length) {
     const doc = await todosDb.bulkGet({

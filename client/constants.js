@@ -8,8 +8,8 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-export const AM_URL = 'https://openam-crbrl-01.forgeblocks.com/am/';
-export const APP_URL = 'https://fr-react-todos.crbrl.io';
-export const API_URL = 'https://fr-todos-api.crbrl.io';
-export const REALM_PATH = 'alpha';
+export const AM_URL = process.env.AM_URL;
+export const APP_URL = process.env.APP_URL;
+export const API_URL = process.env.API_URL;
+export const REALM_PATH = process.env.REALM_PATH;
 export const SESSION_URL = `${AM_URL}json/realms/root/sessions`;

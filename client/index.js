@@ -12,13 +12,14 @@ import { Config } from '@forgerock/javascript-sdk';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './app.js';
+import Router from './router.js';
 import { AM_URL, APP_URL, REALM_PATH } from './constants.js';
 import { AppContext, useStateMgmt } from './state.js';
 
+/**
+ * This import will produce the CSS file linked in the index.html
+ */
 import './styles/index.scss';
-
-console.log('Set AM configuration');
 
 /**
  * Configure JS SDK for AM installation
@@ -35,8 +36,12 @@ Config.set({
   tree: 'UsernamePassword',
 });
 
-// It's worth noting that all values are strings in session or localStorage.
+/**
+ * Pull values from sessionStorage to rehydrate app.
+ * Note that all values, even booleans, are strings in session or localStorage.
+ */
 const authenticatedString = window.sessionStorage.getItem('sdk_authenticated');
+// Convert string to boolean
 const isAuthenticated = authenticatedString === 'true';
 const email = window.sessionStorage.getItem('sdk_email');
 const username = window.sessionStorage.getItem('sdk_username');
@@ -61,7 +66,7 @@ function Init() {
 
   return (
     <AppContext.Provider value={stateMgmt}>
-      <App />
+      <Router />
     </AppContext.Provider>
   );
 }

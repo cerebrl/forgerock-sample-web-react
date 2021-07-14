@@ -21,6 +21,8 @@ export default function Home() {
   /**
    * Collects the global state for detecting user auth for rendering
    * appropriate navigational items.
+   * The destructing of the hook's array results in index 0 having the state value,
+   * and index 1 having the "setter" method to set new state values.
    */
   const [state] = useContext(AppContext);
   const LoginAlert = () => {
@@ -66,8 +68,8 @@ export default function Home() {
         using a popular framework.
       </p>
       <p>
-        Don't have an account? <Link to="/register">Create an account now</Link>
-        ! Or, <Link to="/login">Login</Link> to get things done!
+        To use this app, <Link to="/register">create an account now</Link>!
+        Already have an account? <Link to="/login">Login</Link> to get things done!
       </p>
     </div>
   );

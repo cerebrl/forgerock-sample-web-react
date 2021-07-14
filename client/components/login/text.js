@@ -1,7 +1,7 @@
 /*
  * forgerock-sample-web-react
  *
- * username.js
+ * text.js
  *
  * Copyright (c) 2021 ForgeRock. All rights reserved.
  * This software may be modified and distributed under the terms
@@ -13,7 +13,7 @@ import React from 'react';
 /**
  * @function Text- React component used for displaying username callback
  * @param {Object} props - React props object passed from parent
- * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
+ * @param {Object} props.callback - The callback object from AM
  * @returns {Object} - React JSX view
  */
 export default function Text({ callback }) {

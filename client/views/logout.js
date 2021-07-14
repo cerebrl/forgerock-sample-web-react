@@ -15,14 +15,27 @@ import { useHistory } from 'react-router-dom';
 import { AppContext } from '../state.js';
 import Loading from '../components/loading.js';
 
+/**
+ * @function Logout - React view for Logout
+ * @returns {Object} - React JSX view
+ */
 export default function Logout() {
-  const [_, methods] = useContext(AppContext);
+  /**
+   * The destructing of the hook's array results in index 0 having the state value,
+   * and index 1 having the "setter" method to set new state values.
+   */
+  const [_, { setAuthentication, setEmail, setUser }] = useContext(AppContext);
   const history = useHistory();
 
   useEffect(async () => {
     try {
       await FRUser.logout();
-      methods.setAuthentication(false);
+
+      // Clear existing, stored data
+      setAuthentication(false);
+      setEmail('');
+      setUser('');
+
       // Allow for enough time to communicate the action
       setTimeout(() => history.push('/?action=logout'), 1000);
     } catch (error) {

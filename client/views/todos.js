@@ -16,13 +16,15 @@ import Todo from '../components/todo.js';
 import apiRequest from '../utilities/request.js';
 
 /**
- * @function Todos - React view component for retrieving and displaying todos
+ * @function Todos - React view for retrieving & displaying todo collection
  * @returns {Object} - React JSX view
  */
 export default function Todos() {
   /**
    * Use local, component state for todos. Though, this could be moved to
-   * the global state if that's preferred over doing API calls in React views
+   * the global state if that's preferred over doing API calls in React views.
+   * The destructing of the hook's array results in index 0 having the state value,
+   * and index 1 having the "setter" method to set new state values.
    */
   let [hasFetched, setFetched] = useState(false);
   const [todos, setTodos] = useState([]);
