@@ -10,25 +10,23 @@
 
 import React from 'react';
 
+import AlertIcon from '../icons/alert-icon';
+
 /**
- * @function LoginFailure - React component used for retrieving the device profile
+ * @function Failure - React component used for retrieving the device profile
  * @param {Object} props - React props object passed from parent
  * @param {Object} props.reload - method for reloading the form
  * @returns {Object} - React JSX view
  */
-export default function LoginFailure({ reload }) {
+export default function Failure({ message }) {
   return (
     <p
       className="alert alert-danger d-flex align-items-center mt-5"
       role="alert"
     >
-      <AlertIcon />
+      <AlertIcon classes="alert_icon col-1" />
       <span className="ps-2">
-        Your credentials were incorrect. Please{' '}
-        <button className="login_reload-btn" onClick={reload}>
-          try again
-        </button>
-        .
+        { message }
       </span>
     </p>
   );

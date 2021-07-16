@@ -10,12 +10,13 @@
 
 import React from 'react';
 
-export default function ForgeRockIcon() {
+export default function ForgeRockIcon({ classes = '', size = '24px'}) {
   return (
     <svg
-      viewBox="0 0 64 64"
+      classes={classes}
+      height={size}
       version="1.1"
-      height="31px"
+      viewBox="0 0 64 64"
     >
       <g
         transform="matrix(0.18538366,0,0,0.18538366,-64.077863,86.24418)"

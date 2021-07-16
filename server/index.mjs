@@ -15,6 +15,7 @@ import { createServer } from 'http';
 import { createServer as createSecureServer } from 'https';
 import { env } from 'process';
 
+import { PORT, SEC_CERT, SEC_KEY } from './constants.mjs';
 import routes from './routes.mjs';
 
 /**
@@ -56,16 +57,11 @@ if (process.env.DEVELOPMENT) {
   env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
   console.log('Creating secure server');
-  createSecureServer(
-    {
-      key: process.env.SEC_KEY.replace(/\\n/gm, '\n'),
-      cert: process.env.SEC_CERT.replace(/\\n/gm, '\n'),
-    },
-    app
-  ).listen(`${process.env.PORT}`);
+  createSecureServer({ cert: SEC_CERT, key: SEC_KEY }, app).listen(PORT);
 } else {
   // Prod uses Nginx, so run regular server
   console.log('Creating regular server');
-  createServer(app).listen(`${process.env.PORT}`);
+  createServer(app).listen(PORT);
 }
-console.log(`Listening to HTTPS on secure port: ${process.env.PORT}`);
+
+console.log(`Listening to HTTPS on secure port: ${PORT}`);

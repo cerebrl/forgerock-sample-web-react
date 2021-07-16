@@ -5,10 +5,10 @@
   "main": "./server/index.mjs",
   "scripts": {
     "build": "webpack",
+    "clean": "shx rm -rf \"./public/app*\" ./node_modules ./package-lock.json",
+    "reset": "shx rm -rf ./todos ./users && npm run clean && git clean -fX -e \"!.env\" -e \"!*.pem\"",
+    "servers": "ws --https -d public/ --spa index.html -p 8443 & node -r dotenv/config ./server/index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:client": "ws -d public/ --spa index.html -p 8443 --cert example.com+5.pem --key example.com+5-key.pem",
-    "start:dev-server": "node -r dotenv/config ./server/index.mjs",
-    "start:server": "node ./server/index.mjs",
     "watch": "webpack -w"
   },
   "author": "Justin Lowery <justin.lowery@forgerock.com>",
@@ -31,6 +31,7 @@
     "postcss-loader": "^6.1.0",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
+    "shx": "^0.3.3",
     "style-loader": "^2.0.0",
     "superagent": "^6.0.0",
     "webpack": "^5.39.0",

@@ -54,7 +54,7 @@ export default function Todo({ setTodoActionId, todo: item }) {
               toggleTodo(todo._id);
             }}
           />
-          <TodoIcon completed={todo.completed} />
+          <TodoIcon classes="me-2 col-1" completed={todo.completed} size="36px" />
           {todo.title}
         </label>
 

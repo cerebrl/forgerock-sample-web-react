@@ -10,8 +10,13 @@
 
 import request from 'superagent';
 
-import { SEC_KEY, SEC_CERT } from './constants.mjs';
-import { AM_URL, CONFIDENTIAL_CLIENT, REALM_PATH } from './constants.mjs';
+import {
+  AM_URL,
+  CONFIDENTIAL_CLIENT,
+  REALM_PATH,
+  SEC_KEY,
+  SEC_CERT,
+} from './constants.mjs';
 
 /**
  * @function auth - Auth middleware for checking the validity of user's auth
@@ -26,16 +31,13 @@ export async function auth(req, res, next) {
   try {
     if (req.headers.authorization) {
       // Call OAuth introspect endpoint
-      const [ _, token ] = req.headers.authorization.split(' ');
+      const [_, token] = req.headers.authorization.split(' ');
       response = await request
         .post(`${AM_URL}oauth2/realms/root/realms/${REALM_PATH}/introspect`)
         .key(SEC_KEY)
         .cert(SEC_CERT)
         .set('Content-Type', 'application/json')
-        .set(
-          'Authorization',
-          `Basic ${CONFIDENTIAL_CLIENT}`
-        )
+        .set('Authorization', `Basic ${CONFIDENTIAL_CLIENT}`)
         .query({ token });
     } else {
       // Call session validate endpoint

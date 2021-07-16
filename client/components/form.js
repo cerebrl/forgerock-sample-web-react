@@ -18,13 +18,14 @@ import React, {
 } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import LoginFailure from './login/login-failure.js';
-import Choice from '../components/login/choice.js';
-import DeviceProfile from '../components/login/device-profile.js';
+import { JOURNEY_LOGIN, JOURNEY_REGISTER } from '../constants.js';
+import { htmlDecode } from '../utilities/decode.js';
+import Failure from './form/failure.js';
+import Choice from './form/choice.js';
 import Loading from '../components/loading.js';
-import Password from '../components/login/password.js';
-import Unknown from '../components/login/unknown.js';
-import Text from '../components/login/text.js';
+import Password from './form/password.js';
+import Unknown from './form/unknown.js';
+import Text from './form/text.js';
 
 import { AppContext } from '../state.js';
 
@@ -42,27 +43,35 @@ export default function Form({ action, followUp }) {
   const reducer = (_, action) => {
     switch (action.type) {
       case 'login':
-        return 'UsernamePassword';
+        return JOURNEY_LOGIN;
       case 'register':
-        return 'Registration';
-      case 'forgotPassword':
-        return 'ForgotPassword';
+        return JOURNEY_REGISTER;
       default:
-        throw new Error('Login action type not recognized.');
+        throw new Error('Form action type not recognized.');
     }
   };
   /**
    * Compose the state used in this view.
    * First, we will use the global state methods found in the App Context.
    * Then, we will create local state to manage the login journey. The
-   * underscore is an unused variable, since we don't need the current state.
+   * underscore is an unused variable, since we don't need the current global state.
+   *
    * The destructing of the hook's array results in index 0 having the state value,
    * and index 1 having the "setter" method to set new state values.
    */
+  // Used for setting global authentication state
   const [_, methods] = useContext(AppContext);
+  // Map action to authentication tree
   const [tree] = useReducer(reducer, reducer(null, action));
+  // Form level errors
+  const [formFailureMessage, setFormFailureMessage] = useState(null);
+  // Password registration errors
+  const [passwordFailureMessage, setPasswordFailureMessage] = useState(null);
+  // Step to render
   const [renderStep, setRenderStep] = useState(null);
+  // Step to submit
   const [submissionStep, setSubmissionStep] = useState(null);
+  // Used for redirection after success
   const history = useHistory();
 
   /**
@@ -119,14 +128,44 @@ export default function Form({ action, followUp }) {
        * @returns {undefined}
        */
       async function getStep(prev) {
+        // Save just in case we have a registration failure with password
+        const previousCallbacks = prev && prev.callbacks;
+        const previousPayload = prev && prev.payload;
         const nextStep = await FRAuth.next(prev, { tree });
         /**
          * Condition for handling start and stop of login journey.
-         * Here's where you should add more error handling.
          */
         if (nextStep.type === 'LoginSuccess') {
           // User is authenticated, now call for OAuth tokens
           getOAuth();
+        } else if (
+          /**
+           * Special error handling for password validation failures
+           * in registration form
+           */
+          action.type === 'register' &&
+          nextStep.type === 'LoginFailure' &&
+          nextStep.payload.message.includes('Constraint Violation')
+        ) {
+          let messageArray = nextStep.payload.message.split(':');
+          setPasswordFailureMessage(htmlDecode(messageArray[2]));
+
+          const newStep = await FRAuth.next(null, { tree });
+          newStep.callbacks = previousCallbacks;
+          newStep.payload = previousPayload;
+
+          setRenderStep(newStep);
+        } else if (nextStep.type === 'LoginFailure') {
+          /**
+           * Handle basic form failure
+           */
+          setFormFailureMessage(htmlDecode(nextStep.payload.message));
+
+          const newStep = await FRAuth.next(null, { tree });
+          newStep.callbacks = previousCallbacks;
+          newStep.payload = previousPayload;
+
+          setRenderStep(newStep);
         } else {
           setRenderStep(nextStep);
         }
@@ -159,16 +198,17 @@ export default function Form({ action, followUp }) {
     MessageComponent = () => <Loading message="Checking your session ..." />;
   } else if (renderStep.type === 'LoginSuccess') {
     MessageComponent = () => <Loading message="Success! Redirecting ..." />;
-  } else if (renderStep.type === 'LoginFailure') {
-    ErrorComponent = () => (
-      <LoginFailure
-        reload={async () => {
-          const nextStep = await FRAuth.next();
-          setRenderStep(nextStep);
-        }}
-      />
-    );
   } else if (renderStep.callbacks.length > 0) {
+    /**
+     * If there's a login failure, but we've preserved the previous payload for
+     * better UX, render the error at the top of the form.
+     */
+     if (formFailureMessage) {
+      StepComponents.push({
+        Component: () => <Failure message={formFailureMessage} />,
+      });
+    }
+
     /**
      * Iterate through callbacks mapping the callback to the
      * appropriate callback component, pushing that component
@@ -189,7 +229,11 @@ export default function Form({ action, followUp }) {
           break;
         case 'PasswordCallback':
         case 'ValidatedCreatePasswordCallback':
-          StepComponents.push({ Component: Password, callback });
+          StepComponents.push({
+            Component: Password,
+            callback,
+            errorMessage: passwordFailureMessage,
+          });
           break;
         default:
           // If current callback is not supported it, render a warning
@@ -200,7 +244,15 @@ export default function Form({ action, followUp }) {
     /**
      * This shouldn't be reached, but it's here just in case things blow up.
      */
-    MessageComponent = () => <p>It looks like there was an error.</p>;
+    ErrorComponent = () => (
+      <Failure
+        message={renderStep.payload.message}
+        reload={async () => {
+          const nextStep = await FRAuth.next(null, { tree });
+          setRenderStep(nextStep);
+        }}
+      />
+    );
   }
 
   /**
@@ -227,8 +279,14 @@ export default function Form({ action, followUp }) {
              * and iteratively render the collection as one form. This way,
              * it can render a single component or any number of components.
              */
-            StepComponents.map(({ Component, callback }, idx) => {
-              return <Component key={idx} callback={callback} />;
+            StepComponents.map(({ Component, callback, errorMessage }, idx) => {
+              return (
+                <Component
+                  key={idx}
+                  callback={callback}
+                  errorMessage={errorMessage}
+                />
+              );
             })
           }
           <input

@@ -8,9 +8,16 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
+ @use 'sass:color';
+
 // To allow for vertical centering
 html {
   height: 100%;
+}
+
+// Floating Select Override
+.form-floating > .form-select {
+  padding-bottom: $form-select-padding-y;
 }
 
 // Home page styling
@@ -81,8 +88,22 @@ html {
 .account_dropdown-menu.account_dropdown-menu {
   margin-top: 0.5rem;
 }
+
+// Verified alert banner on home page
+.verified-alert_link {
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+.verified-alert_icon {
+  fill: $cyan;
+}
+
 .alert_icon {
-  fill: $red-800;
+  fill: color.scale($red, $saturation: 80%, $lightness: -40%);
 }
 
 .login_form {
@@ -90,7 +111,7 @@ html {
     padding: 0.75rem 1.25rem;
   }
 }
-.login_key-icon {
+.register_key-icon, .login_key-icon {
   fill: $gray-400;
 }
 .login_reload-btn {

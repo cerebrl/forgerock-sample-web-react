@@ -8,15 +8,14 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Redirect,
   Route,
 } from 'react-router-dom';
 
-import { AppContext } from './state.js';
+import { ProtectedRoute } from './utilities/route.js';
 import Todos from './views/todos.js';
 import Footer from './components/footer.js';
 import Header from './components/header.js';
@@ -30,8 +29,6 @@ import Register from './views/register.js';
  * @returns {Object} - React JSX view
  */
 export default function App() {
-  const [{ isAuthenticated }] = useContext(AppContext);
-
   return (
     <Router>
       <Switch>
@@ -41,11 +38,11 @@ export default function App() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/todos">
+        <ProtectedRoute path="/todos">
           <Header />
-          {isAuthenticated ? <Todos /> : <Redirect to="/login" />}
+          <Todos />
           <Footer />
-        </Route>
+        </ProtectedRoute>
         <Route path="/logout">
           <Header />
           <Logout />

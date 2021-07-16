@@ -44,7 +44,10 @@ export default function Header() {
             location.pathname === '/todos' ? 'header_nav-item_active' : ''
           } nav-item`}
         >
-          <Link className="header_nav-link nav-link d-flex align-items-center h-100" to="/todos">
+          <Link
+            className="header_nav-link nav-link d-flex align-items-center h-100"
+            to="/todos"
+          >
             <TodosIcon />
             <span className="px-2 fs-5">Todos</span>
           </Link>
@@ -60,7 +63,7 @@ export default function Header() {
               data-bs-offset="[20,20]"
               id="account_dropdown"
             >
-              <AccountIcon />
+              <AccountIcon classes="account_icon" size="48px" />
             </button>
             <ul
               className="account_dropdown-menu dropdown-menu dropdown-menu-end"
@@ -104,7 +107,7 @@ export default function Header() {
             state.isAuthenticated ? 'header_navbar-brand_auth' : ''
           } navbar-brand py-3 pe-4 me-4`}
         >
-          <ForgeRockIcon /> + <ReactIcon />
+          <ForgeRockIcon size="31px" /> + <ReactIcon size="38px" />
         </div>
         <button
           className="navbar-toggler"
@@ -117,8 +120,13 @@ export default function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse d-flex align-items-stretch" id="navbarNav">
-          <ul className="navbar-nav d-flex align-items-stretch me-auto">{TodosItem}</ul>
+        <div
+          className="collapse navbar-collapse d-flex align-items-stretch"
+          id="navbarNav"
+        >
+          <ul className="navbar-nav d-flex align-items-stretch me-auto">
+            {TodosItem}
+          </ul>
           {LoginOrOutItem}
         </div>
       </div>
