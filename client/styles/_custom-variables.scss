@@ -87,15 +87,6 @@ $box-shadow-sm: 0 1px 2px rgba($black, 0.13);
 $box-shadow: 0 1px 3px rgba($black, 0.13);
 $box-shadow-lg: 0 2px 11px rgba($black, 0.13);
 
-// Override Container
-$container-max-widths: (
-  sm: 540px,
-  md: 540px,
-  lg: 540px,
-  xl: 540px,
-  xxl: 540px
-);
-
 // Override Border Styles
 $border-color: $gray-200;
 

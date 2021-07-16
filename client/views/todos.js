@@ -27,6 +27,7 @@ export default function Todos() {
    * and index 1 having the "setter" method to set new state values.
    */
   let [hasFetched, setFetched] = useState(false);
+  const [creatingTodo, setCreatingTodo] = useState(false);
   const [todos, setTodos] = useState([]);
   const [todoActionId, setTodoActionId] = useState('');
   const textInput = useRef(null);
@@ -54,11 +55,14 @@ export default function Todos() {
 
   async function createTodo(e) {
     e.preventDefault();
+
+    setCreatingTodo(true);
+
     const title = e.target.elements[0].value;
     const newTodo = await apiRequest('todos', 'POST', { title });
     setTodos([newTodo, ...todos]);
+    setCreatingTodo(false);
     textInput.current.value = '';
-    return;
   }
 
   async function deleteTodo() {
@@ -98,26 +102,36 @@ export default function Todos() {
 
   return (
     <Fragment>
-      <div className="container">
+      <div className="container_max-width container-fluid">
         <h1 className="mt-5">Your Todos</h1>
         <p className="fs-6 text-muted">Create and manage your todos.</p>
         <div className="card shadow-sm mb-5">
           <form
-            className="p-3"
+            className="p-3 d-flex"
             action="https://api.example.com:8443/todos"
             method="POST"
             onSubmit={createTodo}
           >
-            <div className="form-floating todos_input">
+            <div className="todos_input form-floating flex-grow-1">
               <input
                 id="newTodo"
                 type="text"
                 className="form-control"
                 placeholder="What needs doing?"
+                required="required"
                 ref={textInput}
               />
               <label htmlFor="newTodo">What needs doing?</label>
             </div>
+            <button className="btn btn-primary ms-2 col-3 col-md-2" type="submit">
+              {creatingTodo ? (
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              ) : "Create"}
+            </button>
           </form>
           {Todos}
         </div>

@@ -32,11 +32,11 @@ export default function Todo({ setTodoActionId, todo: item }) {
   } ${'col d-flex align-items-center fs-5 w-100 ms-2 p-3'}`;
 
   async function toggleTodo(id) {
-    await apiRequest(`todos/${id}`, 'POST');
     updateTodo({
       ...todo,
       completed: !todo.completed,
     });
+    await apiRequest(`todos/${id}`, 'POST');
     return;
   }
 
@@ -48,13 +48,16 @@ export default function Todo({ setTodoActionId, todo: item }) {
             id={todo._id}
             className="form-check-input visually-hidden"
             type="checkbox"
-            checked={todo.completed}
+            defaultChecked={todo.completed}
             onChange={(e) => {
-              e.preventDefault();
               toggleTodo(todo._id);
             }}
           />
-          <TodoIcon completed={todo.completed} />
+          <TodoIcon
+            classes="me-2 col-1"
+            completed={todo.completed}
+            size="36px"
+          />
           {todo.title}
         </label>
 

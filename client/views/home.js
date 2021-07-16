@@ -12,6 +12,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppContext } from '../state.js';
+import VerifiedIcon from '../components/icons/verified-icon.js';
 
 /**
  * @function Home - Home React view
@@ -25,26 +26,42 @@ export default function Home() {
    * and index 1 having the "setter" method to set new state values.
    */
   const [state] = useContext(AppContext);
+
+  const createAccountText = () => {
+    return !state.isAuthenticated ? (
+      <p>
+        To use this app, <Link to="/register">create an account now</Link>!
+        Already have an account? <Link to="/login">Login</Link> to get things
+        done!
+      </p>
+    ) : null;
+  };
+
   const LoginAlert = () => {
     return state.isAuthenticated ? (
       <p
-        className="alert alert-info d-flex align-items-center mt-5"
+        className="verified_alert alert alert-success d-flex align-items-center mt-5"
         role="alert"
       >
+        <VerifiedIcon classes="verified-alert_icon" size="36px" />
         <span className="ps-2">
           Welcome back, {state.username}!{' '}
-          <Link to="/todos">Manage your todos here</Link>.
+          <Link className="verified-alert_link" to="/todos">
+            Manage your todos here
+          </Link>
+          .
         </span>
       </p>
     ) : null;
   };
 
   return (
-    <div className="container">
+    <div className="container_max-width container-fluid">
       {LoginAlert()}
       <h1 className="home_head-text text-center">
         Protect with ForgeRock; Develop with React.js
       </h1>
+
       <p className=".home_subhead-text fs-3 mb-4 fw-bold text-muted">
         Learn how to develop ForgeRock protected, web apps with the{' '}
         <a
@@ -67,10 +84,7 @@ export default function Home() {
         JavaScript SDK is implemented within a fully-functional application
         using a popular framework.
       </p>
-      <p>
-        To use this app, <Link to="/register">create an account now</Link>!
-        Already have an account? <Link to="/login">Login</Link> to get things done!
-      </p>
+      {createAccountText()}
     </div>
   );
 }

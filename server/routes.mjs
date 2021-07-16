@@ -10,14 +10,6 @@
 import * as db from './db.mjs';
 import { auth } from './middleware.mjs';
 
-// let todos = [
-//   {
-//     title: 'My first todo',
-//     completed: false,
-//     _id: 'b557318e-19ff-458d-8a4e-114d8c89a723',
-//   },
-// ];
-
 /**
  * @function routes - Initializes the routes
  * @param app {Object} - Express application

@@ -8,6 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
+import { Config, FRUser, OAuth2Client, TokenManager } from '@forgerock/javascript-sdk';
 import React, { useState } from 'react';
 
 /**
@@ -36,8 +37,10 @@ export function useStateMgmt({ isAuthenticated, page, email, username }) {
    * @param {boolean} value - current user authentication
    * @returns {void}
    */
-  function setAuthenticationWrapper(value) {
-    window.sessionStorage.setItem('sdk_authenticated', `${value}`);
+  async function setAuthenticationWrapper(value) {
+    if (value === false) {
+      await FRUser.logout();
+    }
     setAuthentication(value);
   }
 

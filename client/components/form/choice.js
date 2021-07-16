@@ -8,7 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 
 /**
  * @function Choice - React component used for displaying choices
@@ -29,22 +29,20 @@ export default function Choice({ callback }) {
   }
 
   return (
-    <Fragment>
-      <div className="form-group">
-        <label htmlFor="prompt">{ prompt }</label>
-        <select
-          onBlur={ setValue }
-          name="selected"
-          className="form-control">
-          {
-            choiceOptions.map(function (option, idx) {
-              return (
-                <option key={idx} value={idx}>{ option }</option>
-              )
-            })
-          }
-        </select>
-      </div>
-    </Fragment>
+    <div className="form-floating mb-3">
+      <select
+        onChange={ setValue }
+        name="selected"
+        className="form-select">
+        {
+          choiceOptions.map(function (option, idx) {
+            return (
+              <option key={idx} value={idx}>{ option }</option>
+            )
+          })
+        }
+      </select>
+      <label htmlFor="prompt">{ prompt }</label>
+    </div>
   );
 }

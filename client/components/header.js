@@ -14,6 +14,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AccountIcon from './icons/account-icon.js';
 import { AppContext } from '../state.js';
 import ForgeRockIcon from './icons/forgerock-icon.js';
+import HomeIcon from './icons/home-icon.js';
 import ReactIcon from './icons/react-icon.js';
 import TodosIcon from './icons/todos-icon.js';
 
@@ -36,89 +37,102 @@ export default function Header() {
   /**
    * Render different navigational items depending on authenticated status
    */
-  switch (state.isAuthenticated) {
-    case true:
-      TodosItem = (
-        <li
-          className={`header_nav-item ${
-            location.pathname === '/todos' ? 'header_nav-item_active' : ''
-          } nav-item`}
+  if (state.isAuthenticated) {
+    TodosItem = [
+      <li
+        key="home"
+        className={`header_nav-item ${
+          location.pathname === '/' ? 'header_nav-item_active' : ''
+        } nav-item mx-1`}
+      >
+        <Link
+          className="header_nav-link nav-link d-flex align-items-center h-100 p-0 ps-1"
+          to="/"
         >
-          <Link className="header_nav-link nav-link d-flex align-items-center h-100" to="/todos">
-            <TodosIcon />
-            <span className="px-2 fs-5">Todos</span>
-          </Link>
-        </li>
-      );
-      LoginOrOutItem = (
-        <div className="d-flex">
-          <div className="dropdown text-end">
-            <button
-              aria-expanded="false"
-              className="account_dropdown-btn btn h-100 p-0"
-              data-bs-toggle="dropdown"
-              data-bs-offset="[20,20]"
-              id="account_dropdown"
-            >
-              <AccountIcon />
-            </button>
-            <ul
-              className="account_dropdown-menu dropdown-menu dropdown-menu-end"
-              aria-labelledby="account_dropdown"
-            >
-              <li>
-                <div className="dropdown-header border-bottom">
-                  <p className="fw-bold mb-0">{state.username}</p>
-                  <p className="mb-2">{state.email}</p>
-                </div>
-              </li>
-              <li>
-                <Link className="dropdown-item" to="/logout">
-                  Logout
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <HomeIcon />
+          <span className="px-2 fs-6">Home</span>
+        </Link>
+      </li>,
+      <li
+        key="todos"
+        className={`header_nav-item ${
+          location.pathname === '/todos' ? 'header_nav-item_active' : ''
+        } nav-item`}
+      >
+        <Link
+          className="header_nav-link nav-link d-flex align-items-center h-100 p-0 ps-2"
+          to="/todos"
+        >
+          <TodosIcon />
+          <span className="px-2 fs-6">Todos</span>
+        </Link>
+      </li>,
+    ];
+    LoginOrOutItem = (
+      <div className="d-flex">
+        <div className="dropdown text-end">
+          <button
+            aria-expanded="false"
+            className="account_dropdown-btn btn h-100 p-0"
+            data-bs-toggle="dropdown"
+            data-bs-offset="[20,20]"
+            id="account_dropdown"
+          >
+            <AccountIcon classes="account_icon" size="48px" />
+          </button>
+          <ul
+            className="account_dropdown-menu dropdown-menu dropdown-menu-end"
+            aria-labelledby="account_dropdown"
+          >
+            <li>
+              <div className="dropdown-header border-bottom">
+                <p className="fw-bold mb-0">{state.username}</p>
+                <p className="mb-2">{state.email}</p>
+              </div>
+            </li>
+            <li>
+              <Link className="dropdown-item" to="/logout">
+                Logout
+              </Link>
+            </li>
+          </ul>
         </div>
-      );
-      break;
-    default:
-      TodosItem = null;
-      LoginOrOutItem = (
-        <div className="d-flex py-3">
-          <Link className="header_account-link py-2 px-3 mx-1" to="/login">
-            Login
-          </Link>
-          <Link className="btn btn-outline-secondary" to="/register">
-            Register
-          </Link>
-        </div>
-      );
+      </div>
+    );
+  } else {
+    TodosItem = null;
+    LoginOrOutItem = (
+      <div className="d-flex py-3">
+        <Link className="header_account-link py-2 px-3 mx-1" to="/login">
+          Login
+        </Link>
+        <Link className="btn btn-outline-secondary" to="/register">
+          Register
+        </Link>
+      </div>
+    );
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white py-0 border-bottom">
-      <div className="container d-flex align-items-stretch">
-        <div
+    <nav className="navbar navbar-expand navbar-light bg-white py-0 border-bottom">
+      <div className="container_max-width container-fluid d-flex align-items-stretch">
+        <Link
+          to="/"
           className={`header_navbar-brand ${
             state.isAuthenticated ? 'header_navbar-brand_auth' : ''
-          } navbar-brand py-3 pe-4 me-4`}
+          } navbar-brand ${
+            state.isAuthenticated ? 'd-none d-sm-none d-md-block' : ''
+          } py-3 pe-4 me-4`}
         >
-          <ForgeRockIcon /> + <ReactIcon />
-        </div>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          <ForgeRockIcon size="31px" /> + <ReactIcon size="38px" />
+        </Link>
+        <div
+          className="navbar-collapse d-flex align-items-stretch"
+          id="navbarNav"
         >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse d-flex align-items-stretch" id="navbarNav">
-          <ul className="navbar-nav d-flex align-items-stretch me-auto">{TodosItem}</ul>
+          <ul className="navbar-nav d-flex align-items-stretch me-auto">
+            {TodosItem}
+          </ul>
           {LoginOrOutItem}
         </div>
       </div>

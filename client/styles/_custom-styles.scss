@@ -8,9 +8,24 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
+@use 'sass:color';
+
 // To allow for vertical centering
 html {
   height: 100%;
+}
+// Fix for modal causing right padding to body in mobile
+body {
+  padding-right: 0 !important;
+}
+
+.container_max-width {
+  max-width: 540px;
+}
+
+// Floating Select Override
+.form-floating > .form-select {
+  padding-bottom: $form-select-padding-y;
 }
 
 // Home page styling
@@ -39,19 +54,36 @@ html {
   }
 }
 .header_nav-item {
-  border-bottom: 5px solid $light;
+  border-top: 5px solid $gray-200;
 
   &:hover {
     background-color: $light-cyan;
-    border-bottom-color: $primary;
+    border-top-color: $gray-400;
   }
   .header_nav-link.header_nav-link {
-    color: $gray-800;
+    color: $gray-900;
+    padding: 0;
+    min-height: 65px;
+  }
+  svg {
+    fill: $gray-500;
   }
 }
 .header_nav-item_active {
-  border-bottom-color: $primary;
+  border-top-color: $primary;
   transition: background-color 0.25s;
+
+  &:hover {
+    background-color: inherit;
+    border-top-color: $primary;
+  }
+  .header_nav-link {
+    cursor: default;
+  }
+
+  svg {
+    fill: color.scale($primary, $blackness: 25%);
+  }
 }
 .header_account-link {
   color: $primary;
@@ -66,7 +98,7 @@ html {
 // Floating label for new todo input
 .todos_input {
   > label {
-    opacity: .50;
+    opacity: 0.5;
   }
 }
 
@@ -81,8 +113,22 @@ html {
 .account_dropdown-menu.account_dropdown-menu {
   margin-top: 0.5rem;
 }
+
+// Verified alert banner on home page
+.verified-alert_link {
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+.verified-alert_icon {
+  fill: $cyan;
+}
+
 .alert_icon {
-  fill: $red-800;
+  fill: color.scale($red, $saturation: 80%, $lightness: -40%);
 }
 
 .login_form {
@@ -90,6 +136,7 @@ html {
     padding: 0.75rem 1.25rem;
   }
 }
+.register_key-icon,
 .login_key-icon {
   fill: $gray-400;
 }

@@ -29,9 +29,7 @@ export default function Logout() {
 
   useEffect(async () => {
     try {
-      await FRUser.logout();
-
-      // Clear existing, stored data
+      // Logout and clear existing, stored data
       setAuthentication(false);
       setEmail('');
       setUser('');
