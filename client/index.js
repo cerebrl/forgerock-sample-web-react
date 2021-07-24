@@ -12,9 +12,9 @@ import { Config, TokenStorage } from '@forgerock/javascript-sdk';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Router from './router.js';
-import { AM_URL, APP_URL, DEBUGGER, REALM_PATH } from './constants.js';
-import { AppContext, useStateMgmt } from './state.js';
+import Router from './router';
+import { AM_URL, APP_URL, DEBUGGER, REALM_PATH } from './constants';
+import { AppContext, useStateMgmt } from './state';
 
 /**
  * This import will produce a separate CSS file linked in the index.html
@@ -43,9 +43,17 @@ Config.set({
    * Note that all values, even booleans, are strings in session or localStorage.
    */
   const isAuthenticated = !!(await TokenStorage.get());
+  const prefersDarkTheme = window.matchMedia(
+    '(prefers-color-scheme: dark)'
+  ).matches;
   const email = window.sessionStorage.getItem('sdk_email');
   const username = window.sessionStorage.getItem('sdk_username');
   const page = new URL(window.location.href).pathname.slice(1);
+  const rootEl = document.getElementById('root');
+
+  if (prefersDarkTheme) {
+    document.body.classList.add('cstm_bg-dark', 'bg-dark');
+  }
 
   /**
    * @function Init - Initializes React and global state
@@ -58,9 +66,10 @@ Config.set({
      * like this authentication status stored in sessionStorage.
      */
     const stateMgmt = useStateMgmt({
-      page,
-      isAuthenticated,
       email,
+      isAuthenticated,
+      page,
+      prefersDarkTheme,
       username,
     });
 
@@ -71,5 +80,5 @@ Config.set({
     );
   }
 
-  ReactDOM.render(<Init />, document.getElementById('root'));
+  ReactDOM.render(<Init />, rootEl);
 })();

@@ -10,9 +10,10 @@
 
 import React from 'react';
 
-import apiRequest from '../utilities/request.js';
-import NewUserIcon from '../components/icons/new-user-icon.js';
-import Form from '../components/form.js';
+import Card from '../components/layout/card';
+import apiRequest from '../utilities/request';
+import NewUserIcon from '../components/icons/new-user-icon';
+import Form from '../components/journey/form';
 
 /**
  * @function Register - React view for Register
@@ -24,16 +25,13 @@ export default function Register() {
   }
 
   return (
-    <div className="container_max-width container-fluid h-100">
-      <div className="d-flex align-items-center h-100">
-        <div className="card shadow-sm p-5 w-100">
-          <div className="register_key-icon align-self-center mb-3">
-            <NewUserIcon size="72px" />
-          </div>
-          <h1 className="text-center fs-2 mb-3">Register</h1>
-          <Form action={{ type: 'register' }} followUp={initUserInDb} />
+    <div className="cstm_container_max-width_v-centered container-fluid d-flex align-items-center">
+      <Card>
+        <div className="cstm_register_add-user-icon align-self-center mb-3">
+          <NewUserIcon size="72px" />
         </div>
-      </div>
+        <Form action={{ type: 'register' }} followUp={initUserInDb} />
+      </Card>
     </div>
   );
 }

@@ -24,10 +24,8 @@ export default function Error({ message }) {
       className="alert alert-danger d-flex align-items-center mt-1"
       role="alert"
     >
-      <AlertIcon classes="alert_icon col-1" />
-      <span className="ps-2">
-        { message }
-      </span>
+      <AlertIcon classes="cstm_alert-icon col-1" />
+      <span className="ps-2">{message}</span>
     </p>
   );
 }

@@ -10,7 +10,14 @@
 
 import React from 'react';
 
-export default function TodosIcon({ classes = '', size = '24px'}) {
+/**
+ * @function TodosIcon - Displays the multipe checks icon representing the todos page
+ * @param {Object} props - React props object
+ * @param {string} props.classes - A string of classnames to be set on component
+ * @param {string} props.size - A string representing the intended size of the rendering
+ * @returns {Object} - React JSX Object
+ */
+export default function TodosIcon({ classes = '', size = '24px' }) {
   return (
     <svg
       className={classes}

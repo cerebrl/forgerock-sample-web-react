@@ -8,12 +8,16 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { Fragment, useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, Fragment, useReducer, useState } from 'react';
 
-import Modal from '../components/modal.js';
-import Todo from '../components/todo.js';
-import apiRequest from '../utilities/request.js';
+import { AppContext } from '../state';
+import CreateTodo from '../components/todos/create';
+import DeleteModal from '../components/todos/delete';
+import EditModal from '../components/todos/edit';
+import useTodoFetch from '../components/todos/fetch';
+import reducer from '../components/todos/reducer';
+import Todo from '../components/todos/todo';
+import apiRequest from '../utilities/request';
 
 /**
  * @function Todos - React view for retrieving & displaying todo collection
@@ -26,65 +30,54 @@ export default function Todos() {
    * The destructing of the hook's array results in index 0 having the state value,
    * and index 1 having the "setter" method to set new state values.
    */
-  let [hasFetched, setFetched] = useState(false);
-  const [creatingTodo, setCreatingTodo] = useState(false);
-  const [todos, setTodos] = useState([]);
-  const [todoActionId, setTodoActionId] = useState('');
-  const textInput = useRef(null);
-  const history = useHistory();
+  const [state] = useContext(AppContext);
+  const [hasFetched, setFetched] = useState(false);
+  const [todos, dispatch] = useReducer(reducer, []);
+  const [selectedDeleteTodo, setSelectedDeleteTodo] = useState(null);
+  const [selectedEditTodo, setSelectedEditTodo] = useState(null);
 
-  /**
-   * Since we are making an API call, which is a side-effect,
-   * we will wrap this in a useEffect, which will re-render the
-   * view once the API request returns.
-   */
-  useEffect(function () {
-    async function getTodos() {
-      // Request the todos from our resource API
-      const todos = await apiRequest('todos', 'GET');
-      if (todos.error) {
-        return history.push('/login');
-      }
-      setFetched(true);
-      setTodos(todos);
-    }
-    if (!todos.length) {
-      getTodos();
-    }
-  }, []);
+  useTodoFetch(dispatch, setFetched, todos);
 
-  async function createTodo(e) {
-    e.preventDefault();
+  function addTodo(newTodo) {
+    dispatch({ type: 'add-todo', payload: { todo: newTodo } });
+  }
 
-    setCreatingTodo(true);
-
-    const title = e.target.elements[0].value;
-    const newTodo = await apiRequest('todos', 'POST', { title });
-    setTodos([newTodo, ...todos]);
-    setCreatingTodo(false);
-    textInput.current.value = '';
+  async function completeTodo(_id, completed) {
+    dispatch({ type: 'complete-todo', payload: { _id, completed } });
+    await apiRequest(`todos/${_id}`, 'POST', { completed });
+    return;
   }
 
   async function deleteTodo() {
-    await apiRequest(`todos/${todoActionId}`, 'DELETE');
-    setTodos(todos.filter((todo) => todo._id !== todoActionId));
+    dispatch({ type: 'delete-todo', payload: { _id: selectedDeleteTodo._id } });
+    await apiRequest(`todos/${selectedDeleteTodo._id}`, 'DELETE');
+    return;
+  }
+
+  async function editTodo({ _id, title }) {
+    dispatch({ type: 'edit-todo', payload: { _id, title } });
+    await apiRequest(`todos/${_id}`, 'POST', { title });
     return;
   }
 
   const Todos = hasFetched ? (
-    <ul className="list-group list-group-flush mb-1">
+    <ul
+      className={`list-group list-group-flush mb-1 ${state.theme.listGroupClass}`}
+    >
       {todos.length > 0 ? (
-        todos.map(function (todo) {
+        todos.map((item) => {
           return (
             <Todo
-              key={todo._id}
-              todo={todo}
-              setTodoActionId={setTodoActionId}
+              completeTodo={completeTodo}
+              item={item}
+              key={item._id}
+              setSelectedDeleteTodo={setSelectedDeleteTodo}
+              setSelectedEditTodo={setSelectedEditTodo}
             />
           );
         })
       ) : (
-        <li className="todo_item list-group-item list-group-item-action p-0">
+        <li className="cstm_todo-item list-group-item list-group-item-action p-0">
           <div className="row">
             <p className="col d-flex align-items-center fs-5 text-muted w-100 ms-3 p-3">
               No todos yet. Create one above!
@@ -94,7 +87,9 @@ export default function Todos() {
       )}
     </ul>
   ) : (
-    <p className="d-flex justify-content-center align-items-center border-top px-3">
+    <p
+      className={`d-flex justify-content-center align-items-center border-top px-3 ${state.theme.borderClass}`}
+    >
       <span className="spinner-border text-primary my-2" role="status"></span>
       <span className="p-3 fs-5">Collecting your todos ...</span>
     </p>
@@ -102,41 +97,23 @@ export default function Todos() {
 
   return (
     <Fragment>
-      <div className="container_max-width container-fluid">
-        <h1 className="mt-5">Your Todos</h1>
+      <div className={`cstm_container_max-width container-fluid`}>
+        <h1 className={`mt-5 ${state.theme.textClass}`}>Your Todos</h1>
         <p className="fs-6 text-muted">Create and manage your todos.</p>
-        <div className="card shadow-sm mb-5">
-          <form
-            className="p-3 d-flex"
-            action="https://api.example.com:8443/todos"
-            method="POST"
-            onSubmit={createTodo}
-          >
-            <div className="todos_input form-floating flex-grow-1">
-              <input
-                id="newTodo"
-                type="text"
-                className="form-control"
-                placeholder="What needs doing?"
-                required="required"
-                ref={textInput}
-              />
-              <label htmlFor="newTodo">What needs doing?</label>
-            </div>
-            <button className="btn btn-primary ms-2 col-3 col-md-2" type="submit">
-              {creatingTodo ? (
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              ) : "Create"}
-            </button>
-          </form>
+        <div className={`card shadow-sm mb-5 ${state.theme.cardBgClass}`}>
+          <CreateTodo addTodo={addTodo} />
           {Todos}
         </div>
       </div>
-      <Modal deleteTodo={deleteTodo} />
+      <EditModal
+        editTodo={editTodo}
+        selectedEditTodo={selectedEditTodo}
+        setSelectedEditTodo={setSelectedEditTodo}
+      />
+      <DeleteModal
+        deleteTodo={deleteTodo}
+        setSelectedDeleteTodo={setSelectedDeleteTodo}
+      />
     </Fragment>
   );
 }

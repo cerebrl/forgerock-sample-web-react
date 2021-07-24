@@ -13,7 +13,7 @@ export async function initUser(user) {
   await userDb.put({
     _id: user.user_id,
     todos: [],
-  })
+  });
 }
 
 export async function getAll(user) {
@@ -82,19 +82,17 @@ export async function put(user, data, create) {
   if (create) {
     userData.todos.unshift({ id: item.id, rev: item.rev });
   } else if (data._deleted) {
-    userData.todos
-      .forEach((todo, idx) => {
-        if (todo.id === item.id) {
-          userData.todos.splice(idx, 1);
-        }
-      });
+    userData.todos.forEach((todo, idx) => {
+      if (todo.id === item.id) {
+        userData.todos.splice(idx, 1);
+      }
+    });
   } else {
-    userData.todos
-      .forEach((todo, idx) => {
-        if (todo.id === item.id) {
-          todo.rev = item.rev;
-        }
-      });
+    userData.todos.forEach((todo) => {
+      if (todo.id === item.id) {
+        todo.rev = item.rev;
+      }
+    });
   }
   await userDb.put(userData);
   return item;

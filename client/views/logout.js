@@ -12,8 +12,8 @@ import { FRUser } from '@forgerock/javascript-sdk';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { AppContext } from '../state.js';
-import Loading from '../components/loading.js';
+import { AppContext } from '../state';
+import Loading from '../components/utilities/loading';
 
 /**
  * @function Logout - React view for Logout
@@ -27,19 +27,24 @@ export default function Logout() {
   const [_, { setAuthentication, setEmail, setUser }] = useContext(AppContext);
   const history = useHistory();
 
-  useEffect(async () => {
-    try {
-      // Logout and clear existing, stored data
-      setAuthentication(false);
-      setEmail('');
-      setUser('');
+  useEffect(() => {
+    async function logout() {
+      try {
+        await FRUser.logout();
+        // Logout and clear existing, stored data
+        setAuthentication(false);
+        setEmail('');
+        setUser('');
 
-      // Allow for enough time to communicate the action
-      setTimeout(() => history.push('/?action=logout'), 1000);
-    } catch (error) {
-      console.error(error);
+        // Allow for enough time to communicate the action
+        setTimeout(() => history.push('/?action=logout'), 1000);
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }, []);
 
-  return <Loading message="You're being logged out ..." />;
+    logout();
+  }, [history, setAuthentication, setEmail, setUser]);
+
+  return <Loading classes="pt-5" message="You're being logged out ..." />;
 }

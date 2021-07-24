@@ -10,26 +10,23 @@
 
 import React from 'react';
 
-import KeyIcon from '../components/icons/key-icon.js';
-import Form from '../components/form.js';
+import Card from '../components/layout/card';
+import KeyIcon from '../components/icons/key-icon';
+import Form from '../components/journey/form';
 
 /**
  * @function Login - React view for Login
  * @returns {Object} - React JSX view
  */
 export default function Login() {
-
   return (
-    <div className="container_max-width container-fluid h-100">
-      <div className="d-flex align-items-center h-100">
-        <div className="card shadow-sm p-5 w-100">
-          <div className="login_key-icon align-self-center mb-3">
-            <KeyIcon size="72px" />
-          </div>
-          <h1 className="text-center fs-2 mb-3">Login</h1>
-          <Form action={{ type: 'login' }} />
+    <div className="cstm_container_max-width_v-centered container-fluid d-flex align-items-center">
+      <Card>
+        <div className="cstm_login_key-icon align-self-center mb-3">
+          <KeyIcon size="72px" />
         </div>
-      </div>
+        <Form action={{ type: 'login' }} />
+      </Card>
     </div>
   );
 }

@@ -10,17 +10,17 @@
 
 import React from 'react';
 
-export default function ForgeRockIcon({ classes = '', size = '24px'}) {
+/**
+ * @function ForgeRockIcon - Displays the ForgeRock brand icon
+ * @param {Object} props - React props object
+ * @param {string} props.classes - A string of classnames to be set on component
+ * @param {string} props.size - A string representing the intended size of the rendering
+ * @returns {Object} - React JSX Object
+ */
+export default function ForgeRockIcon({ classes = '', size = '24px' }) {
   return (
-    <svg
-      classes={classes}
-      height={size}
-      version="1.1"
-      viewBox="0 0 64 64"
-    >
-      <g
-        transform="matrix(0.18538366,0,0,0.18538366,-64.077863,86.24418)"
-      >
+    <svg classes={classes} height={size} version="1.1" viewBox="0 0 64 64">
+      <g transform="matrix(0.18538366,0,0,0.18538366,-64.077863,86.24418)">
         <polygon
           transform="translate(0,-465.21997)"
           points="603.99,87.77 571.17,29.85 469.15,209.14 502.22,267.59 "

@@ -20,7 +20,7 @@ This project requires HTTPS (secure protocol) which means security (SSL/TLS) cer
 - Using [this utility (`mkcert`) can help simplify the process of creating trusted certs](https://github.com/FiloSottile/mkcert)
 - After following `mkcert`'s installation guide and simple example of creating certs, you should have two files: `example.com+5.pem` & `example.com+5-key.pem`
 
-  (Ensure these two files are in the root of this project; you can name them whatever you want since you configure them in your `.env` file)
+  (Ensure these two files are at the root of this project; you can name them whatever you want since you configure them in your `.env` file)
 
 > **WARNING: Self-signed certificates or certificates not from an industry-recognized, certificate authority (CA) should never be used in production.**
 
@@ -30,7 +30,7 @@ This project requires HTTPS (secure protocol) which means security (SSL/TLS) cer
 
 1. Allowed origins: `https://react.example.com:8443`
 2. Allowed methods: `GET` `POST`
-3. Allowed headers: `Content-Type, X-Requested-With, Accept-API-Version, Authorization`
+3. Allowed headers: `Content-Type` `X-Requested-With` `Accept-API-Version` `Authorization`
 
 #### Create Your OAuth Clients
 
@@ -45,14 +45,18 @@ This project requires HTTPS (secure protocol) which means security (SSL/TLS) cer
 Note: The sample app currently supports the following callbacks only:
 
 - NameCallback
-- ValidatedCreateUsernameCallback
-- StringAttributeInputCallback
 - PasswordCallback
+- ChoiceCallback
+- ValidatedCreateUsernameCallback
 - ValidatedCreatePasswordCallback
+- StringAttributeInputCallback
+- BooleanAttributeInputCallback
+- KbaCreateCallback
+- TermsAndConditionsCallback
 
 ### Configure Your `.env` File
 
-Change the name of `template.env` to `.env` and replace the bracketed values (e.g. `<helper-text>`) with your values.
+Change the name of `template.env` to `.env` and replace the bracketed values (e.g. `<<<helper-text>>>`) with your values.
 
 ### Installing Dependencies and Run Build
 
@@ -85,4 +89,24 @@ npm run watch
 npm run servers
 ```
 
-Now, you should be able to visit `https://react.example.com:8443`. This app will make requests to your AM instance (running on whatever domain you set), acting as the authorization server, and `https://api.example.com:9443` as the API for your resource (todos). Enjoy!
+Now, you should be able to visit `https://react.example.com:8443`, which is your web app or client (the Relying Party in OAuth terms). This client will make requests to your AM instance, (the Authorization Server in OAuth terms), which will be running on whatever domain you set, and `https://api.example.com:9443` as the REST API for your todos (the Resource Server). Enjoy!
+
+## Modifying This Project
+
+To modify the client portion of this project, you'll need to be familiar with the following React patterns:
+
+1. Functional components
+2. Hooks (including custom hooks)
+3. Context API
+4. React Router
+
+You'll also want a basic understanding of Webpack and the following:
+
+1. Babel transformation for React
+2. Plugins for Sass-to-CSS processing.
+
+To modify the API server, you'll need a basic understanding of Node as well as the following things:
+
+1. Express
+2. PouchDB
+3. Superagent

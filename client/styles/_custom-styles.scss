@@ -10,39 +10,115 @@
 
 @use 'sass:color';
 
-// To allow for vertical centering
-html {
+/** *********************************************
+ * Root and container element fixes
+ */
+
+// Fix for 100% height styling
+html,
+body,
+.cstm_root {
   height: 100%;
+  min-height: 100%;
 }
-// Fix for modal causing right padding to body in mobile
+
+// Fix for Bootstrap modal causing right padding to body in mobile
 body {
   padding-right: 0 !important;
 }
 
-.container_max-width {
+// Keep max width much smaller than Bootstrap's default
+.cstm_container_max-width,
+.cstm_container_max-width_v-centered {
   max-width: 540px;
 }
-
-// Floating Select Override
-.form-floating > .form-select {
-  padding-bottom: $form-select-padding-y;
+.cstm_container_max-width_v-centered {
+  min-height: 100%;
 }
 
-// Home page styling
-.home_head-text {
+/** *********************************************
+ * Utilities
+ */
+
+.cstm_border-black {
+  border-color: $black !important;
+}
+.cstm_card-dark {
+  background-color: $gray-800;
+}
+.cstm_list-group-dark > li {
+  background-color: $gray-800;
+
+  &:hover {
+    background-color: $gray-700;
+  }
+}
+.cstm_hr {
+  opacity: 1;
+}
+.cstm_hr-lock_light,
+.cstm_hr-lock_dark {
+  margin-top: -2rem;
+
+  svg {
+    fill: $secondary;
+    background-color: $white;
+  }
+}
+.cstm_hr-lock_dark {
+  svg {
+    fill: $light;
+    background-color: $gray-800;
+  }
+}
+
+/** *********************************************
+ * Home page styling
+ */
+
+.cstm_home_head-text {
   letter-spacing: -0.01em;
   margin: 5rem 0;
 }
-.home_subhead-text {
+.cstm_home_subhead-text {
   letter-spacing: -0.01em;
 }
 
-// Header styling
-.header_navbar-brand.header_navbar-brand {
+/** *********************************************
+ * Verified alert banner on home page
+ */
+
+.cstm_verified_alert-link.cstm_verified_alert-link {
+  color: color.scale($teal, $lightness: -50%);
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+.cstm_verified_alert-icon {
+  fill: $cyan;
+}
+
+/** *********************************************
+ * Large spinner styling
+ */
+
+.cstm_loading_spinner {
+  width: 10rem;
+  height: 10rem;
+}
+
+/** *********************************************
+ * Header/navbar styling
+ */
+
+.cstm_navbar-brand.cstm_navbar-brand {
   color: $gray-700;
   font-weight: bold;
 
-  &.header_navbar-brand_auth {
+  // Altering navbar-brand when user is authenticated
+  &.cstm_navbar-brand_auth {
     border-right: 1px solid $gray-200;
     margin-left: -7.5rem;
     width: 7.5rem;
@@ -53,14 +129,14 @@ body {
     padding: 0 0.25rem;
   }
 }
-.header_nav-item {
+.cstm_nav-item {
   border-top: 5px solid $gray-200;
 
   &:hover {
     background-color: $light-cyan;
     border-top-color: $gray-400;
   }
-  .header_nav-link.header_nav-link {
+  .cstm_nav-link.cstm_nav-link {
     color: $gray-900;
     padding: 0;
     min-height: 65px;
@@ -69,7 +145,16 @@ body {
     fill: $gray-500;
   }
 }
-.header_nav-item_active {
+.cstm_navbar-dark .cstm_nav-item {
+  &:hover {
+    background-color: $gray-800;
+    border-top-color: $gray-400;
+  }
+  .cstm_nav-link.cstm_nav-link {
+    color: $gray-300;
+  }
+}
+.cstm_nav-item_active.cstm_nav-item_active {
   border-top-color: $primary;
   transition: background-color 0.25s;
 
@@ -77,15 +162,15 @@ body {
     background-color: inherit;
     border-top-color: $primary;
   }
-  .header_nav-link {
+  .cstm_nav-link {
     cursor: default;
   }
 
   svg {
-    fill: color.scale($primary, $blackness: 25%);
+    fill: $primary;
   }
 }
-.header_account-link {
+.cstm_login-link {
   color: $primary;
   text-decoration: none;
 
@@ -94,90 +179,131 @@ body {
   }
 }
 
-// Todos list styling
-// Floating label for new todo input
-.todos_input {
-  > label {
-    opacity: 0.5;
-  }
-}
+/** *********************************************
+ * Account Dropdown
+ */
 
-// Account
-.account_icon {
+.cstm_account_icon {
   fill: $gray-500;
 
   &:hover {
     fill: $primary;
   }
 }
-.account_dropdown-menu.account_dropdown-menu {
-  margin-top: 0.5rem;
-}
 
-// Verified alert banner on home page
-.verified-alert_link {
-  color: inherit;
+/** *********************************************
+ * Form Styling
+ */
 
-  &:hover {
-    color: inherit;
-    text-decoration: none;
+.cstm_bg-dark .cstm_form-floating > input {
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    box-shadow: 0 0 0 30px $gray-800 inset !important;
+    -webkit-text-fill-color: $white !important;
   }
 }
-.verified-alert_icon {
-  fill: $cyan;
-}
-
-.alert_icon {
-  fill: color.scale($red, $saturation: 80%, $lightness: -40%);
-}
-
-.login_form {
-  .btn {
+.cstm_login_form {
+  button[type='submit'] {
     padding: 0.75rem 1.25rem;
   }
 }
-.register_key-icon,
-.login_key-icon {
-  fill: $gray-400;
+.cstm_form-floating > .cstm_form-select {
+  padding-bottom: $form-select-padding-y;
+  transition: background-color 0.5s;
 }
-.login_reload-btn {
-  display: inline;
-  font-size: inherit;
-  background: none;
-  border: none;
-  padding: 0;
-  text-decoration: underline;
+.bg-dark .cstm_form-select {
+  &:focus {
+    color: $gray-900 !important;
+    background-color: $gray-400 !important;
+  }
+  &:focus + label {
+    color: $gray-900;
+  }
 }
 
-// Todo styling
-.todo_item {
-  transition: background-color 0.4s;
+/** *********************************************
+ * Link styling
+ */
+
+.cstm_bg-dark a:not([class]) {
+  color: color.scale($primary, $lightness: 40%);
 }
-.todo_label {
-  cursor: pointer;
+
+/** *********************************************
+ * Icon styling
+ */
+
+.cstm_alert-icon {
+  fill: color.scale($red, $saturation: 80%, $lightness: -40%);
 }
-.todo_icon_complete,
-.todo_icon_incomplete {
-  transition: fill 0.4s;
-}
-.todo_icon_complete {
+.cstm_login_key-icon,
+.cstm_register_add-user-icon {
   fill: $gray-400;
 }
-.todo_icon_incomplete {
+.cstm_input-icon {
   fill: $gray-600;
 }
-.todo_label_complete {
+// Remove Edge's native password toggle, since we're providing our own
+.cstm_input-password::-ms-reveal {
+  display: none;
+}
+// Corrects an issue caused from the combination of floating labels and input group:
+// https://github.com/twbs/bootstrap/blob/main/scss/forms/_input-group.scss
+.cstm_form-floating.cstm_form-floating > .cstm_form-control:focus ~ label {
+  z-index: 4; // Needs to be 1 more than the value found in bootstrap's CSS
+}
+
+/** *********************************************
+ * Todo styling
+ */
+
+.cstm_todos_input {
+  > label {
+    opacity: 0.5;
+  }
+}
+.cstm_todo-item {
+  transition: background-color 0.4s;
+}
+.cstm_form-check:focus + .cstm_todo-label {
+  box-shadow: $input-btn-focus-box-shadow;
+
+  &.cstm_todo-label_complete {
+    color: $gray-200;
+  }
+  &.cstm_todo-label_incomplete {
+    color: $gray-400;
+  }
+}
+.cstm_todo-label {
+  cursor: pointer;
+}
+.cstm_todo-icon_complete,
+.cstm_todo-icon_incomplete {
+  transition: fill 0.4s;
+  width: 10%;
+}
+.cstm_todo-icon_complete {
+  fill: $gray-400;
+}
+.cstm_todo-icon_incomplete {
+  fill: $gray-600;
+}
+.cstm_todo-label_complete {
   color: $gray-600;
   font-style: italic;
   text-decoration: line-through;
   text-decoration-color: rgba($color: #000000, $alpha: 0.25);
 }
-.todo_label_incomplete:hover > .todo_icon_incomplete {
+.cstm_todo-label_incomplete:hover > .cstm_todo-icon_incomplete {
   fill: $teal;
 }
-.todo_dropdown_actions {
+.cstm_todo_dropdown-actions {
   fill: $gray-600;
 }
-.todo_dropdown_actions:hover {
+.cstm_todo_dropdown-actions:hover {
   fill: $gray-800;
 }

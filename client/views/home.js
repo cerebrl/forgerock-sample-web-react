@@ -8,11 +8,11 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../state.js';
-import VerifiedIcon from '../components/icons/verified-icon.js';
+import { AppContext } from '../state';
+import VerifiedIcon from '../components/icons/verified-icon';
 
 /**
  * @function Home - Home React view
@@ -27,64 +27,81 @@ export default function Home() {
    */
   const [state] = useContext(AppContext);
 
-  const createAccountText = () => {
-    return !state.isAuthenticated ? (
+  const createAccountText = !state.isAuthenticated ? (
+    <Fragment>
+      <h2 className={`fs-4 fw-normal pt-3 pb-1 ${state.theme.textClass}`}>
+        Getting started
+      </h2>
       <p>
         To use this app, <Link to="/register">create an account now</Link>!
-        Already have an account? <Link to="/login">Login</Link> to get things
+        Already have an account? <Link to="/login">Sign in</Link> to get things
         done!
       </p>
-    ) : null;
-  };
+    </Fragment>
+  ) : null;
 
-  const LoginAlert = () => {
-    return state.isAuthenticated ? (
-      <p
-        className="verified_alert alert alert-success d-flex align-items-center mt-5"
-        role="alert"
-      >
-        <VerifiedIcon classes="verified-alert_icon" size="36px" />
-        <span className="ps-2">
-          Welcome back, {state.username}!{' '}
-          <Link className="verified-alert_link" to="/todos">
-            Manage your todos here
-          </Link>
-          .
-        </span>
-      </p>
-    ) : null;
-  };
+  const LoginAlert = state.isAuthenticated ? (
+    <p
+      className={`alert alert-success d-flex align-items-center mt-5`}
+      role="alert"
+    >
+      <VerifiedIcon classes="cstm_verified_alert-icon" size="36px" />
+      <span className="ps-2">
+        Welcome back, {state.username}!{' '}
+        <Link className="cstm_verified_alert-link" to="/todos">
+          Manage your todos here
+        </Link>
+        .
+      </span>
+    </p>
+  ) : null;
 
   return (
-    <div className="container_max-width container-fluid">
-      {LoginAlert()}
-      <h1 className="home_head-text text-center">
+    <div
+      className={`cstm_container_max-width container-fluid ${state.theme.textClass}`}
+    >
+      {LoginAlert}
+      <h1
+        className={`cstm_home_head-text text-center ${state.theme.textClass}`}
+      >
         Protect with ForgeRock; Develop with React.js
       </h1>
 
-      <p className=".home_subhead-text fs-3 mb-4 fw-bold text-muted">
+      <p
+        className={`cstm_home_subhead-text fs-3 mb-4 fw-bold ${state.theme.textMutedClass}`}
+      >
         Learn how to develop ForgeRock protected, web apps with the{' '}
         <a
-          className="text-muted text-decoration-underline"
+          className={`${state.theme.textMutedClass} text-decoration-underline`}
           href="https://reactjs.org/"
         >
           React.js
         </a>{' '}
         library and our{' '}
         <a
-          className="text-muted text-decoration-underline"
+          className={`${state.theme.textMutedClass} text-decoration-underline`}
           href="https://github.com/ForgeRock/forgerock-javascript-sdk"
         >
           JavaScript SDK
         </a>
         .
       </p>
+      <h2 className={`fs-4 fw-normal pt-3 pb-1 ${state.theme.textClass}`}>
+        About this project
+      </h2>
       <p>
         The purpose of this sample web app is to demonstrate how the ForgeRock
         JavaScript SDK is implemented within a fully-functional application
-        using a popular framework.
+        using a popular framework. The source code for{' '}
+        <a href="https://github.com/cerebrl/forgerock-sample-web-react">
+          this project can be found on Github
+        </a>{' '}
+        and run locally for experimentation. For more on our SDKs,{' '}
+        <a href="https://sdks.forgerock.com/">
+          you can find our official SDK documentation here.
+        </a>
       </p>
-      {createAccountText()}
+      {createAccountText}
     </div>
   );
 }

@@ -10,11 +10,18 @@
 
 import React from 'react';
 
+/**
+ * @function TodoIcon - Displays either the circle or circle with check icon representing the todo
+ * @param {Object} props - React props object
+ * @param {string} props.classes - A string of classnames to be set on component
+ * @param {string} props.size - A string representing the intended size of the rendering
+ * @returns {Object} - React JSX Object
+ */
 export default function TodoIcon({ classes, completed, size }) {
   if (completed) {
     return (
       <svg
-        className={`todo_icon_complete ${classes}`}
+        className={`cstm_todo-icon_complete ${classes}`}
         height={size}
         width={size}
         viewBox="0 0 24 24"
@@ -27,7 +34,7 @@ export default function TodoIcon({ classes, completed, size }) {
   } else {
     return (
       <svg
-        className={`todo_icon_incomplete ${classes}`}
+        className={`cstm_todo-icon_incomplete ${classes}`}
         height={size}
         width={size}
         viewBox="0 0 24 24"

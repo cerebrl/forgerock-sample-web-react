@@ -8,7 +8,9 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { AppContext } from '../../state';
 
 /**
  * @function Choice - React component used for displaying choices
@@ -17,8 +19,11 @@ import React from 'react';
  * @returns {Object} - React JSX view
  */
 export default function Choice({ callback }) {
+  const [state] = useContext(AppContext);
+
   const prompt = callback.getPrompt();
   const choiceOptions = callback.getChoices();
+  const defaultChoice = callback.getDefaultChoice();
 
   /**
    * @function setValue - Sets the value on the callback on element blur (lose focus)
@@ -29,20 +34,21 @@ export default function Choice({ callback }) {
   }
 
   return (
-    <div className="form-floating mb-3">
+    <div className="cstm_form-floating form-floating mb-3">
       <select
-        onChange={ setValue }
+        onChange={setValue}
         name="selected"
-        className="form-select">
-        {
-          choiceOptions.map(function (option, idx) {
-            return (
-              <option key={idx} value={idx}>{ option }</option>
-            )
-          })
-        }
+        className={`cstm_form-select form-select bg-transparent ${state.theme.textClass} ${state.theme.borderClass}`}
+      >
+        {choiceOptions.map(function (option, idx) {
+          return (
+            <option key={idx} value={idx} selected={idx === defaultChoice}>
+              {option}
+            </option>
+          );
+        })}
       </select>
-      <label htmlFor="prompt">{ prompt }</label>
+      <label htmlFor="prompt">{prompt}</label>
     </div>
   );
 }

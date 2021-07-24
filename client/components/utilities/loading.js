@@ -16,12 +16,19 @@ import React from 'react';
  * @param {string} props.message - The message string object passed from the parent component
  * @returns {Object} - React JSX view
  */
-export default function Loading({ message }) {
+export default function Loading({ classes, message }) {
   return (
     <div className="container">
-      <p className="d-flex justify-content-center align-items-center pt-5">
-        <span className="spinner-border text-primary my-2" role="status"></span>
-        <span className="p-3 fs-5">{message}</span>
+      <p className={classes}>
+        <span className="d-flex justify-content-center my-2">
+          <span
+            className="cstm_loading_spinner spinner-border text-primary"
+            role="status"
+          ></span>
+        </span>
+        <span className="d-flex justify-content-center p-3 fs-5">
+          {message}
+        </span>
       </p>
     </div>
   );

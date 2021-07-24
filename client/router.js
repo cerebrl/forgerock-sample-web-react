@@ -9,28 +9,24 @@
  */
 
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { ProtectedRoute } from './utilities/route.js';
-import Todos from './views/todos.js';
-import Footer from './components/footer.js';
-import Header from './components/header.js';
-import Home from './views/home.js';
-import Login from './views/login.js';
-import Logout from './views/logout.js';
-import Register from './views/register.js';
+import { ProtectedRoute } from './utilities/route';
+import Todos from './views/todos';
+import Footer from './components/layout/footer';
+import Header from './components/layout/header';
+import Home from './views/home';
+import Login from './views/login';
+import Logout from './views/logout';
+import Register from './views/register';
 
 /**
  * @function App - Application React view
  * @returns {Object} - React JSX view
  */
-export default function App() {
+export default function Router() {
   return (
-    <Router>
+    <BrowserRouter>
       <Switch>
         <Route path="/login">
           <Login />
@@ -44,9 +40,7 @@ export default function App() {
           <Footer />
         </ProtectedRoute>
         <Route path="/logout">
-          <Header />
           <Logout />
-          <Footer />
         </Route>
         <Route path="/">
           <Header />
@@ -54,6 +48,6 @@ export default function App() {
           <Footer />
         </Route>
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 }

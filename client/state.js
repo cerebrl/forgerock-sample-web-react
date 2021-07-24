@@ -8,7 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { Config, FRUser, OAuth2Client, TokenManager } from '@forgerock/javascript-sdk';
+import { FRUser } from '@forgerock/javascript-sdk';
 import React, { useState } from 'react';
 
 /**
@@ -20,7 +20,13 @@ import React, { useState } from 'react';
  * @param {Object} props.username - User's username
  * @returns {Array} - Global state values and state methods
  */
-export function useStateMgmt({ isAuthenticated, page, email, username }) {
+export function useStateMgmt({
+  email,
+  isAuthenticated,
+  page,
+  prefersDarkTheme,
+  username,
+}) {
   /**
    * Create state properties for "global" state.
    * Using internal names that differ from external to prevent shadowing.
@@ -31,6 +37,8 @@ export function useStateMgmt({ isAuthenticated, page, email, username }) {
   const [mail, setEmail] = useState(email || '');
   const [currentPage, setPage] = useState(page || 'home');
   const [name, setUser] = useState(username || '');
+
+  let theme;
 
   /**
    * @function setAuthenticationWrapper - A wrapper for storing authentication in sessionStorage
@@ -64,6 +72,36 @@ export function useStateMgmt({ isAuthenticated, page, email, username }) {
     setUser(value);
   }
 
+  if (prefersDarkTheme) {
+    theme = {
+      mode: 'dark',
+      // CSS Classes
+      bgClass: 'bg-dark',
+      borderClass: 'border-dark',
+      borderHighContrastClass: 'cstm_border-black',
+      cardBgClass: 'cstm_card-dark',
+      dropdownClass: 'dropdown-menu-dark',
+      listGroupClass: 'cstm_list-group-dark',
+      navbarClass: 'cstm_navbar-dark navbar-dark bg-dark text-white',
+      textClass: 'text-white',
+      textMutedClass: 'text-white-50',
+    };
+  } else {
+    theme = {
+      mode: 'light',
+      // CSS Classes
+      bgClass: '',
+      borderClass: '',
+      borderHighContrastClass: '',
+      cardBgClass: '',
+      dropdownClass: '',
+      listGroupClass: '',
+      navbarClass: 'navbar-light bg-white',
+      textClass: 'text-body',
+      textMutedClass: 'text-muted',
+    };
+  }
+
   /**
    * returns an array with state object as index zero and setters as index one
    */
@@ -72,6 +110,7 @@ export function useStateMgmt({ isAuthenticated, page, email, username }) {
       isAuthenticated: authenticated,
       email: mail,
       page: currentPage,
+      theme,
       username: name,
     },
     {

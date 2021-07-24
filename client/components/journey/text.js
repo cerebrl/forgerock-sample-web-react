@@ -8,7 +8,9 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { AppContext } from '../../state';
 
 /**
  * @function Text- React component used for displaying text callback
@@ -17,13 +19,16 @@ import React from 'react';
  * @returns {Object} - React JSX view
  */
 export default function Text({ callback }) {
+  const [state] = useContext(AppContext);
+
   const existingValue = callback.getInputValue();
-  const failedPolicies = callback.getFailedPolicies && callback.getFailedPolicies();
+  const failedPolicies =
+    callback.getFailedPolicies && callback.getFailedPolicies();
   const policies = callback.getPolicies && callback.getPolicies();
   const textInputLabel = callback.getPrompt();
 
   let isRequired;
-  let Validation = () => null;
+  let Validation = null;
   let validationClass = '';
 
   /**
@@ -50,12 +55,12 @@ export default function Text({ callback }) {
           prev = `${prev}Please use a valid email address. `;
           break;
         default:
-          prev = `${prev}Please check this value for correctness.`
+          prev = `${prev}Please check this value for correctness.`;
       }
       return prev;
     }, '');
     validationClass = 'is-invalid';
-    Validation = () => (<div className="invalid-feedback">{ validationFailure}</div>);
+    Validation = <div className="invalid-feedback">{validationFailure}</div>;
   }
 
   if (policies && policies.policyRequirements) {
@@ -64,20 +69,20 @@ export default function Text({ callback }) {
     isRequired = callback.isRequired();
   }
 
-   return (
-    <div className="form-floating mb-3">
+  return (
+    <div className={`cstm_form-floating form-floating mb-3`}>
       <input
-        onChange={setValue}
-        type="text"
-        name={callback.payload.input[0].name}
-        className={`form-control ${validationClass}`}
-        id={callback.payload.input[0].name}
-        required={isRequired ? "required" : ""}
-        placeholder={textInputLabel}
+        className={`cstm_form-control form-control ${validationClass} bg-transparent ${state.theme.textClass} ${state.theme.borderClass}`}
         defaultValue={existingValue}
+        id={callback.payload.input[0].name}
+        name={callback.payload.input[0].name}
+        onChange={setValue}
+        placeholder={textInputLabel}
+        required={isRequired ? 'required' : ''}
+        type="text"
       />
       <label htmlFor={callback.payload.input[0].name}>{textInputLabel}</label>
-      <Validation />
+      {Validation}
     </div>
   );
 }

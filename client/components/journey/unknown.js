@@ -12,14 +12,12 @@ import React from 'react';
 
 /**
  * @function Unknown- React component used for displaying Unknown callback
- * @param {Object} props - React props object passed from parent
- * @param {Object} props.step - The authentication "step" object from ForgeRock's SDK
  * @returns {Object} - React JSX view
  */
-export default function Unknown(props) {
+export default function Unknown() {
   return (
     <div className="form-group">
-      <label>{ "Warning: an unknown Callback is present!" }</label>
+      <p>{'Warning: an unknown callback is present!'}</p>
     </div>
   );
 }

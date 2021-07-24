@@ -10,7 +10,14 @@
 
 import React from 'react';
 
-export default function ActionIcon({ classes = '', size = '24px'}) {
+/**
+ * @function ActionIcon - Displays the action, "three dots" icon representing the a menu
+ * @param {Object} props - React props object
+ * @param {string} props.classes - A string of classnames to be set on component
+ * @param {string} props.size - A string representing the intended size of the rendering
+ * @returns {Object} - React JSX Object
+ */
+export default function ActionIcon({ classes = '', size = '24px' }) {
   return (
     <svg
       className={classes}
@@ -20,7 +27,7 @@ export default function ActionIcon({ classes = '', size = '24px'}) {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M0 0h24v24H0z" fill="none" />
-      <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+      <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
     </svg>
   );
 }

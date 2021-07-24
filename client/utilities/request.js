@@ -10,7 +10,7 @@
 
 import { HttpClient } from '@forgerock/javascript-sdk';
 
-import { API_URL } from '../constants.js';
+import { API_URL } from '../constants';
 
 /**
  * @function request - A convenience function for wrapping around HttpClient
@@ -25,16 +25,16 @@ export default async function apiRequest(resource, method, data) {
     const response = await HttpClient.request({
       url: `${API_URL}/${resource}`,
       init: {
-        credentials: "include",
+        credentials: 'include',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         method: method,
         body: data && JSON.stringify(data),
       },
     });
     if (!response.ok) {
-      throw new Error(`Status ${response.status}: API request failed`)
+      throw new Error(`Status ${response.status}: API request failed`);
     }
     json = await response.json();
   } catch (err) {
