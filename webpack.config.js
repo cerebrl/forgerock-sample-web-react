@@ -15,6 +15,7 @@ module.exports = () => {
   const DEVELOPMENT = process.env.DEVELOPMENT || localEnv.DEVELOPMENT;
   const JOURNEY_LOGIN = process.env.JOURNEY_LOGIN || localEnv.JOURNEY_LOGIN;
   const JOURNEY_REGISTER = process.env.JOURNEY_REGISTER || localEnv.JOURNEY_REGISTER;
+  const WEB_OAUTH_CLIENT = process.env.WEB_OAUTH_CLIENT || localEnv.WEB_OAUTH_CLIENT;
   const REALM_PATH = process.env.REALM_PATH || localEnv.REALM_PATH;
 
   return {
@@ -30,7 +31,7 @@ module.exports = () => {
       filename: '[name].js',
     },
     // Dictates some behavior in Webpack, "development" is a bit quicker
-    mode: DEVELOPMENT ? 'development' : 'production',
+    mode: DEVELOPMENT === 'true' ? 'development' : 'production',
     // Modules are essentially plugins that can extend/modify Webpack
     // Here, we are using it to transpile React's JSX to ordinary functions
     module: {
@@ -93,6 +94,7 @@ module.exports = () => {
         'process.env.DEBUGGER_OFF': JSON.stringify(DEBUGGER_OFF),
         'process.env.JOURNEY_LOGIN': JSON.stringify(JOURNEY_LOGIN),
         'process.env.JOURNEY_REGISTER': JSON.stringify(JOURNEY_REGISTER),
+        'process.env.WEB_OAUTH_CLIENT': JSON.stringify(WEB_OAUTH_CLIENT),
         'process.env.REALM_PATH': JSON.stringify(REALM_PATH),
       }),
     ],

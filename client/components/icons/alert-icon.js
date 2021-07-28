@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function AlertIcon - Displays the alert icon representing the a warning
+ * @function AlertIcon - React component that displays the alert icon representing the a warning
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

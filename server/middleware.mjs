@@ -30,7 +30,6 @@ export async function auth(req, res, next) {
 
   try {
     if (req.headers.authorization) {
-      // Call OAuth introspect endpoint
       const [_, token] = req.headers.authorization.split(' ');
       response = await request
         .post(`${AM_URL}oauth2/realms/root/realms/${REALM_PATH}/introspect`)
@@ -39,16 +38,6 @@ export async function auth(req, res, next) {
         .set('Content-Type', 'application/json')
         .set('Authorization', `Basic ${CONFIDENTIAL_CLIENT}`)
         .query({ token });
-    } else {
-      // Call session validate endpoint
-      response = await request
-        .post(`${AM_URL}json/sessions/?_action=validate`)
-        .key(SEC_KEY)
-        .cert(SEC_CERT)
-        .set('Content-Type', 'application/json')
-        .set('iPlanetDirectoryPro', req.cookies.iPlanetDirectoryPro)
-        .set('Accept-API-Version', 'resource=2.1, protocol=1.0')
-        .send({ tokenId: req.cookies.iPlanetDirectoryPro });
     }
   } catch (err) {
     console.log(`Error: auth middleware: ${err}`);

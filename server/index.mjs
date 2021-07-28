@@ -23,12 +23,12 @@ import routes from './routes.mjs';
  */
 const app = express();
 app.use(express.json());
-app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
     origin: function (origin, callback) {
+      // DON'T DO THIS IN PRODUCTION!
       return callback(null, true);
     },
   })

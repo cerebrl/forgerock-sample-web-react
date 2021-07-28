@@ -8,56 +8,30 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { FRAuth } from '@forgerock/javascript-sdk';
 import React, { Fragment, useEffect, useContext, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Boolean from './boolean';
-import { JOURNEY_LOGIN, JOURNEY_REGISTER } from '../../constants';
+import { DEBUGGER } from '../../constants';
 import Error from './error';
 import Choice from './choice';
 import Kba from './kba';
 import Loading from '../utilities/loading';
 import Password from './password';
-import Unknown from './unknown';
-import useJourneyHandler from './state';
+import treeReducer from './tree-reducer';
+import useJourneyHandler from './journey-state';
 import { AppContext } from '../../state';
 import TermsConditions from './terms-conditions';
 import Text from './text';
+import Unknown from './unknown';
 
 /**
- * @function reducer - A simple reducer for determining what tree to call
- * @param {Object} _ - Normally the current state, but it's not being used
- * @param {Object} action - Action object
- * @param {string} action.type - Action type that describes what to do
- * @returns {Object} - the updated state
- */
-const reducer = (_, action) => {
-  switch (action.type) {
-    case 'login':
-      return {
-        buttonText: 'Sign In',
-        titleText: 'Sign In',
-        tree: JOURNEY_LOGIN,
-      };
-    case 'register':
-      return {
-        buttonText: 'Register',
-        titleText: 'Sign Up',
-        tree: JOURNEY_REGISTER,
-      };
-    default:
-      throw new Error('Form action type not recognized.');
-  }
-};
-
-/**
- * @function Form - React view for managing the user authentication journey
+ * @function Form - React component for managing the user authentication journey
  * @param {Object} props - props object from React
  * @param {Object} props.action - Action object for a "reducer" pattern
  * @param {string} props.action.type - Action type string that represents the action
  * @param {Object} props.followUp - A function that should be run after successful authentication
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Form({ action, followUp }) {
   /**
@@ -72,7 +46,7 @@ export default function Form({ action, followUp }) {
   // Used for setting global authentication state
   const [state, methods] = useContext(AppContext);
   // Map action to form metadata: title, button text and tree
-  const [form] = useReducer(reducer, reducer(null, action));
+  const [form] = useReducer(treeReducer, treeReducer(null, action));
   // Used for redirection after success
   const history = useHistory();
 
@@ -98,7 +72,7 @@ export default function Form({ action, followUp }) {
       submittingForm,
       user,
     },
-    { setRenderStep, setSubmissionStep, setSubmittingForm },
+    { setSubmissionStep, setSubmittingForm },
   ] = useJourneyHandler({ action, form });
 
   /**
@@ -113,7 +87,7 @@ export default function Form({ action, followUp }) {
        */
       if (user) {
         /**
-         * Set user info on "global state"
+         * Set user state/info on "global state"
          */
         methods.setUser(user.name);
         methods.setEmail(user.email);
@@ -128,7 +102,10 @@ export default function Form({ action, followUp }) {
     }
 
     finalizeAuthState();
-  }, [followUp, history, methods, user]);
+
+    // Only `user` is a needed dependency, all others are "stable"
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   /**
    * Render conditions for presenting appropriate views to user.
@@ -148,14 +125,16 @@ export default function Form({ action, followUp }) {
     MessageComponent = <Loading message="Checking your session ..." />;
   } else if (renderStep.type === 'LoginSuccess') {
     MessageComponent = <Loading message="Success! Redirecting ..." />;
-  } else if (renderStep.callbacks.length > 0) {
+  } else if (renderStep.callbacks && renderStep.callbacks.length) {
     /**
      * If there's a login failure, but we've preserved the previous payload for
      * better UX, render the error at the top of the form.
      */
     if (formFailureMessage) {
       StepComponents.push({
-        Component: <Error message={formFailureMessage} />,
+        Component: function InlineFormError() {
+          return <Error message={formFailureMessage} />;
+        },
       });
     }
 
@@ -165,6 +144,14 @@ export default function Form({ action, followUp }) {
      * the StepComponent's array.
      */
     renderStep.callbacks.map((callback) => {
+      /** *********************************************************************
+       * SDK INTEGRATION POINT
+       * Summary:SDK callback method for getting the callback type
+       * ----------------------------------------------------------------------
+       * Details: This method is helpful in quickly identifying the callback
+       * when iterating through an unknown list of AM callbacks
+       ********************************************************************* */
+      if (DEBUGGER) debugger;
       switch (callback.getType()) {
         case 'ChoiceCallback':
           StepComponents.push({ Component: Choice, callback });
@@ -209,27 +196,22 @@ export default function Form({ action, followUp }) {
     });
   } else {
     /**
-     * This shouldn't be reached, but it's here just in case things blow up.
+     * Just in case things blow up.
      */
-    ErrorComponent = (
-      <Error
-        message={renderStep.payload.message}
-        reload={async () => {
-          const nextStep = await FRAuth.next(null, { tree: form });
-          setRenderStep(nextStep);
-        }}
-      />
-    );
+    ErrorComponent = <Error message={renderStep.payload.message} />;
   }
 
   /**
    * Check if there is an error, a message or components to render.
    */
   if (ErrorComponent) {
+    // Handles an unrecoverable form failure
     return <Fragment>{ErrorComponent}</Fragment>;
   } else if (MessageComponent) {
+    // Handles messaging related to a process, like loading
     return <Fragment>{MessageComponent}</Fragment>;
   } else {
+    // Handle form rendering
     return (
       <Fragment>
         <h1 className={`text-center fs-2 mb-3 ${state.theme.textClass}`}>

@@ -12,6 +12,12 @@ import React, { useContext } from 'react';
 
 import { AppContext } from '../../state';
 
+/**
+ * @function Card - React component that displays the alert icon representing the a warning
+ * @param {Object} props - React props object
+ * @param {Object} props.children - The child React components that are passed in
+ * @returns {Object} - React JSX Object
+ */
 export default function Card(props) {
   const [state] = useContext(AppContext);
 

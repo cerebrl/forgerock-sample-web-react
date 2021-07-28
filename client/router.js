@@ -22,7 +22,7 @@ import Register from './views/register';
 
 /**
  * @function App - Application React view
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Router() {
   return (

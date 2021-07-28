@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function VerifiedIcon - Displays the verified checkmark icon representing the validation
+ * @function VerifiedIcon - React component that displays the verified checkmark icon representing the validation
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

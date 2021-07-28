@@ -1,6 +1,20 @@
 # Changelog
 
-## [1.4.0] - 2021-6-24
+## [1.4.1] - 2021-06-28
+
+### Summary
+
+Preparing for code review
+
+### Features
+
+- Improve code comments throughout
+- Add debugger feature for pausing at SDK integration points with comment explaining use
+- Fixed some bugs
+- Improved color contrast for both light and dark modes
+- Improved some `useEffect` implementations to reduce unnecessary re-renders
+
+## [1.4.0] - 2021-06-24
 
 ### Summary
 

@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function KeyIcon - Displays the key icon representing login
+ * @function KeyIcon - React component that displays the key icon representing login
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

@@ -13,6 +13,12 @@ import React, { useContext, useRef, useState } from 'react';
 import apiRequest from '../../utilities/request';
 import { AppContext } from '../../state';
 
+/**
+ * @function CreateTodo - React component for displaying the input and button pair for todo creation
+ * @param {Object} props - React props object
+ * @param {Function} props.addTodo - The function that adds the todo to the local collection
+ * @returns {Object} - React component object
+ */
 export default function CreateTodo({ addTodo }) {
   const [state] = useContext(AppContext);
 

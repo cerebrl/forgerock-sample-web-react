@@ -10,7 +10,7 @@
 
 import { HttpClient } from '@forgerock/javascript-sdk';
 
-import { API_URL } from '../constants';
+import { API_URL, DEBUGGER } from '../constants';
 
 /**
  * @function request - A convenience function for wrapping around HttpClient
@@ -22,15 +22,24 @@ import { API_URL } from '../constants';
 export default async function apiRequest(resource, method, data) {
   let json;
   try {
+    /** ***********************************************************************
+     * SDK INTEGRATION POINT
+     * Summary: HttpClient for protected resource server requests.
+     * ------------------------------------------------------------------------
+     * Details: This helper retrieves your access token from storage and adds
+     * it to the authorization header as a bearer token for making HTTP
+     * requests to protected resource APIs. It's a wrapper around the native
+     * fetch method.
+     *********************************************************************** */
+    if (DEBUGGER) debugger;
     const response = await HttpClient.request({
       url: `${API_URL}/${resource}`,
       init: {
-        credentials: 'include',
+        body: data && JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
         },
         method: method,
-        body: data && JSON.stringify(data),
       },
     });
     if (!response.ok) {

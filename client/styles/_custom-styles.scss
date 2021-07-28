@@ -196,7 +196,6 @@ body {
  */
 
 .cstm_bg-dark .cstm_form-floating > input {
-
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
@@ -206,7 +205,7 @@ body {
   }
 }
 .cstm_login_form {
-  button[type='submit'] {
+  button[type="submit"] {
     padding: 0.75rem 1.25rem;
   }
 }
@@ -268,16 +267,6 @@ body {
 .cstm_todo-item {
   transition: background-color 0.4s;
 }
-.cstm_form-check:focus + .cstm_todo-label {
-  box-shadow: $input-btn-focus-box-shadow;
-
-  &.cstm_todo-label_complete {
-    color: $gray-200;
-  }
-  &.cstm_todo-label_incomplete {
-    color: $gray-400;
-  }
-}
 .cstm_todo-label {
   cursor: pointer;
 }
@@ -290,20 +279,79 @@ body {
   fill: $gray-400;
 }
 .cstm_todo-icon_incomplete {
-  fill: $gray-600;
+  fill: $gray-500;
 }
 .cstm_todo-label_complete {
-  color: $gray-600;
+  color: $gray-500;
   font-style: italic;
   text-decoration: line-through;
   text-decoration-color: rgba($color: #000000, $alpha: 0.25);
 }
-.cstm_todo-label_incomplete:hover > .cstm_todo-icon_incomplete {
-  fill: $teal;
+.text-white .cstm_todo-icon_complete {
+  fill: $gray-600;
+}
+.text-white .cstm_todo-icon_incomplete {
+  fill: $gray-400;
+}
+.text-white .cstm_todo-label_incomplete {
+  color: $gray-200;
+}
+.cstm_todo-label_incomplete:hover {
+  color: $gray-900;
+
+  > .cstm_todo-icon_incomplete {
+    fill: $teal;
+  }
+}
+.cstm_todo-label_complete:hover {
+  color: $gray-600;
+
+  > .cstm_todo-icon_complete {
+    fill: $gray-600;
+  }
+}
+.cstm_form-check:focus + .cstm_todo-label {
+  box-shadow: $input-btn-focus-box-shadow;
+}
+.cstm_form-check:focus + .cstm_todo-label {
+
+  .cstm_todo-icon_complete {
+    fill: $gray-600;
+  }
+  &.cstm_todo-label_complete {
+    color: $gray-700;
+  }
+  .cstm_todo-icon_incomplete {
+    fill: $teal;
+  }
+  &.cstm_todo-label_incomplete {
+    color: $black;
+  }
+}
+.text-white .cstm_form-check:focus + .cstm_todo-label,
+.text-white .cstm_todo-label:hover {
+
+  .cstm_todo-icon_complete {
+    fill: $gray-200;
+  }
+  &.cstm_todo-label_complete {
+    color: $gray-200;
+  }
+  .cstm_todo-icon_incomplete {
+    fill: $teal;
+  }
+  &.cstm_todo-label_incomplete {
+    color: $white;
+  }
 }
 .cstm_todo_dropdown-actions {
   fill: $gray-600;
 }
-.cstm_todo_dropdown-actions:hover {
-  fill: $gray-800;
+.cstm_todo_dropdown-actions:hover,
+.cstm_todo_dropdown-actions:focus {
+  fill: $gray-900;
+}
+.text-white .cstm_todo_dropdown-actions:hover,
+.text-white .cstm_todo_dropdown-actions:focus {
+  fill: $gray-200;
 }

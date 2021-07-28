@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function ReactIcon - Displays the React brand icon
+ * @function ReactIcon - React component that displays the React brand icon
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

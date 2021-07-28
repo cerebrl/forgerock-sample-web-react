@@ -17,9 +17,11 @@ import TodoIcon from '../icons/todo-icon';
 /**
  * @function Todo - Used for display a single todo and its details
  * @param {Object} props - The object representing React's props
- * @param {Object} props.setTodoActionId - Method from parent for passing the ID of todo
- * @param {Object} props.todo - The todo object passed from the parent component
- * @returns {Object} - React JSX view
+ * @param {Function} props.completeTodo - A function for toggling a todo's complete state
+ * @param {Function} props.setSelectedDeleteTodo - A function for setting the todo for deletion
+ * @param {Function} props.setSelectedEditTodo - A function for setting the todo for edit
+ * @param {Object} props.item - The todo item instance to be rendered
+ * @returns {Object} - React component object
  */
 export default function Todo({
   completeTodo,
@@ -57,16 +59,15 @@ export default function Todo({
           }}
         />
         <label htmlFor={todo._id} className={todoClasses}>
-          <TodoIcon
-            classes="me-2"
-            completed={todo.completed}
-            size="36px"
-          />
+          <TodoIcon classes="me-2" completed={todo.completed} size="36px" />
           {todo.title}
         </label>
       </div>
 
-      <div className="dropdown text-end d-flex align-items-center" aria-expanded="false">
+      <div
+        className="dropdown text-end d-flex align-items-center"
+        aria-expanded="false"
+      >
         <button
           className="cstm_todo_dropdown-actions btn h-auto"
           data-bs-toggle="dropdown"

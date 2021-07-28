@@ -11,6 +11,7 @@
 import { FRAuth, TokenManager, UserManager } from '@forgerock/javascript-sdk';
 import { useEffect, useState } from 'react';
 
+import { DEBUGGER } from '../../constants';
 import { htmlDecode } from '../../utilities/decode';
 
 /**
@@ -19,7 +20,7 @@ import { htmlDecode } from '../../utilities/decode';
  * @param {Object} props.action - Action object for a "reducer" pattern
  * @param {string} props.action.type - Action type string that represents the action
  * @param {Object} props.form - The form metadata object
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function useJourneyHandler({ action, form }) {
   /**
@@ -34,7 +35,7 @@ export default function useJourneyHandler({ action, form }) {
   // Form level errors
   const [formFailureMessage, setFormFailureMessage] = useState(null);
   // Password registration errors
-  const [passwordFailureMessage, setPasswordFailureMessage] = useState(null);
+  const [passwordFailureMessage] = useState(null);
   // Step to render
   const [renderStep, setRenderStep] = useState(null);
   // Step to submit
@@ -54,16 +55,26 @@ export default function useJourneyHandler({ action, form }) {
      * @returns {undefined}
      */
     async function getOAuth() {
-      /**
-       * Get OAuth/OIDC tokens through the the Authorization Code Flow w/PKCE.
-       * We are passing the `forceRenew` option to ensure we get fresh tokens,
-       * regardless of existing tokens.
-       */
+      /** *********************************************************************
+       * SDK INTEGRATION POINT
+       * Summary: Get OAuth/OIDC tokens with Authorization Code Flow w/PKCE.
+       * ----------------------------------------------------------------------
+       * Details: Since we have successfully authenticated the user, we can now
+       * get the OAuth2/OIDC tokens. We are passing the `forceRenew` option to
+       * ensure we get fresh tokens, regardless of existing tokens.
+       ************************************************************************* */
+      if (DEBUGGER) debugger;
       await TokenManager.getTokens({ forceRenew: true });
 
-      /**
-       * Now that we have tokens, call the user info endpoint for some basic user data.
-       */
+      /** *********************************************************************
+       * SDK INTEGRATION POINT
+       * Summary: Call the user info endpoint for some basic user data.
+       * ----------------------------------------------------------------------
+       * Details: This is an OAuth2 call that returns user information with a
+       * valid access token. This is optional and only used for displaying
+       * user info in the UI.
+       ********************************************************************* */
+      if (DEBUGGER) debugger;
       const user = await UserManager.getCurrentUser();
       setUser(user);
     }
@@ -81,9 +92,14 @@ export default function useJourneyHandler({ action, form }) {
       const previousCallbacks = prev && prev.callbacks;
       const previousPayload = prev && prev.payload;
 
-      /**
-       * Call the SDK's next method to submit the current step.
-       */
+      /** *********************************************************************
+       * SDK INTEGRATION POINT
+       * Summary: Call the SDK's next method to submit the current step.
+       * ----------------------------------------------------------------------
+       * Details: This calls the next method with the previous step, expecting
+       * the next step to be returned, or a success or failure.
+       ********************************************************************* */
+      if (DEBUGGER) debugger;
       const nextStep = await FRAuth.next(prev, { tree: form.tree });
 
       /**
@@ -93,32 +109,33 @@ export default function useJourneyHandler({ action, form }) {
       if (nextStep.type === 'LoginSuccess') {
         // User is authenticated, now call for OAuth tokens
         getOAuth();
-      } else if (
-        /**
-         * Special error handling for password validation failures
-         * in registration form. Submission will respond with 401
-         * along with a special "Constraint Violation" error message.
-         */
-        action.type === 'register' &&
-        nextStep.type === 'LoginFailure' &&
-        nextStep.payload.message.includes('Constraint Violation')
-      ) {
-        let messageArray = nextStep.payload.message.split(':');
-        setPasswordFailureMessage(htmlDecode(messageArray[2]));
-
-        const newStep = await FRAuth.next(null, { tree: form.tree });
-        newStep.callbacks = previousCallbacks;
-        newStep.payload = previousPayload;
-
-        setRenderStep(newStep);
-        setSubmittingForm(false);
       } else if (nextStep.type === 'LoginFailure') {
         /**
          * Handle basic form error
          */
         setFormFailureMessage(htmlDecode(nextStep.payload.message));
 
+        /** *******************************************************************
+         * SDK INTEGRATION POINT
+         * Summary: Call next without previous step to get new authId.
+         * --------------------------------------------------------------------
+         * Details: Since this is within the failure block, let's call the next
+         * function again but with no step (null) to get a fresh authId.
+         ******************************************************************* */
+        if (DEBUGGER) debugger;
         const newStep = await FRAuth.next(null, { tree: form.tree });
+
+        /** *******************************************************************
+         * SDK INTEGRATION POINT
+         * Summary: Repopulate callbacks/payload with previous data.
+         * --------------------------------------------------------------------
+         * Details: Now that we have a new authId (the identification of the
+         * fresh step) let's populate this new step with old callback data. We
+         * will display the error we collected from the previous submission,
+         * restart the flow, and provide better UX with the previous form data,
+         * so the user doesn't have to refill the form.
+         ******************************************************************* */
+        if (DEBUGGER) debugger;
         newStep.callbacks = previousCallbacks;
         newStep.payload = previousPayload;
 
@@ -150,7 +167,6 @@ export default function useJourneyHandler({ action, form }) {
       user,
     },
     {
-      setRenderStep,
       setSubmissionStep,
       setSubmittingForm,
     },

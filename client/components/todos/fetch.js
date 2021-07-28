@@ -13,7 +13,14 @@ import { useHistory } from 'react-router-dom';
 
 import apiRequest from '../../utilities/request';
 
-export default function useTodoFetch(dispatch, setFetched, todos) {
+/**
+ * @function useTodoFetch - A custom React hook for fetching todos from API
+ * @param {Function} dispatch - The function to pass in an action with data to result in new state
+ * @param {Function} setFetched - A function for setting the state of hasFetched
+ * @param {string} todosLength - The todo collection
+ * @returns {undefined} - this doesn't directly return anything, but calls dispatch to set data
+ */
+export default function useTodoFetch(dispatch, setFetched) {
   const history = useHistory();
 
   /**
@@ -27,14 +34,16 @@ export default function useTodoFetch(dispatch, setFetched, todos) {
       const fetchedTodos = await apiRequest('todos', 'GET');
 
       // TODO: improve error handling
-      if (todos.error) {
+      if (fetchedTodos.error) {
         return history.push('/login');
       }
       setFetched(true);
       dispatch({ type: 'init-todos', payload: { todos: fetchedTodos } });
     }
-    if (!todos.length) {
-      getTodos();
-    }
-  }, [dispatch, history, setFetched, todos]);
+
+    getTodos();
+
+    // There are no dependencies needed as all methods/functions are "stable"
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 }

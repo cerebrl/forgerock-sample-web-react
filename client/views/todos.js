@@ -21,7 +21,7 @@ import apiRequest from '../utilities/request';
 
 /**
  * @function Todos - React view for retrieving & displaying todo collection
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Todos() {
   /**
@@ -36,7 +36,7 @@ export default function Todos() {
   const [selectedDeleteTodo, setSelectedDeleteTodo] = useState(null);
   const [selectedEditTodo, setSelectedEditTodo] = useState(null);
 
-  useTodoFetch(dispatch, setFetched, todos);
+  useTodoFetch(dispatch, setFetched);
 
   function addTodo(newTodo) {
     dispatch({ type: 'add-todo', payload: { todo: newTodo } });
@@ -60,10 +60,18 @@ export default function Todos() {
     return;
   }
 
+  /**
+   * Dynamic React component for rendering either the loading component
+   * or the Todos collection component.
+   */
   const Todos = hasFetched ? (
     <ul
       className={`list-group list-group-flush mb-1 ${state.theme.listGroupClass}`}
     >
+      {/**
+       * We we've fetched the todos, iterate over them for display.
+       * If no todos were returned, show the "no todos" message.
+       */}
       {todos.length > 0 ? (
         todos.map((item) => {
           return (

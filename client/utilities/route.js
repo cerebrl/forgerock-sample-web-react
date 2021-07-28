@@ -12,6 +12,7 @@ import { UserManager } from '@forgerock/javascript-sdk';
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
+import { DEBUGGER } from '../constants';
 import Loading from '../components/utilities/loading';
 import { AppContext } from '../state';
 
@@ -23,8 +24,9 @@ import { AppContext } from '../state';
  */
 function useAuthValidation(auth, setAuth) {
   /**
-   * isValidated is a boolean that represents if the access token
-   * has been validated, NOT whether it is actually valid
+   * React state "hook"
+   *
+   * This has three possible states: 'unknown', 'valid' and 'invalid'.
    */
   const [isValid, setValid] = useState('unknown');
 
@@ -38,6 +40,16 @@ function useAuthValidation(auth, setAuth) {
          * If we they have been authenticated, validate that assumption
          */
         try {
+          /** *****************************************************************
+           * SDK INTEGRATION POINT
+           * Summary: Optional client-side route access validation
+           * ------------------------------------------------------------------
+           * Details: Here, you could just make sure tokens exist –
+           * TokenStorage.get() – or, validate tokens, renew expiry timers,
+           * session checks ... Below, we are calling the userinfo endpoint to
+           * ensure valid tokens before continuing, but it's optional.
+           ***************************************************************** */
+          if (DEBUGGER) debugger;
           await UserManager.getCurrentUser();
           setValid('valid');
         } catch (err) {
@@ -53,7 +65,9 @@ function useAuthValidation(auth, setAuth) {
     }
 
     validateAccessToken();
-  }, [auth, setAuth]);
+    // Only `auth` is mutable, all others, even `setAuth` are "stable"
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth]);
 
   return [
     {
@@ -63,14 +77,18 @@ function useAuthValidation(auth, setAuth) {
 }
 
 /**
- *
+ * @function ProtectedRoute - This function extends the ReactRouter component to
+ * protect routes from unauthenticated access.
+ * Inspired by: https://ui.dev/react-router-v5-protected-routes-authentication/
  * @param {Object} props - React props
  * @param {Object} props.children - React components passed as children
- * @param {Object} ...rest - The rest of the props passed
+ * @param {Object} rest - The rest of the props passed
  * @returns {Object} - Wrapped React Router component
  */
 export function ProtectedRoute({ children, ...rest }) {
+  // Get "global" state from Context API
   const [{ isAuthenticated }, { setAuthentication }] = useContext(AppContext);
+  // Custom hook for validating user's access token
   const [{ isValid }] = useAuthValidation(isAuthenticated, setAuthentication);
 
   return (
@@ -85,7 +103,7 @@ export function ProtectedRoute({ children, ...rest }) {
             // Access token has been confirmed to be invalid
             return <Redirect to="/login" />;
           default:
-            // Waiting on token validation
+            // State is 'unknown', so we are waiting on token validation
             return <Loading classes="pt-5" message="Validating session ... " />;
         }
       }}

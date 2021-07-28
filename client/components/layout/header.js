@@ -20,7 +20,7 @@ import TodosIcon from '../icons/todos-icon';
 
 /**
  * @function Header - Header React view
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Header() {
   /**

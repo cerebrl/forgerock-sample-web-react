@@ -11,9 +11,10 @@
 import React, { useContext } from 'react';
 
 import { AppContext } from '../../state';
+
 /**
- * @function Footer - Footer React view
- * @returns {Object} - React JSX view
+ * @function Footer - Footer React component
+ * @returns {Object} - React component object
  */
 export default function Footer() {
   const [state] = useContext(AppContext);

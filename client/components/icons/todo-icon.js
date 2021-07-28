@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function TodoIcon - Displays either the circle or circle with check icon representing the todo
+ * @function TodoIcon - React component that displays either the circle or circle with check icon representing the todo
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

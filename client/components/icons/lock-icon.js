@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function LockIcon - Displays the lock icon representing security
+ * @function LockIcon - React component that displays the lock icon representing security
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

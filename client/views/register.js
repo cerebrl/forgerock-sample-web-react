@@ -17,7 +17,7 @@ import Form from '../components/journey/form';
 
 /**
  * @function Register - React view for Register
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Register() {
   async function initUserInDb() {

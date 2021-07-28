@@ -15,8 +15,8 @@ import { AppContext } from '../state';
 import VerifiedIcon from '../components/icons/verified-icon';
 
 /**
- * @function Home - Home React view
- * @returns {Object} - React JSX view
+ * @function Home - React view for Home
+ * @returns {Object} - React component object
  */
 export default function Home() {
   /**

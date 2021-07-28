@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function AccountIcon - Displays the user icon representing the account
+ * @function AccountIcon - React component for the user icon representing the account
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

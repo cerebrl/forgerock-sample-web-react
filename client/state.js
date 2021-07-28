@@ -11,6 +11,8 @@
 import { FRUser } from '@forgerock/javascript-sdk';
 import React, { useState } from 'react';
 
+import { DEBUGGER } from './constants';
+
 /**
  * @function useStateMgmt - The global state/store for managing user authentication and page
  * @param {Object} props - The object representing React's props
@@ -23,7 +25,6 @@ import React, { useState } from 'react';
 export function useStateMgmt({
   email,
   isAuthenticated,
-  page,
   prefersDarkTheme,
   username,
 }) {
@@ -35,7 +36,6 @@ export function useStateMgmt({
    */
   const [authenticated, setAuthentication] = useState(isAuthenticated || false);
   const [mail, setEmail] = useState(email || '');
-  const [currentPage, setPage] = useState(page || 'home');
   const [name, setUser] = useState(username || '');
 
   let theme;
@@ -47,6 +47,15 @@ export function useStateMgmt({
    */
   async function setAuthenticationWrapper(value) {
     if (value === false) {
+      /** *********************************************************************
+       * SDK INTEGRATION POINT
+       * Summary: Logout, end session and revoke tokens
+       * ----------------------------------------------------------------------
+       * Details: Since this method is a global method via the Context API,
+       * any part of the application can log a user out. This is helpful when
+       * APIs are called and we get a 401 response.
+       ********************************************************************* */
+      if (DEBUGGER) debugger;
       await FRUser.logout();
     }
     setAuthentication(value);
@@ -97,7 +106,7 @@ export function useStateMgmt({
       dropdownClass: '',
       listGroupClass: '',
       navbarClass: 'navbar-light bg-white',
-      textClass: 'text-body',
+      textClass: '',
       textMutedClass: 'text-muted',
     };
   }
@@ -109,14 +118,12 @@ export function useStateMgmt({
     {
       isAuthenticated: authenticated,
       email: mail,
-      page: currentPage,
       theme,
       username: name,
     },
     {
       setAuthentication: setAuthenticationWrapper,
       setEmail: setEmailWrapper,
-      setPage,
       setUser: setUserWrapper,
     },
   ];

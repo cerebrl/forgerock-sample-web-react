@@ -10,10 +10,16 @@ async function getUser(id) {
 }
 
 export async function initUser(user) {
-  await userDb.put({
-    _id: user.user_id,
-    todos: [],
-  });
+  try {
+    console.log(`Initialize user ${user.user_id}`);
+    await userDb.put({
+      _id: user.user_id,
+      todos: [],
+    });
+   } catch (err) {
+     console.log("Error initializing user");
+     console.log(err);
+   }
 }
 
 export async function getAll(user) {
@@ -23,6 +29,7 @@ export async function getAll(user) {
     userData = await getUser(user.user_id);
   } catch (err) {
     console.log(`Error: retrieving user meta: ${err}`);
+    console.log(`Attempting to initialize user: ${user.user_id}`);
     await initUser(user);
     userData = await getUser(user.user_id);
   }

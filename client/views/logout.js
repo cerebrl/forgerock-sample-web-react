@@ -8,7 +8,6 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { FRUser } from '@forgerock/javascript-sdk';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ import Loading from '../components/utilities/loading';
 
 /**
  * @function Logout - React view for Logout
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Logout() {
   /**
@@ -30,8 +29,11 @@ export default function Logout() {
   useEffect(() => {
     async function logout() {
       try {
-        await FRUser.logout();
-        // Logout and clear existing, stored data
+        /**
+         * Logout and clear existing, stored data
+         * Note that the setAuthentication method below calls the FRUser.logout
+         * method, ensuring the access artifacts are revoked on ForgeRock.
+         */
         setAuthentication(false);
         setEmail('');
         setUser('');
@@ -44,7 +46,10 @@ export default function Logout() {
     }
 
     logout();
-  }, [history, setAuthentication, setEmail, setUser]);
+
+    // All methods/functions used herein are are "stable"
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <Loading classes="pt-5" message="You're being logged out ..." />;
 }

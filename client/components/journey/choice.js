@@ -10,17 +10,26 @@
 
 import React, { useContext } from 'react';
 
+import { DEBUGGER } from '../../constants';
 import { AppContext } from '../../state';
 
 /**
  * @function Choice - React component used for displaying choices
  * @param {Object} props - React props object passed from parent
  * @param {Object} props.callback - The callback object from AM
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Choice({ callback }) {
   const [state] = useContext(AppContext);
 
+  /** *************************************************************************
+   * SDK INTEGRATION POINT
+   * Summary: SDK callback methods for getting values
+   * --------------------------------------------------------------------------
+   * Details: Each callback is wrapped by the SDK to provide helper methods
+   * for accessing values from the callbacks received from AM
+   ************************************************************************* */
+  if (DEBUGGER) debugger;
   const prompt = callback.getPrompt();
   const choiceOptions = callback.getChoices();
   const defaultChoice = callback.getDefaultChoice();
@@ -30,6 +39,14 @@ export default function Choice({ callback }) {
    * @param {Object} event
    */
   function setValue(event) {
+    /** ***********************************************************************
+     * SDK INTEGRATION POINT
+     * Summary: SDK callback methods for setting values
+     * ------------------------------------------------------------------------
+     * Details: Each callback is wrapped by the SDK to provide helper methods
+     * for writing values to the callbacks received from AM
+     *********************************************************************** */
+    if (DEBUGGER) debugger;
     callback.setChoiceIndex(event.target.value);
   }
 

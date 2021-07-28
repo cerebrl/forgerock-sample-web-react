@@ -36,7 +36,7 @@ export default async function routes(app) {
 
   app.post('/todos', auth, async (req, res) => {
     const newTodo = {
-      ...req.body,
+      title: req.body.title,
       completed: false,
       _id: Date.now().toString(),
     };

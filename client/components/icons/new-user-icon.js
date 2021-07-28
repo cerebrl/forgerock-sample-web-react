@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function NewUserIcon - Displays the new user (user with +) icon representing registration
+ * @function NewUserIcon - React component that displays the new user (user with +) icon representing registration
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

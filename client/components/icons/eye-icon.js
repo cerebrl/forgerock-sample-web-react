@@ -10,6 +10,13 @@
 
 import React from 'react';
 
+/**
+ * @function AlertIcon - React component that displays the eye (password visible) icon
+ * @param {Object} props - React props object
+ * @param {string} props.classes - A string of classnames to be set on component
+ * @param {string} props.size - A string representing the intended size of the rendering
+ * @returns {Object} - React JSX Object
+ */
 export default function EyeIcon({
   classes = '',
   visible = true,

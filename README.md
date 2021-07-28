@@ -1,17 +1,18 @@
 # ForgeRock Sample React (Web) App
 
-A sample todo web app written in the React view library with a supporting API resource server.
+A ForgeRock protected, sample todo web app written with the React view library with a supporting API resource server. A live version can be found here: https://fr-react-todos.crbrl.io.
 
 ## Requirements
 
-1. Node >= 14.2.0 (recommended: install via [official package installer](https://nodejs.org/en/))
-2. Knowledge of using the Terminal/Command Line
-3. Ability to generate security certs (recommended: mkcert ([installation instructions here](https://github.com/FiloSottile/mkcert#installation))
-4. This project "cloned" to your computer
+1. An instance of ForgeRock's Access Manager (AM), either within a ForgeRock's Identity Cloud tenant, your own private installation or locally installed on your computer
+2. Node >= 14.2.0 (recommended: install via [official package installer](https://nodejs.org/en/))
+3. Knowledge of using the Terminal/Command Line
+4. Ability to generate security certs (recommended: mkcert ([installation instructions here](https://github.com/FiloSottile/mkcert#installation))
+5. This project "cloned" to your computer
 
 ## Installation
 
-Once you have the 4 requirements above met, let's get to building the project.
+Once you have the 5 requirements above met, let's get to building the project.
 
 ### Security Certificates
 
@@ -78,6 +79,7 @@ Now you'll need to update your `hosts` (`/etc/hosts` if on a Mac) to allow for d
 ```
 
 ### Run the Servers
+
 Now, run the dev command to start the processes needed for both client and API server
 
 ```sh
@@ -90,6 +92,14 @@ npm run servers
 ```
 
 Now, you should be able to visit `https://react.example.com:8443`, which is your web app or client (the Relying Party in OAuth terms). This client will make requests to your AM instance, (the Authorization Server in OAuth terms), which will be running on whatever domain you set, and `https://api.example.com:9443` as the REST API for your todos (the Resource Server). Enjoy!
+
+## Learn About Integration Touchpoints
+
+This project has a debugging statements that can be activated which causes the app to pause execution at each SDK integration point. It will have a comment above the `debugger` statement explaining the purpose of the integration.
+
+If you'd like to use this feature as a learning tool, [open the live app](https://fr-react-todos.crbrl.io/) and then open the developer tools of your browser. Rerun the app with the developer tools open, and it will automatically pause at these points of integration.
+
+For local development, if you want to turn these debuggers off, you can set the environment variable of `DEBUGGER_OFF` to true.
 
 ## Modifying This Project
 

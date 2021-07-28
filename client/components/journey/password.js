@@ -10,6 +10,7 @@
 
 import React, { useContext, useState } from 'react';
 
+import { DEBUGGER } from '../../constants';
 import { AppContext } from '../../state';
 import EyeIcon from '../icons/eye-icon';
 
@@ -18,11 +19,19 @@ import EyeIcon from '../icons/eye-icon';
  * @param {Object} props - React props object passed from parent
  * @param {Object} props.callback - The callback object from AM
  * @param {string} props.errorMessage - Error message string
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Password({ callback, errorMessage }) {
   const [state] = useContext(AppContext);
 
+  /** *************************************************************************
+   * SDK INTEGRATION POINT
+   * Summary: SDK callback methods for getting values
+   * --------------------------------------------------------------------------
+   * Details: Each callback is wrapped by the SDK to provide helper methods
+   * for accessing values from the callbacks received from AM
+   ************************************************************************* */
+  if (DEBUGGER) debugger;
   const failedPolicies =
     callback.getFailedPolicies && callback.getFailedPolicies();
   const passwordLabel = callback.getPrompt();
@@ -39,6 +48,14 @@ export default function Password({ callback, errorMessage }) {
    * @param {Object} event
    */
   function setValue(event) {
+    /** ***********************************************************************
+     * SDK INTEGRATION POINT
+     * Summary: SDK callback methods for setting values
+     * ------------------------------------------------------------------------
+     * Details: Each callback is wrapped by the SDK to provide helper methods
+     * for writing values to the callbacks received from AM
+     *********************************************************************** */
+    if (DEBUGGER) debugger;
     callback.setPassword(event.target.value);
   }
 

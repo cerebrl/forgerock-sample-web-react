@@ -10,6 +10,7 @@
 
 import React, { Fragment, useContext } from 'react';
 
+import { DEBUGGER } from '../../constants';
 import { AppContext } from '../../state';
 import LockIcon from '../icons/lock-icon';
 
@@ -17,19 +18,43 @@ import LockIcon from '../icons/lock-icon';
  * @function Kba - React component used for displaying KBA security question
  * @param {Object} props - React props object passed from parent
  * @param {Object} props.callback - The callback object from AM
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Kba({ callback }) {
   const [state] = useContext(AppContext);
 
+  /** *************************************************************************
+   * SDK INTEGRATION POINT
+   * Summary: SDK callback methods for getting values
+   * --------------------------------------------------------------------------
+   * Details: Each callback is wrapped by the SDK to provide helper methods
+   * for accessing values from the callbacks received from AM
+   ************************************************************************* */
+  if (DEBUGGER) debugger;
   const prompt = callback.getPrompt();
   const questions = callback.getPredefinedQuestions();
 
   function setAnswer(e) {
+    /** ***********************************************************************
+     * SDK INTEGRATION POINT
+     * Summary: SDK callback methods for setting values
+     * ------------------------------------------------------------------------
+     * Details: Each callback is wrapped by the SDK to provide helper methods
+     * for writing values to the callbacks received from AM
+     *********************************************************************** */
+    if (DEBUGGER) debugger;
     callback.setAnswer(e.target.value);
   }
 
   function setQuestion(e) {
+    /** ***********************************************************************
+     * SDK INTEGRATION POINT
+     * Summary: SDK callback methods for setting values
+     * ------------------------------------------------------------------------
+     * Details: Each callback is wrapped by the SDK to provide helper methods
+     * for writing values to the callbacks received from AM
+     *********************************************************************** */
+    if (DEBUGGER) debugger;
     callback.setQuestion(e.target.value);
   }
 

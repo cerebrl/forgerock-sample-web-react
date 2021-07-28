@@ -12,7 +12,7 @@ import React from 'react';
 
 /**
  * @function Unknown- React component used for displaying Unknown callback
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Unknown() {
   return (

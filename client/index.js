@@ -13,20 +13,39 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Router from './router';
-import { AM_URL, APP_URL, DEBUGGER, REALM_PATH } from './constants';
+import {
+  AM_URL,
+  APP_URL,
+  DEBUGGER,
+  REALM_PATH,
+  WEB_OAUTH_CLIENT,
+} from './constants';
 import { AppContext, useStateMgmt } from './state';
 
 /**
  * This import will produce a separate CSS file linked in the index.html
+ * Webpack will detect this and transpile, process and generate the needed CSS file
  */
 import './styles/index.scss';
 
-/**
- * SDK Integration: Configure JS SDK for AM installation
- */
+/** ***************************************************************************
+ * SDK INTEGRATION POINT
+ * Summary: Configure the SDK
+ * ----------------------------------------------------------------------------
+ * Details: Below, you will see the following settings:
+ * - clientId: (OAuth2 only) this is the OAuth2 client you created in ForgeRock
+ * - redirectUri: (OAuth2 only) this is the URI/URL of this app too which the
+ *   OAuth flow will redirect
+ * - scope: (OAuth2 only) these are the OAuth scopes that you will request from
+ *   ForgeRock
+ * - serverConfig: this includes the baseUrl of your ForgeRock AM, should
+ *   include `/am/` at the end
+ * - realmPath: this is the realm you are wanting to use within ForgeRock
+ * - tree: The authentication journey/tree that you are wanting to use
+ *************************************************************************** */
 if (DEBUGGER) debugger;
 Config.set({
-  clientId: 'WebOAuthClient',
+  clientId: WEB_OAUTH_CLIENT,
   redirectUri: `${APP_URL}/callback`,
   scope: 'openid profile email',
   serverConfig: {
@@ -37,18 +56,29 @@ Config.set({
   tree: 'Login',
 });
 
-(async function hydrate() {
-  /**
-   * Pull values from sessionStorage to rehydrate app.
-   * Note that all values, even booleans, are strings in session or localStorage.
-   */
+/**
+ * Initialize the React application
+ */
+(async function initAndHydrate() {
+  /** *************************************************************************
+   * SDK INTEGRATION POINT
+   * Summary: Get OAuth/OIDC tokens from storage
+   * --------------------------------------------------------------------------
+   * Details: We can immediately call TokenStorage.get() to check for stored
+   * tokens. If we have them, you can cautiously assume the user is
+   * authenticated.
+   ************************************************************************* */
+  if (DEBUGGER) debugger;
   const isAuthenticated = !!(await TokenStorage.get());
+
+  /**
+   * Pull custom values from outside of the app to (re)hydrate state.
+   */
   const prefersDarkTheme = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches;
   const email = window.sessionStorage.getItem('sdk_email');
   const username = window.sessionStorage.getItem('sdk_username');
-  const page = new URL(window.location.href).pathname.slice(1);
   const rootEl = document.getElementById('root');
 
   if (prefersDarkTheme) {
@@ -57,18 +87,21 @@ Config.set({
 
   /**
    * @function Init - Initializes React and global state
-   * @returns {Object} - React JSX view
+   * @returns {Object} - React component object
    */
   function Init() {
     /**
      * This leverages "global state" with React's Context API.
-     * This can be useful to "hydrate" the state with stored data,
-     * like this authentication status stored in sessionStorage.
+     * This can be useful to share state with any component without
+     * having to pass props through deeply nested components,
+     * authentication status and theme state are good examples.
+     *
+     * If global state becomes a more complex function of the app,
+     * something like Redux might be a better option.
      */
     const stateMgmt = useStateMgmt({
       email,
       isAuthenticated,
-      page,
       prefersDarkTheme,
       username,
     });
@@ -80,5 +113,6 @@ Config.set({
     );
   }
 
+  // Mounts the React app to the existing root element
   ReactDOM.render(<Init />, rootEl);
 })();

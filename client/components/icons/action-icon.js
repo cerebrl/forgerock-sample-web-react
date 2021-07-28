@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function ActionIcon - Displays the action, "three dots" icon representing the a menu
+ * @function ActionIcon - React component that displays the action, "three dots" icon representing the a menu
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

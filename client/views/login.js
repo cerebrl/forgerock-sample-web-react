@@ -16,7 +16,7 @@ import Form from '../components/journey/form';
 
 /**
  * @function Login - React view for Login
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Login() {
   return (

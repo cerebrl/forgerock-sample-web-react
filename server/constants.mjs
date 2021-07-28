@@ -18,7 +18,7 @@ const certsPath = fileURLToPath(certsUrl);
 export const AM_URL = process.env.AM_URL;
 
 export const CONFIDENTIAL_CLIENT = Buffer.from(
-  `${process.env.OAUTH_CLIENT}:${process.env.OAUTH_SECRET}`
+  `${process.env.REST_OAUTH_CLIENT}:${process.env.REST_OAUTH_SECRET}`
 ).toString('base64');
 
 export const PORT = process.env.PORT || 9443;

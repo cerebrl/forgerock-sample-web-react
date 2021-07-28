@@ -13,9 +13,10 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../state';
 
 /**
- * @function Delete - Used for display a single todo and its details
+ * @function Delete - Used for display a modal that ensures intention for todo deletion
  * @param {Object} props - The object representing React's props
- * @returns {Object} - React JSX view
+ * @param {Object} props.deleteTodo - The todo object that is requested to be deleted
+ * @returns {Object} - React component object
  */
 export default function Delete({ deleteTodo }) {
   const [state] = useContext(AppContext);

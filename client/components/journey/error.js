@@ -16,7 +16,7 @@ import AlertIcon from '../icons/alert-icon';
  * @function Error - React component used for displaying form errors
  * @param {Object} props - React props object passed from parent
  * @param {Object} props.message - error message
- * @returns {Object} - React JSX view
+ * @returns {Object} - React component object
  */
 export default function Error({ message }) {
   return (

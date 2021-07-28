@@ -11,7 +11,7 @@
 import React from 'react';
 
 /**
- * @function TodosIcon - Displays the multipe checks icon representing the todos page
+ * @function TodosIcon - React component that displays the multiple checks icon representing the todos page
  * @param {Object} props - React props object
  * @param {string} props.classes - A string of classnames to be set on component
  * @param {string} props.size - A string representing the intended size of the rendering

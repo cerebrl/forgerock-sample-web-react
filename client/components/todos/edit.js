@@ -13,9 +13,12 @@ import React, { useContext, useRef } from 'react';
 import { AppContext } from '../../state';
 
 /**
- * @function Edit - Used for display a single todo and its details
+ * @function Edit - Used for a single todo for edit within a modal popup
  * @param {Object} props - The object representing React's props
- * @returns {Object} - React JSX view
+ * @param {Object} props.selectedEditTodo - The todo object representing what is selected for edit
+ * @param {Function} props.setSelectedEditTodo - The function to set the newly edited todo
+ * @param {Function} props.editTodo - The function to add the edited todo back to the collection
+ * @returns {Object} - React component object
  */
 export default function Edit({
   selectedEditTodo,
