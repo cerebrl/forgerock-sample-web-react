@@ -137,7 +137,10 @@ export default function useJourneyHandler({ action, form }) {
          ******************************************************************* */
         if (DEBUGGER) debugger;
         newStep.callbacks = previousCallbacks;
-        newStep.payload = previousPayload;
+        newStep.payload = {
+          ...previousPayload,
+          authId: newStep.payload.authId,
+        };
 
         setRenderStep(newStep);
         setSubmittingForm(false);
