@@ -8,8 +8,8 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
 
 import { ProtectedRoute } from './utilities/route';
 import Todos from './views/todos';
@@ -19,6 +19,16 @@ import Home from './views/home';
 import Login from './views/login';
 import Logout from './views/logout';
 import Register from './views/register';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 /**
  * @function App - Application React view
@@ -43,6 +53,7 @@ export default function Router() {
           <Logout />
         </Route>
         <Route path="/">
+          <ScrollToTop />
           <Header />
           <Home />
           <Footer />

@@ -37,8 +37,7 @@ export default function Form({ action, followUp }) {
   /**
    * Compose the state used in this view.
    * First, we will use the global state methods found in the App Context.
-   * Then, we will create local state to manage the login journey. The
-   * underscore is an unused variable, since we don't need the current global state.
+   * Then, we will create local state to manage the login journey.
    *
    * The destructing of the hook's array results in index 0 having the state value,
    * and index 1 having the "setter" method to set new state values.
@@ -54,6 +53,7 @@ export default function Form({ action, followUp }) {
    * Component types
    * StepComponents are generic callback components that will be
    * generically rendered.
+   *
    * MessageComponent is intended for simply rendering messages to screen.
    * ErrorComponent is intended for displaying the error
    */
@@ -139,7 +139,7 @@ export default function Form({ action, followUp }) {
     }
 
     /**
-     * Iterate through callbacks mapping the callback to the
+     * Iterate through callbacks received from AM and map the callback to the
      * appropriate callback component, pushing that component
      * the StepComponent's array.
      */
