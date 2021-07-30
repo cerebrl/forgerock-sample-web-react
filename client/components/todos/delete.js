@@ -10,7 +10,7 @@
 
 import React, { useContext } from 'react';
 
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 
 /**
  * @function Delete - Used for display a modal that ensures intention for todo deletion

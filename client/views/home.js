@@ -11,7 +11,7 @@
 import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../state';
+import { AppContext } from '../global-state';
 import VerifiedIcon from '../components/icons/verified-icon';
 
 /**
@@ -72,14 +72,14 @@ export default function Home() {
       >
         Learn how to develop ForgeRock protected, web apps with the{' '}
         <a
-          className={`${state.theme.textMutedClass} text-decoration-underline`}
+          className={`${state.theme.textMutedClass}`}
           href="https://reactjs.org/"
         >
           React.js
         </a>{' '}
         library and our{' '}
         <a
-          className={`${state.theme.textMutedClass} text-decoration-underline`}
+          className={`${state.theme.textMutedClass}`}
           href="https://github.com/ForgeRock/forgerock-javascript-sdk"
         >
           JavaScript SDK

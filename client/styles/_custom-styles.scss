@@ -11,6 +11,15 @@
 @use 'sass:color';
 
 /** *********************************************
+ * Non-bootstrap variables
+ */
+$cstm_link-light-color: $primary;
+$cstm_link-light-color_hover: color.scale($primary, $blackness: 20%);
+$cstm_link-dark-color: color.scale($primary, $lightness: 40%);
+$cstm_link-dark-color_hover: color.scale($primary, $lightness: 60%);
+
+
+/** *********************************************
  * Root and container element fixes
  */
 
@@ -178,6 +187,13 @@ body {
     text-decoration: underline;
   }
 }
+.cstm_login-link_dark {
+  color: color.scale($primary, $lightness: 40%);
+
+  &:hover {
+    color: color.scale($primary, $lightness: 60%);
+  }
+}
 
 /** *********************************************
  * Account Dropdown
@@ -189,6 +205,9 @@ body {
   &:hover {
     fill: $primary;
   }
+}
+.cstm_profile-name {
+  color: $gray-900;
 }
 
 /** *********************************************
@@ -229,6 +248,10 @@ body {
 
 .cstm_bg-dark a:not([class]) {
   color: color.scale($primary, $lightness: 40%);
+
+  &:hover {
+    color: color.scale($primary, $lightness: 60%);
+  }
 }
 
 /** *********************************************
@@ -253,6 +276,38 @@ body {
 // https://github.com/twbs/bootstrap/blob/main/scss/forms/_input-group.scss
 .cstm_form-floating.cstm_form-floating > .cstm_form-control:focus ~ label {
   z-index: 4; // Needs to be 1 more than the value found in bootstrap's CSS
+}
+.cstm_back-home {
+  background-color: transparent;
+  color: $link-color;
+
+  svg {
+    fill: $link-color;
+    margin-top: -0.25rem;
+    padding-left: 0.25rem;
+  }
+  &:hover {
+    background-color: $gray-200;
+
+    svg {
+      fill: $link-hover-color;
+    }
+  }
+}
+.cstm_back-home_dark {
+  color: color.scale($primary, $lightness: 40%);;
+
+  svg {
+    fill: color.scale($primary, $lightness: 40%);;
+  }
+  &:hover {
+    background-color: $gray-700;
+    color: color.scale($primary, $lightness: 60%);
+
+    svg {
+      fill: color.scale($primary, $lightness: 60%);
+    }
+  }
 }
 
 /** *********************************************

@@ -11,7 +11,7 @@
 import React, { useContext } from 'react';
 
 import { DEBUGGER } from '../../constants';
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 
 /**
  * @function Choice - React component used for displaying choices

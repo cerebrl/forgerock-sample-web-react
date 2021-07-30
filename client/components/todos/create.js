@@ -11,7 +11,7 @@
 import React, { useContext, useRef, useState } from 'react';
 
 import apiRequest from '../../utilities/request';
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 
 /**
  * @function CreateTodo - React component for displaying the input and button pair for todo creation

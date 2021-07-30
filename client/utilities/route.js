@@ -14,7 +14,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { DEBUGGER } from '../constants';
 import Loading from '../components/utilities/loading';
-import { AppContext } from '../state';
+import { AppContext } from '../global-state';
 
 /**
  * @function useAuthValidation - Custom hook for validating user authentication

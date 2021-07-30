@@ -11,7 +11,7 @@
 import React, { Fragment, useContext } from 'react';
 
 import { DEBUGGER } from '../../constants';
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 import LockIcon from '../icons/lock-icon';
 
 /**

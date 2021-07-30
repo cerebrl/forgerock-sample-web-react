@@ -11,7 +11,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { AppContext } from '../state';
+import { AppContext } from '../global-state';
 import Loading from '../components/utilities/loading';
 
 /**

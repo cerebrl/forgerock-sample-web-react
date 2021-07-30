@@ -20,7 +20,7 @@ import Loading from '../utilities/loading';
 import Password from './password';
 import treeReducer from './tree-reducer';
 import useJourneyHandler from './journey-state';
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 import TermsConditions from './terms-conditions';
 import Text from './text';
 import Unknown from './unknown';
@@ -33,7 +33,7 @@ import Unknown from './unknown';
  * @param {Object} props.followUp - A function that should be run after successful authentication
  * @returns {Object} - React component object
  */
-export default function Form({ action, followUp }) {
+export default function Form({ action, bottomMessage, followUp, topMessage }) {
   /**
    * Compose the state used in this view.
    * First, we will use the global state methods found in the App Context.
@@ -217,6 +217,7 @@ export default function Form({ action, followUp }) {
         <h1 className={`text-center fs-2 mb-3 ${state.theme.textClass}`}>
           {form.titleText}
         </h1>
+        {topMessage}
         <form
           className="cstm_login_form"
           onSubmit={(event) => {
@@ -263,6 +264,7 @@ export default function Form({ action, followUp }) {
             <span> {form.buttonText}</span>
           </button>
         </form>
+        {bottomMessage}
       </Fragment>
     );
   }

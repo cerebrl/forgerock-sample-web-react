@@ -121,6 +121,13 @@ $text-muted: $gray-500;
 
 $list-group-hover-bg: $highlight-bg;
 
+// Override Links
+$link-color: $primary !default;
+$link-decoration: underline !default;
+$link-shade-percentage: 20% !default;
+$link-hover-color: shift-color($link-color, $link-shade-percentage) !default;
+$link-hover-decoration: none !default;
+
 // Override Dropdown
 $dropdown-box-shadow: $box-shadow;
 
