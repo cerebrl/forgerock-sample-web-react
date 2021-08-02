@@ -82,10 +82,10 @@ function useAuthValidation(auth, setAuth) {
  * Inspired by: https://ui.dev/react-router-v5-protected-routes-authentication/
  * @param {Object} props - React props
  * @param {Object} props.children - React components passed as children
- * @param {Object} rest - The rest of the props passed
+ * @param string[] path - React-Router path prop 
  * @returns {Object} - Wrapped React Router component
  */
-export function ProtectedRoute({ children, ...rest }) {
+export function ProtectedRoute({ children, path }) {
   // Get "global" state from Context API
   const [{ isAuthenticated }, { setAuthentication }] = useContext(AppContext);
   // Custom hook for validating user's access token
@@ -93,7 +93,7 @@ export function ProtectedRoute({ children, ...rest }) {
 
   return (
     <Route
-      {...rest}
+      path={path}
       render={() => {
         switch (isValid) {
           case 'valid':
@@ -107,6 +107,6 @@ export function ProtectedRoute({ children, ...rest }) {
             return <Loading classes="pt-5" message="Validating session ... " />;
         }
       }}
-    ></Route>
+    />
   );
 }

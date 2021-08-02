@@ -14,7 +14,7 @@ A ForgeRock protected, sample, todo web-app written with the React view library 
 
 ## Installation
 
-Once you have the 5 requirements above met, let's get to building the project.
+Once you have the 5 requirements above met, we can build the project.
 
 ### Security Certificates
 
@@ -38,7 +38,7 @@ This project requires HTTPS (secure protocol) which means security (SSL/TLS) cer
 #### Create Your OAuth Clients
 
 1. Create a public OAuth client for the web app
-2. Create a confidential OAuth client for the API server
+2. Create a confidential OAuth client for the API server (one with a secret)
 
 #### Create your Authentication Journeys/Trees
 
@@ -61,11 +61,29 @@ Note: The sample app currently supports the following callbacks only:
 
 Change the name of `.env.example` to `.env` and replace the bracketed values (e.g. `<<<helper-text>>>`) with your values.
 
+Example with annotations
+
+```
+AM_URL=https://example-am-instance.forgerock.com/am (important that you include the /am)
+APP_URL=https://react.example.com:8443 (your public application url)
+API_URL=https://api.example.com:9443 (your private application url, the server)
+DEBUGGER_OFF=false
+DEVELOPMENT=true
+JOURNEY_LOGIN=Login (name of Journey for Login)
+JOURNEY_REGISTER=Registration (name of Journey for Register)
+SEC_KEY_FILE=./key.pem
+SEC_CERT_FILE=./cert.pem
+REALM_PATH=alpha
+REST_OAUTH_CLIENT=sample-app-server (name of private oauth application)
+REST_OAUTH_SECRET=secret (the secret you chose for the private application)
+WEB_OAUTH_CLIENT=example-react-app (the name of the public oauth application)
+```
+
 ### Installing Dependencies and Run Build
 
 ```sh
 # Install the project dependencies
-npm run install
+npm install
 
 # Build the client project
 npm run build
@@ -74,6 +92,10 @@ npm run build
 ### Update Your `/etc/hosts` File
 
 Now you'll need to update your `hosts` (`/etc/hosts` if on a Mac) to allow for domain aliases:
+
+```
+$ sudo vim /etc/hosts
+```
 
 ```sh
 # hosts file aliases
@@ -87,10 +109,10 @@ Now, run the below commands to start the processes needed for building the appli
 ```sh
 # In one terminal window, run the following watch command
 # This "watches" the client source files for changes and rebuilds when needed
-npm run watch
+$ npm run watch
 
 # In another terminal window, run the dev servers for both client and server
-npm run start
+$ npm run servers
 ```
 
 Now, you should be able to visit `https://react.example.com:8443`, which is your web app or client (the Relying Party in OAuth terms). This client will make requests to your AM instance, (the Authorization Server in OAuth terms), which will be running on whatever domain you set, and `https://api.example.com:9443` as the REST API for your todos (the Resource Server). Enjoy!
