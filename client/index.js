@@ -17,10 +17,11 @@ import {
   AM_URL,
   APP_URL,
   DEBUGGER,
+  JOURNEY_LOGIN,
   REALM_PATH,
   WEB_OAUTH_CLIENT,
 } from './constants';
-import { AppContext, useStateMgmt } from './state';
+import { AppContext, useGlobalStateMgmt } from './global-state';
 
 /**
  * This import will produce a separate CSS file linked in the index.html
@@ -53,7 +54,7 @@ Config.set({
     timeout: '5000',
   },
   realmPath: REALM_PATH,
-  tree: 'Login',
+  tree: JOURNEY_LOGIN,
 });
 
 /**
@@ -99,7 +100,7 @@ Config.set({
      * If global state becomes a more complex function of the app,
      * something like Redux might be a better option.
      */
-    const stateMgmt = useStateMgmt({
+    const stateMgmt = useGlobalStateMgmt({
       email,
       isAuthenticated,
       prefersDarkTheme,

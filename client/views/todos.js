@@ -10,7 +10,7 @@
 
 import React, { useContext, Fragment, useReducer, useState } from 'react';
 
-import { AppContext } from '../state';
+import { AppContext } from '../global-state';
 import CreateTodo from '../components/todos/create';
 import DeleteModal from '../components/todos/delete';
 import EditModal from '../components/todos/edit';

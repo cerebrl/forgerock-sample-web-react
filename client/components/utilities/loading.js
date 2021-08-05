@@ -8,7 +8,9 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { AppContext } from '../../global-state';
 
 /**
  * @function Loading - Used to display a loading message
@@ -17,6 +19,8 @@ import React from 'react';
  * @returns {Object} - React component object
  */
 export default function Loading({ classes, message }) {
+  const [state] = useContext(AppContext);
+
   return (
     <div className="container">
       <p className={classes}>
@@ -26,7 +30,9 @@ export default function Loading({ classes, message }) {
             role="status"
           ></span>
         </span>
-        <span className="d-flex justify-content-center p-3 fs-5">
+        <span
+          className={`d-flex justify-content-center p-3 fs-5 ${state.theme.textClass}`}
+        >
           {message}
         </span>
       </p>

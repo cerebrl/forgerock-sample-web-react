@@ -22,7 +22,7 @@ import { DEBUGGER } from './constants';
  * @param {Object} props.username - User's username
  * @returns {Array} - Global state values and state methods
  */
-export function useStateMgmt({
+export function useGlobalStateMgmt({
   email,
   isAuthenticated,
   prefersDarkTheme,

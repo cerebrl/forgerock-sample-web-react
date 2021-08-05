@@ -8,9 +8,12 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
+import BackHome from '../components/utilities/back-home';
 import Card from '../components/layout/card';
+import { AppContext } from '../global-state';
 import apiRequest from '../utilities/request';
 import NewUserIcon from '../components/icons/new-user-icon';
 import Form from '../components/journey/form';
@@ -20,18 +23,33 @@ import Form from '../components/journey/form';
  * @returns {Object} - React component object
  */
 export default function Register() {
+  const [state] = useContext(AppContext);
+
   async function initUserInDb() {
     await apiRequest(`users`, 'POST');
   }
 
   return (
     <div className="cstm_container_max-width_v-centered container-fluid d-flex align-items-center">
-      <Card>
-        <div className="cstm_register_add-user-icon align-self-center mb-3">
-          <NewUserIcon size="72px" />
-        </div>
-        <Form action={{ type: 'register' }} followUp={initUserInDb} />
-      </Card>
+      <div className="w-100">
+        <BackHome />
+        <Card>
+          <div className="cstm_register_add-user-icon align-self-center mb-3">
+            <NewUserIcon size="72px" />
+          </div>
+          <Form
+            action={{ type: 'register' }}
+            followUp={initUserInDb}
+            topMessage={
+              <p
+                className={`text-center text-secondary pb-2 ${state.theme.textClass}`}
+              >
+                Already have an account? <Link to="/login">Sign in here!</Link>
+              </p>
+            }
+          />
+        </Card>
+      </div>
     </div>
   );
 }

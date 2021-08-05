@@ -10,7 +10,7 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 import ActionIcon from '../icons/action-icon';
 import TodoIcon from '../icons/todo-icon';
 

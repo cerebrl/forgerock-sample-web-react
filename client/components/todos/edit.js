@@ -10,7 +10,7 @@
 
 import React, { useContext, useRef } from 'react';
 
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 
 /**
  * @function Edit - Used for a single todo for edit within a modal popup

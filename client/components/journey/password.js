@@ -11,7 +11,7 @@
 import React, { useContext, useState } from 'react';
 
 import { DEBUGGER } from '../../constants';
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 import EyeIcon from '../icons/eye-icon';
 
 /**

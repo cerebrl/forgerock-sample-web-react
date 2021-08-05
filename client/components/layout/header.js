@@ -12,7 +12,7 @@ import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import AccountIcon from '../icons/account-icon';
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 import ForgeRockIcon from '../icons/forgerock-icon';
 import HomeIcon from '../icons/home-icon';
 import ReactIcon from '../icons/react-icon';
@@ -81,19 +81,25 @@ export default function Header() {
             <AccountIcon classes="cstm_account_icon" size="48px" />
           </button>
           <ul
-            className={`dropdown-menu dropdown-menu-end shadow-sm ${state.theme.dropdownClass}`}
+            className={`dropdown-menu dropdown-menu-end shadow-sm pb-0 ${state.theme.dropdownClass}`}
             aria-labelledby="account_dropdown"
           >
             <li>
               <div
                 className={`dropdown-header border-bottom ${state.theme.borderClass}`}
               >
-                <p className="fw-bold mb-0">{state.username}</p>
+                <p
+                  className={`fw-bold fs-6 mb-0 ${
+                    state.theme.textClass ? state.theme.textClass : 'text-dark'
+                  }`}
+                >
+                  {state.username}
+                </p>
                 <p className="mb-2">{state.email}</p>
               </div>
             </li>
             <li>
-              <Link className="dropdown-item" to="/logout">
+              <Link className="dropdown-item py-2" to="/logout">
                 Sign Out
               </Link>
             </li>
@@ -105,7 +111,12 @@ export default function Header() {
     TodosItem = null;
     LoginOrOutItem = (
       <div className="d-flex py-3">
-        <Link className="cstm_login-link py-2 px-3 mx-1" to="/login">
+        <Link
+          className={`cstm_login-link py-2 px-3 mx-1 ${
+            state.theme.mode === 'dark' ? 'cstm_login-link_dark' : ''
+          }`}
+          to="/login"
+        >
           Sign In
         </Link>
         <Link className="btn btn-primary" to="/register">

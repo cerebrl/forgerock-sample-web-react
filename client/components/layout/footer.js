@@ -10,7 +10,7 @@
 
 import React, { useContext } from 'react';
 
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 
 /**
  * @function Footer - Footer React component

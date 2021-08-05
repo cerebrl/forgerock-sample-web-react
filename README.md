@@ -1,6 +1,8 @@
 # ForgeRock Sample React (Web) App
 
-A ForgeRock protected, sample todo web app written with the React view library with a supporting API resource server. A live version can be found here: https://fr-react-todos.crbrl.io.
+A ForgeRock protected, sample, todo web-app written with the React view library with a supporting (protected) API resource server. A live version can be found here: https://fr-react-todos.crbrl.io.
+
+**IMPORTANT: This is not a demonstration of React itself or instructional for _how_ to build a React app. This is intended to demonstrate the implementation of the ForgeRock JavaScript SDK within a React app. There are many aspects to routing, state management, tooling and other aspects to building a React app that are outside of the scope of this project. For information about creating a React app, [visit React's official documentation](https://reactjs.org/docs/create-a-new-react-app.html).**
 
 ## Requirements
 
@@ -12,7 +14,7 @@ A ForgeRock protected, sample todo web app written with the React view library w
 
 ## Installation
 
-Once you have the 5 requirements above met, let's get to building the project.
+Once you have the 5 requirements above met, we can build the project.
 
 ### Security Certificates
 
@@ -35,8 +37,8 @@ This project requires HTTPS (secure protocol) which means security (SSL/TLS) cer
 
 #### Create Your OAuth Clients
 
-1. Create a public OAuth client for the web app
-2. Create a confidential OAuth client for the API server
+1. Create a public (SPA) OAuth client for the web app: no secret, scopes of `openid profile email`, implicit consent enabled, and no "token authentication endpoint method".
+2. Create a confidential (Node.js) OAuth client for the API server: with a secret, default scope of `am-introspect-all-tokens`, and `client_secret_basic` as the "token authentication endpoint method".
 
 #### Create your Authentication Journeys/Trees
 
@@ -57,21 +59,43 @@ Note: The sample app currently supports the following callbacks only:
 
 ### Configure Your `.env` File
 
-Change the name of `template.env` to `.env` and replace the bracketed values (e.g. `<<<helper-text>>>`) with your values.
+Change the name of `.env.example` to `.env` and replace the bracketed values (e.g. `<<<helper-text>>>`) with your values.
+
+Example with annotations
+
+```
+AM_URL=https://example-am-instance.forgerock.com/am (include the /am)
+APP_URL=https://react.example.com:8443 (your SPA's URL)
+API_URL=https://api.example.com:9443 (your resource API server's URL)
+DEBUGGER_OFF=false
+DEVELOPMENT=true
+JOURNEY_LOGIN=Login (name of journey/tree for Login)
+JOURNEY_REGISTER=Registration (name of journey/tree for Register)
+SEC_KEY_FILE=./key.pem
+SEC_CERT_FILE=./cert.pem
+REALM_PATH=alpha
+REST_OAUTH_CLIENT=sample-app-server (name of private OAuth 2.0 client/application)
+REST_OAUTH_SECRET=secret (the secret for the private OAuth 2.0 client/application)
+WEB_OAUTH_CLIENT=example-react-app (the name of the public OAuth 2.0 client/application)
+```
 
 ### Installing Dependencies and Run Build
 
 ```sh
 # Install the project dependencies
-npm run install
+$ npm install
 
 # Build the client project
-npm run build
+$ npm run build
 ```
 
 ### Update Your `/etc/hosts` File
 
 Now you'll need to update your `hosts` (`/etc/hosts` if on a Mac) to allow for domain aliases:
+
+```sh
+$ sudo vim /etc/hosts
+```
 
 ```sh
 # hosts file aliases
@@ -80,15 +104,15 @@ Now you'll need to update your `hosts` (`/etc/hosts` if on a Mac) to allow for d
 
 ### Run the Servers
 
-Now, run the dev command to start the processes needed for both client and API server
+Now, run the below commands to start the processes needed for building the application and running the servers for both client and API server:
 
 ```sh
 # In one terminal window, run the following watch command
 # This "watches" the client source files for changes and rebuilds when needed
-npm run watch
+$ npm run watch
 
 # In another terminal window, run the dev servers for both client and server
-npm run servers
+$ npm run servers
 ```
 
 Now, you should be able to visit `https://react.example.com:8443`, which is your web app or client (the Relying Party in OAuth terms). This client will make requests to your AM instance, (the Authorization Server in OAuth terms), which will be running on whatever domain you set, and `https://api.example.com:9443` as the REST API for your todos (the Resource Server). Enjoy!
@@ -103,20 +127,32 @@ For local development, if you want to turn these debuggers off, you can set the 
 
 ## Modifying This Project
 
+### React Client
+
 To modify the client portion of this project, you'll need to be familiar with the following React patterns:
 
-1. Functional components
-2. Hooks (including custom hooks)
-3. Context API
-4. React Router
+1. [Functional components and composition](https://reactjs.org/docs/components-and-props.html)
+2. [Hooks (including custom hooks)](https://reactjs.org/docs/hooks-intro.html)
+3. [Context API](https://reactjs.org/docs/hooks-reference.html#usecontext)
+4. [React Router](https://reactrouter.com/)
 
-You'll also want a basic understanding of Webpack and the following:
+You'll also want a [basic understanding of Webpack](https://webpack.js.org/concepts/) and the following:
 
-1. Babel transformation for React
-2. Plugins for Sass-to-CSS processing.
+1. [Babel transformation for React](https://webpack.js.org/loaders/babel-loader/#root)
+2. [Plugins for Sass-to-CSS processing](https://webpack.js.org/loaders/sass-loader/#root)
 
-To modify the API server, you'll need a basic understanding of Node as well as the following things:
+#### Styling and CSS
 
-1. Express
-2. PouchDB
-3. Superagent
+We heavily leveraged [Twitter Bootstrap](https://getbootstrap.com/) and [it's utility classes](https://getbootstrap.com/docs/5.0/utilities/api/), but you will see classes with the prefix `cstm_`. These are custom classes, hence the `cstm` shorthand, and they are explicitly used to denote an additional style application on top of Bootstrap's styling.
+
+### REST API Server
+
+To modify the API server, you'll need a [basic understanding of Node](https://nodejs.org/en/about/) as well as the following things:
+
+1. [Express](https://expressjs.com/)
+2. [PouchDB](https://pouchdb.com/)
+3. [Superagent](https://www.npmjs.com/package/superagent)
+
+## TypeScript?
+
+The ForgeRock Javascript SDK is developed with TypeScript, so type definitions are available. This sample application does not utilize TypeScript, but if you'd like to see a version of this written in TypeScript, let us know.

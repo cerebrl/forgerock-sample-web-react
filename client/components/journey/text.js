@@ -11,7 +11,7 @@
 import React, { useContext } from 'react';
 
 import { DEBUGGER } from '../../constants';
-import { AppContext } from '../../state';
+import { AppContext } from '../../global-state';
 
 /**
  * @function Text- React component used for displaying text callback
@@ -35,6 +35,7 @@ export default function Text({ callback }) {
     callback.getFailedPolicies && callback.getFailedPolicies();
   const policies = callback.getPolicies && callback.getPolicies();
   const textInputLabel = callback.getPrompt();
+  const inputName = callback.getName && callback.getName();
 
   let isRequired;
   let Validation = null;
@@ -96,7 +97,7 @@ export default function Text({ callback }) {
         onChange={setValue}
         placeholder={textInputLabel}
         required={isRequired ? 'required' : ''}
-        type="text"
+        type={inputName == 'mail' ? 'email' : 'text'}
       />
       <label htmlFor={callback.payload.input[0].name}>{textInputLabel}</label>
       {Validation}
