@@ -20,7 +20,7 @@ export default function Footer() {
   const [state] = useContext(AppContext);
 
   return (
-    <div className="cstm_container_max-width container-fluid">
+    <div className="cstm_container container-fluid">
       <small
         className={`border-top d-block mt-5 py-5 ${state.theme.textClass} ${state.theme.borderHighContrastClass}`}
       >

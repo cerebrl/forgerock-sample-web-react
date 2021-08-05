@@ -16,9 +16,9 @@ import { DEBUGGER } from './constants';
 /**
  * @function useStateMgmt - The global state/store for managing user authentication and page
  * @param {Object} props - The object representing React's props
- * @param {Object} props.isAuthenticated - Boolean value of user's auth status
- * @param {Object} props.page - Currently requested page
  * @param {Object} props.email - User's email
+ * @param {Object} props.isAuthenticated - Boolean value of user's auth status
+ * @param {Object} props.prefersDarkTheme - User theme setting
  * @param {Object} props.username - User's username
  * @returns {Array} - Global state values and state methods
  */
@@ -87,10 +87,10 @@ export function useGlobalStateMgmt({
       // CSS Classes
       bgClass: 'bg-dark',
       borderClass: 'border-dark',
-      borderHighContrastClass: 'cstm_border-black',
+      borderHighContrastClass: 'cstm_border_black',
       cardBgClass: 'cstm_card-dark',
       dropdownClass: 'dropdown-menu-dark',
-      listGroupClass: 'cstm_list-group-dark',
+      listGroupClass: 'cstm_list-group_dark',
       navbarClass: 'cstm_navbar-dark navbar-dark bg-dark text-white',
       textClass: 'text-white',
       textMutedClass: 'text-white-50',

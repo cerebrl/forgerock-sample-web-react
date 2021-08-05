@@ -37,11 +37,11 @@ body {
 }
 
 // Keep max width much smaller than Bootstrap's default
-.cstm_container_max-width,
-.cstm_container_max-width_v-centered {
+.cstm_container,
+.cstm_container_v-centered {
   max-width: 540px;
 }
-.cstm_container_max-width_v-centered {
+.cstm_container_v-centered {
   min-height: 100%;
 }
 
@@ -49,13 +49,13 @@ body {
  * Utilities
  */
 
-.cstm_border-black {
+.cstm_border_black {
   border-color: $black !important;
 }
 .cstm_card-dark {
   background-color: $gray-800;
 }
-.cstm_list-group-dark > li {
+.cstm_list-group_dark > li {
   background-color: $gray-800;
 
   &:hover {
@@ -85,11 +85,11 @@ body {
  * Home page styling
  */
 
-.cstm_home_head-text {
+.cstm_head-text {
   letter-spacing: -0.01em;
   margin: 5rem 0;
 }
-.cstm_home_subhead-text {
+.cstm_subhead-text {
   letter-spacing: -0.01em;
 }
 
@@ -97,7 +97,7 @@ body {
  * Verified alert banner on home page
  */
 
-.cstm_verified_alert-link.cstm_verified_alert-link {
+.cstm_verified-alert-link.cstm_verified-alert-link {
   color: color.scale($teal, $lightness: -50%);
 
   &:hover {
@@ -105,7 +105,7 @@ body {
     text-decoration: none;
   }
 }
-.cstm_verified_alert-icon {
+.cstm_verified-alert-icon {
   fill: $cyan;
 }
 
@@ -113,7 +113,7 @@ body {
  * Large spinner styling
  */
 
-.cstm_loading_spinner {
+.cstm_loading-spinner {
   width: 10rem;
   height: 10rem;
 }
@@ -199,7 +199,7 @@ body {
  * Account Dropdown
  */
 
-.cstm_account_icon {
+.cstm_profile-icon {
   fill: $gray-500;
 
   &:hover {
@@ -223,7 +223,7 @@ body {
     -webkit-text-fill-color: $white !important;
   }
 }
-.cstm_login_form {
+.cstm_form {
   button[type="submit"] {
     padding: 0.75rem 1.25rem;
   }
@@ -261,8 +261,7 @@ body {
 .cstm_alert-icon {
   fill: color.scale($red, $saturation: 80%, $lightness: -40%);
 }
-.cstm_login_key-icon,
-.cstm_register_add-user-icon {
+.cstm_form-icon {
   fill: $gray-400;
 }
 .cstm_input-icon {
@@ -314,7 +313,7 @@ body {
  * Todo styling
  */
 
-.cstm_todos_input {
+.cstm_todos-input {
   > label {
     opacity: 0.5;
   }
@@ -399,14 +398,19 @@ body {
     color: $white;
   }
 }
-.cstm_todo_dropdown-actions {
+
+/** *********************************************
+ * Actions dropdown styling
+ */
+
+.cstm_dropdown-actions {
   fill: $gray-600;
 }
-.cstm_todo_dropdown-actions:hover,
-.cstm_todo_dropdown-actions:focus {
+.cstm_dropdown-actions:hover,
+.cstm_dropdown-actions:focus {
   fill: $gray-900;
 }
-.text-white .cstm_todo_dropdown-actions:hover,
-.text-white .cstm_todo_dropdown-actions:focus {
+.text-white .cstm_dropdown-actions:hover,
+.text-white .cstm_dropdown-actions:focus {
   fill: $gray-200;
 }

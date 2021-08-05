@@ -42,13 +42,13 @@ export default function Home() {
 
   const LoginAlert = state.isAuthenticated ? (
     <p
-      className={`alert alert-success d-flex align-items-center mt-5`}
+      className="alert alert-success d-flex align-items-center mt-5"
       role="alert"
     >
-      <VerifiedIcon classes="cstm_verified_alert-icon" size="36px" />
+      <VerifiedIcon classes="cstm_verified-alert-icon" size="36px" />
       <span className="ps-2">
         Welcome back, {state.username}!{' '}
-        <Link className="cstm_verified_alert-link" to="/todos">
+        <Link className="cstm_verified-alert-link" to="/todos">
           Manage your todos here
         </Link>
         .
@@ -57,18 +57,14 @@ export default function Home() {
   ) : null;
 
   return (
-    <div
-      className={`cstm_container_max-width container-fluid ${state.theme.textClass}`}
-    >
+    <div className={`cstm_container container-fluid ${state.theme.textClass}`}>
       {LoginAlert}
-      <h1
-        className={`cstm_home_head-text text-center ${state.theme.textClass}`}
-      >
+      <h1 className={`cstm_head-text text-center ${state.theme.textClass}`}>
         Protect with ForgeRock; Develop with React.js
       </h1>
 
       <p
-        className={`cstm_home_subhead-text fs-3 mb-4 fw-bold ${state.theme.textMutedClass}`}
+        className={`cstm_subhead-text fs-3 mb-4 fw-bold ${state.theme.textMutedClass}`}
       >
         Learn how to develop ForgeRock protected, web apps with the{' '}
         <a

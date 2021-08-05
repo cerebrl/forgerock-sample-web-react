@@ -82,7 +82,7 @@ function useAuthValidation(auth, setAuth) {
  * Inspired by: https://ui.dev/react-router-v5-protected-routes-authentication/
  * @param {Object} props - React props
  * @param {Object} props.children - React components passed as children
- * @param string[] path - React-Router path prop 
+ * @param string[] path - React-Router path prop
  * @returns {Object} - Wrapped React Router component
  */
 export function ProtectedRoute({ children, path }) {

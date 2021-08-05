@@ -18,7 +18,7 @@ import { DEBUGGER } from '../../constants';
  * @param {Object} props.callback - The callback object from AM
  * @returns {Object} - React component object
  */
-export default function TermsConditions({ callback }) {
+export default function TermsConditions({ callback, inputName }) {
   /** *************************************************************************
    * SDK INTEGRATION POINT
    * Summary: SDK callback methods for getting values
@@ -47,14 +47,11 @@ export default function TermsConditions({ callback }) {
       <input
         className="form-check-input"
         defaultChecked={false}
-        id={callback.payload.input[0].name}
+        id={inputName}
         onChange={setValue}
         type="checkbox"
       />
-      <label
-        htmlFor={callback.payload.input[0].name}
-        className="form-check-label"
-      >
+      <label htmlFor={inputName} className="form-check-label">
         Please accept our below Terms and Conditions
         <details>
           <summary className="fw-bold ps-1">{termsStart}</summary>

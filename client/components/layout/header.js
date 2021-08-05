@@ -78,7 +78,7 @@ export default function Header() {
             data-bs-toggle="dropdown"
             id="account_dropdown"
           >
-            <AccountIcon classes="cstm_account_icon" size="48px" />
+            <AccountIcon classes="cstm_profile-icon" size="48px" />
           </button>
           <ul
             className={`dropdown-menu dropdown-menu-end shadow-sm pb-0 ${state.theme.dropdownClass}`}
@@ -130,7 +130,7 @@ export default function Header() {
     <nav
       className={`navbar navbar-expand ${state.theme.navbarClass} ${state.theme.borderHighContrastClass} py-0 border-bottom`}
     >
-      <div className="cstm_container_max-width container-fluid d-flex align-items-stretch">
+      <div className="cstm_container container-fluid d-flex align-items-stretch">
         <Link
           to="/"
           className={`cstm_navbar-brand ${

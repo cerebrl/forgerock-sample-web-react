@@ -14,10 +14,12 @@ import React from 'react';
  * @function Unknown- React component used for displaying Unknown callback
  * @returns {Object} - React component object
  */
-export default function Unknown() {
+export default function Unknown({ callback }) {
+  const callbackType = callback.getType();
+
   return (
     <div className="form-group">
-      <p>{'Warning: an unknown callback is present!'}</p>
+      <p>{`Warning: unknown callback type, ${callbackType}, isn't handled`}</p>
     </div>
   );
 }

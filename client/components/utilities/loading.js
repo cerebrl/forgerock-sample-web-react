@@ -26,7 +26,7 @@ export default function Loading({ classes, message }) {
       <p className={classes}>
         <span className="d-flex justify-content-center my-2">
           <span
-            className="cstm_loading_spinner spinner-border text-primary"
+            className="cstm_loading-spinner spinner-border text-primary"
             role="status"
           ></span>
         </span>

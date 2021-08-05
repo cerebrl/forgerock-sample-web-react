@@ -69,7 +69,7 @@ export default function Todo({
         aria-expanded="false"
       >
         <button
-          className="cstm_todo_dropdown-actions btn h-auto"
+          className="cstm_dropdown-actions btn h-auto"
           data-bs-toggle="dropdown"
           id={`todo_action_${todo._id}`}
         >

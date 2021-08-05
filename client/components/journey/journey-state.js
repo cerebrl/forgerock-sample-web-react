@@ -34,8 +34,6 @@ export default function useJourneyHandler({ action, form }) {
    */
   // Form level errors
   const [formFailureMessage, setFormFailureMessage] = useState(null);
-  // Password registration errors
-  const [passwordFailureMessage] = useState(null);
   // Step to render
   const [renderStep, setRenderStep] = useState(null);
   // Step to submit
@@ -86,11 +84,12 @@ export default function useJourneyHandler({ action, form }) {
      */
     async function getStep(prev) {
       /**
-       * Save previous step information just in case we have a
-       * registration failure due to password validation errors.
+       * Save previous step information just in case we have a total
+       * form failure due to 400 response from ForgeRock.
        */
-      const previousCallbacks = prev && prev.callbacks;
-      const previousPayload = prev && prev.payload;
+      const previousStage = prev?.getStage && prev.getStage();
+      const previousCallbacks = prev?.callbacks;
+      const previousPayload = prev?.payload;
 
       /** *********************************************************************
        * SDK INTEGRATION POINT
@@ -130,17 +129,20 @@ export default function useJourneyHandler({ action, form }) {
          * Summary: Repopulate callbacks/payload with previous data.
          * --------------------------------------------------------------------
          * Details: Now that we have a new authId (the identification of the
-         * fresh step) let's populate this new step with old callback data. We
+         * fresh step) let's populate this new step with old callback data if
+         * the stage is the same. If not, the user will have to refill form. We
          * will display the error we collected from the previous submission,
          * restart the flow, and provide better UX with the previous form data,
          * so the user doesn't have to refill the form.
          ******************************************************************* */
         if (DEBUGGER) debugger;
-        newStep.callbacks = previousCallbacks;
-        newStep.payload = {
-          ...previousPayload,
-          authId: newStep.payload.authId,
-        };
+        if (newStep.getStage() === previousStage) {
+          newStep.callbacks = previousCallbacks;
+          newStep.payload = {
+            ...previousPayload,
+            authId: newStep.payload.authId,
+          };
+        }
 
         setRenderStep(newStep);
         setSubmittingForm(false);
@@ -164,7 +166,6 @@ export default function useJourneyHandler({ action, form }) {
   return [
     {
       formFailureMessage,
-      passwordFailureMessage,
       renderStep,
       submittingForm,
       user,

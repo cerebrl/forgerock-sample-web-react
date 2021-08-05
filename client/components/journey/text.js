@@ -19,7 +19,7 @@ import { AppContext } from '../../global-state';
  * @param {Object} props.callback - The callback object from AM
  * @returns {Object} - React component object
  */
-export default function Text({ callback }) {
+export default function Text({ callback, inputName }) {
   const [state] = useContext(AppContext);
 
   /** *************************************************************************
@@ -35,7 +35,7 @@ export default function Text({ callback }) {
     callback.getFailedPolicies && callback.getFailedPolicies();
   const policies = callback.getPolicies && callback.getPolicies();
   const textInputLabel = callback.getPrompt();
-  const inputName = callback.getName && callback.getName();
+  const stringAttributeName = callback.getName && callback.getName();
 
   let isRequired;
   let Validation = null;
@@ -57,7 +57,7 @@ export default function Text({ callback }) {
     callback.setInputValue(event.target.value);
   }
 
-  if (failedPolicies && failedPolicies.length) {
+  if (failedPolicies?.length) {
     const validationFailure = failedPolicies.reduce((prev, curr) => {
       let failureObj;
       try {
@@ -81,7 +81,7 @@ export default function Text({ callback }) {
     Validation = <div className="invalid-feedback">{validationFailure}</div>;
   }
 
-  if (policies && policies.policyRequirements) {
+  if (policies?.policyRequirements) {
     isRequired = policies.policyRequirements.includes('REQUIRED');
   } else if (callback.isRequired) {
     isRequired = callback.isRequired();
@@ -92,14 +92,14 @@ export default function Text({ callback }) {
       <input
         className={`cstm_form-control form-control ${validationClass} bg-transparent ${state.theme.textClass} ${state.theme.borderClass}`}
         defaultValue={existingValue}
-        id={callback.payload.input[0].name}
-        name={callback.payload.input[0].name}
+        id={inputName}
+        name={inputName}
         onChange={setValue}
         placeholder={textInputLabel}
         required={isRequired ? 'required' : ''}
-        type={inputName == 'mail' ? 'email' : 'text'}
+        type={stringAttributeName == 'mail' ? 'email' : 'text'}
       />
-      <label htmlFor={callback.payload.input[0].name}>{textInputLabel}</label>
+      <label htmlFor={inputName}>{textInputLabel}</label>
       {Validation}
     </div>
   );
