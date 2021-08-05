@@ -13,7 +13,7 @@ import { useHistory } from 'react-router-dom';
 
 import Boolean from './boolean';
 import { DEBUGGER } from '../../constants';
-import Error from './error';
+import Alert from './alert';
 import Choice from './choice';
 import Kba from './kba';
 import Loading from '../utilities/loading';
@@ -24,6 +24,7 @@ import { AppContext } from '../../global-state';
 import TermsConditions from './terms-conditions';
 import Text from './text';
 import Unknown from './unknown';
+import Button from './button';
 
 /**
  * @function Form - React component for managing the user authentication journey
@@ -50,28 +51,10 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
   const history = useHistory();
 
   /**
-   * Component types
-   * StepComponents are generic callback components that will be
-   * generically rendered.
-   *
-   * MessageComponent is intended for simply rendering messages to screen.
-   * ErrorComponent is intended for displaying the error
-   */
-  let ErrorComponent;
-  let MessageComponent;
-  let StepComponents = [];
-
-  /**
    * Custom "hook" for handling form orchestration
    */
   const [
-    {
-      formFailureMessage,
-      passwordFailureMessage,
-      renderStep,
-      submittingForm,
-      user,
-    },
+    { formFailureMessage, renderStep, submittingForm, user },
     { setSubmissionStep, setSubmittingForm },
   ] = useJourneyHandler({ action, form });
 
@@ -82,7 +65,7 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
   useEffect(() => {
     async function finalizeAuthState() {
       /**
-       * First, let's see if we get a user back from the journey hook.
+       * First, let's see if we get a user back from useJourneyHandler.
        * If we do, let's set the user data and redirect back to home.
        */
       if (user) {
@@ -108,6 +91,43 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
   }, [user]);
 
   /**
+   * Iterate through callbacks received from AM and map the callback to the
+   * appropriate callback component, pushing that component
+   * the StepComponent's array.
+   */
+  function mapCallbacksToComponents(cb, idx) {
+    const name = cb?.payload?.input?.[0].name;
+    /** *********************************************************************
+     * SDK INTEGRATION POINT
+     * Summary:SDK callback method for getting the callback type
+     * ----------------------------------------------------------------------
+     * Details: This method is helpful in quickly identifying the callback
+     * when iterating through an unknown list of AM callbacks
+     ********************************************************************* */
+    if (DEBUGGER) debugger;
+    switch (cb.getType()) {
+      case 'ChoiceCallback':
+        return <Choice callback={cb} inputName={name} key={name} />;
+      case 'NameCallback':
+      case 'ValidatedCreateUsernameCallback':
+      case 'StringAttributeInputCallback':
+        return <Text callback={cb} inputName={name} key={name} />;
+      case 'PasswordCallback':
+      case 'ValidatedCreatePasswordCallback':
+        return <Password callback={cb} inputName={name} key={name} />;
+      case 'BooleanAttributeInputCallback':
+        return <Boolean callback={cb} inputName={name} key={name} />;
+      case 'TermsAndConditionsCallback':
+        return <TermsConditions callback={cb} inputName={name} key={name} />;
+      case 'KbaCreateCallback':
+        return <Kba callback={cb} inputName={name} key={name} />;
+      default:
+        // If current callback is not supported, render a warning message
+        return <Unknown callback={cb} key={`unknown-${idx}`} />;
+    }
+  }
+
+  /**
    * Render conditions for presenting appropriate views to user.
    * First, we need to handle no "step", which means we are waiting for
    * the initial response from AM for authentication.
@@ -122,96 +142,18 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
      * Since there is no step information we need to call AM to retrieve the
      * instructions for rendering the login form.
      */
-    MessageComponent = <Loading message="Checking your session ..." />;
+    return <Loading message="Checking your session ..." />;
   } else if (renderStep.type === 'LoginSuccess') {
-    MessageComponent = <Loading message="Success! Redirecting ..." />;
-  } else if (renderStep.callbacks && renderStep.callbacks.length) {
     /**
-     * If there's a login failure, but we've preserved the previous payload for
-     * better UX, render the error at the top of the form.
+     * Since we have successfully authenticated, show a success message to
+     * user while we complete the process and redirect to home page.
      */
-    if (formFailureMessage) {
-      StepComponents.push({
-        Component: function InlineFormError() {
-          return <Error message={formFailureMessage} />;
-        },
-      });
-    }
-
+    return <Loading message="Success! Redirecting ..." />;
+  } else if (renderStep.type === 'Step') {
     /**
-     * Iterate through callbacks received from AM and map the callback to the
-     * appropriate callback component, pushing that component
-     * the StepComponent's array.
+     * The step to render has callbacks, so we need to collect additional
+     * data from user. Map callbacks to form inputs.
      */
-    renderStep.callbacks.map((callback) => {
-      /** *********************************************************************
-       * SDK INTEGRATION POINT
-       * Summary:SDK callback method for getting the callback type
-       * ----------------------------------------------------------------------
-       * Details: This method is helpful in quickly identifying the callback
-       * when iterating through an unknown list of AM callbacks
-       ********************************************************************* */
-      if (DEBUGGER) debugger;
-      switch (callback.getType()) {
-        case 'ChoiceCallback':
-          StepComponents.push({ Component: Choice, callback });
-          break;
-        case 'NameCallback':
-        case 'ValidatedCreateUsernameCallback':
-        case 'StringAttributeInputCallback':
-          StepComponents.push({ Component: Text, callback });
-          break;
-        case 'PasswordCallback':
-        case 'ValidatedCreatePasswordCallback':
-          StepComponents.push({
-            Component: Password,
-            callback,
-            errorMessage: passwordFailureMessage,
-          });
-          break;
-        case 'BooleanAttributeInputCallback':
-          StepComponents.push({
-            Component: Boolean,
-            callback,
-          });
-          break;
-        case 'TermsAndConditionsCallback':
-          StepComponents.push({
-            Component: TermsConditions,
-            callback,
-          });
-          break;
-        case 'KbaCreateCallback':
-          StepComponents.push({
-            Component: Kba,
-            callback,
-          });
-          break;
-        default:
-          /**
-           * If current callback is not supported it, render a warning
-           */
-          StepComponents.push({ Component: Unknown, callback });
-      }
-    });
-  } else {
-    /**
-     * Just in case things blow up.
-     */
-    ErrorComponent = <Error message={renderStep.payload.message} />;
-  }
-
-  /**
-   * Check if there is an error, a message or components to render.
-   */
-  if (ErrorComponent) {
-    // Handles an unrecoverable form failure
-    return <Fragment>{ErrorComponent}</Fragment>;
-  } else if (MessageComponent) {
-    // Handles messaging related to a process, like loading
-    return <Fragment>{MessageComponent}</Fragment>;
-  } else {
-    // Handle form rendering
     return (
       <Fragment>
         <h1 className={`text-center fs-2 mb-3 ${state.theme.textClass}`}>
@@ -219,7 +161,7 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
         </h1>
         {topMessage}
         <form
-          className="cstm_login_form"
+          className="cstm_form"
           onSubmit={(event) => {
             event.preventDefault();
             // Indicate form processing
@@ -228,44 +170,28 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
             setSubmissionStep(renderStep);
           }}
         >
+          {formFailureMessage ? (
+            <Alert message={formFailureMessage} type="error" />
+          ) : null}
           {
             /**
-             * Take the StepComponent array (callbacks mapped to components),
-             * and iteratively render the collection as one form. This way,
-             * it can render a single component or any number of components.
+             * Map over the callbacks in renderStep and render the appropriate
+             * component for each one.
              */
-            StepComponents.map(({ Component, callback, errorMessage }, idx) => {
-              return (
-                <Component
-                  key={idx}
-                  callback={callback}
-                  errorMessage={errorMessage}
-                />
-              );
-            })
+            renderStep.callbacks.map(mapCallbacksToComponents)
           }
-          <button
-            type="submit"
-            className="btn btn-primary w-100"
-            disabled={submittingForm ? 'disabled' : null}
-          >
-            {
-              /**
-               * Render a small spinner during submission calls
-               */
-              submittingForm ? (
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              ) : null
-            }
-            <span> {form.buttonText}</span>
-          </button>
+          <Button
+            buttonText={form.buttonText}
+            submittingForm={submittingForm}
+          />
         </form>
         {bottomMessage}
       </Fragment>
     );
+  } else {
+    /**
+     * Just in case things blow up.
+     */
+    return <Alert message={renderStep.payload.message} type="error" />;
   }
 }

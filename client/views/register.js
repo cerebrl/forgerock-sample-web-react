@@ -30,11 +30,11 @@ export default function Register() {
   }
 
   return (
-    <div className="cstm_container_max-width_v-centered container-fluid d-flex align-items-center">
+    <div className="cstm_container_v-centered container-fluid d-flex align-items-center">
       <div className="w-100">
         <BackHome />
         <Card>
-          <div className="cstm_register_add-user-icon align-self-center mb-3">
+          <div className="cstm_form-icon align-self-center mb-3">
             <NewUserIcon size="72px" />
           </div>
           <Form

@@ -62,7 +62,7 @@ export default function Edit({
             </h4>
           </div>
           <form onSubmit={(e) => submit(e, 'form')} className="modal-body">
-            <div className="cstm_todos_input cstm_form-floating form-floating flex-grow-1">
+            <div className="cstm_todos-input cstm_form-floating form-floating flex-grow-1">
               <input
                 id="editTodo"
                 type="text"

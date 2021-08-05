@@ -69,7 +69,7 @@ export default function Todo({
 
         <div className="dropdown col-2 text-end" aria-expanded="false">
           <button
-            className="cstm_todo_dropdown-actions btn h-100"
+            className="cstm_dropdown-actions btn h-100"
             data-bs-toggle="dropdown"
             id={`todo_action_${todo._id}`}
           >

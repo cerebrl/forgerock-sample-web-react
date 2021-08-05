@@ -45,7 +45,7 @@ export default function CreateTodo({ addTodo }) {
       method="POST"
       onSubmit={createTodo}
     >
-      <div className="cstm_todos_input cstm_form-floating form-floating flex-grow-1">
+      <div className="cstm_todos-input cstm_form-floating form-floating flex-grow-1">
         <input
           id="newTodo"
           type="text"

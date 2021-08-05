@@ -16,10 +16,10 @@ export async function initUser(user) {
       _id: user.user_id,
       todos: [],
     });
-   } catch (err) {
-     console.log("Error initializing user");
-     console.log(err);
-   }
+  } catch (err) {
+    console.log('Error initializing user');
+    console.log(err);
+  }
 }
 
 export async function getAll(user) {

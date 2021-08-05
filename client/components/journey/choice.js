@@ -19,7 +19,7 @@ import { AppContext } from '../../global-state';
  * @param {Object} props.callback - The callback object from AM
  * @returns {Object} - React component object
  */
-export default function Choice({ callback }) {
+export default function Choice({ callback, inputName }) {
   const [state] = useContext(AppContext);
 
   /** *************************************************************************
@@ -54,6 +54,7 @@ export default function Choice({ callback }) {
     <div className="cstm_form-floating form-floating mb-3">
       <select
         onChange={setValue}
+        id={inputName}
         name="selected"
         className={`cstm_form-select form-select bg-transparent ${state.theme.textClass} ${state.theme.borderClass}`}
       >
@@ -65,7 +66,7 @@ export default function Choice({ callback }) {
           );
         })}
       </select>
-      <label htmlFor="prompt">{prompt}</label>
+      <label htmlFor={inputName}>{prompt}</label>
     </div>
   );
 }

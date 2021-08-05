@@ -23,7 +23,7 @@ export default function Card(props) {
 
   return (
     <div
-      className={`card shadow-sm p-5 w-100 ${state.theme.cardBgClass} ${state.theme.textClass}`}
+      className={`card shadow-sm p-5 mb-2 w-100 ${state.theme.cardBgClass} ${state.theme.textClass}`}
     >
       {props.children}
     </div>

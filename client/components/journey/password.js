@@ -21,7 +21,7 @@ import EyeIcon from '../icons/eye-icon';
  * @param {string} props.errorMessage - Error message string
  * @returns {Object} - React component object
  */
-export default function Password({ callback, errorMessage }) {
+export default function Password({ callback, errorMessage, inputName }) {
   const [state] = useContext(AppContext);
 
   /** *************************************************************************
@@ -96,7 +96,7 @@ export default function Password({ callback, errorMessage }) {
     Validation = <div className="invalid-feedback">{validationFailure}</div>;
   }
 
-  if (policies && policies.policyRequirements) {
+  if (policies?.policyRequirements) {
     isRequired = policies.policyRequirements.includes('REQUIRED');
   } else if (callback.isRequired) {
     isRequired = callback.isRequired();
@@ -110,14 +110,14 @@ export default function Password({ callback, errorMessage }) {
         } border-end-0 bg-transparent ${state.theme.textClass} ${
           state.theme.borderClass
         }`}
-        id={callback.payload.input[0].name}
-        name={callback.payload.input[0].name}
+        id={inputName}
+        name={inputName}
         onChange={setValue}
         placeholder={passwordLabel}
         type={isVisible ? 'text' : 'password'}
         required={isRequired}
       />
-      <label htmlFor={callback.payload.input[0].name}>{passwordLabel}</label>
+      <label htmlFor={inputName}>{passwordLabel}</label>
       <button
         className={`cstm_input-icon border-start-0 input-group-text bg-transparent ${state.theme.textClass} ${state.theme.borderClass}`}
         onClick={toggleVisibility}

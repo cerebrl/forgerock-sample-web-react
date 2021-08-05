@@ -18,7 +18,7 @@ import { DEBUGGER } from '../../constants';
  * @param {Object} props.callback - The callback object from AM
  * @returns {Object} - React component object
  */
-export default function Boolean({ callback }) {
+export default function Boolean({ callback, inputName }) {
   /** *************************************************************************
    * SDK INTEGRATION POINT
    * Summary: SDK callback methods for getting values
@@ -46,14 +46,11 @@ export default function Boolean({ callback }) {
       <input
         className="form-check-input"
         defaultChecked={value}
-        id={callback.payload.input[0].name}
+        id={inputName}
         onChange={setValue}
         type="checkbox"
       />
-      <label
-        htmlFor={callback.payload.input[0].name}
-        className="form-check-label"
-      >
+      <label htmlFor={inputName} className="form-check-label">
         {prompt}
       </label>
     </div>

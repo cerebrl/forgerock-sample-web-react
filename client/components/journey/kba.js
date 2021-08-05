@@ -20,7 +20,7 @@ import LockIcon from '../icons/lock-icon';
  * @param {Object} props.callback - The callback object from AM
  * @returns {Object} - React component object
  */
-export default function Kba({ callback }) {
+export default function Kba({ callback, inputName }) {
   const [state] = useContext(AppContext);
 
   /** *************************************************************************
@@ -33,6 +33,8 @@ export default function Kba({ callback }) {
   if (DEBUGGER) debugger;
   const prompt = callback.getPrompt();
   const questions = callback.getPredefinedQuestions();
+  const inputNameQuestion = inputName;
+  const inputNameAnswer = callback.payload.input[1].name;
 
   function setAnswer(e) {
     /** ***********************************************************************
@@ -72,8 +74,8 @@ export default function Kba({ callback }) {
       <div className="cstm_form-floating form-floating mb-3">
         <select
           className={`cstm_form-select form-select bg-transparent ${state.theme.textClass} ${state.theme.borderClass}`}
-          id={callback.payload.input[0].name}
-          name={callback.payload.input[0].name}
+          id={inputNameQuestion}
+          name={inputNameQuestion}
           onChange={setQuestion}
           required={true}
         >
@@ -86,7 +88,7 @@ export default function Kba({ callback }) {
             );
           })}
         </select>
-        <label htmlFor={callback.payload.input[0].name}>{prompt}</label>
+        <label htmlFor={inputNameQuestion}>{prompt}</label>
       </div>
       <div
         className={`cstm_form-floating form-floating pb-5 mb-5 border-bottom pb-3 ${
@@ -95,14 +97,14 @@ export default function Kba({ callback }) {
       >
         <input
           className={`cstm_form-control form-control bg-transparent ${state.theme.textClass} ${state.theme.borderClass}`}
-          id={callback.payload.input[1].name}
-          name={callback.payload.input[1].name}
+          id={inputNameAnswer}
+          name={inputNameAnswer}
           onChange={setAnswer}
           placeholder="Security Answer"
           required={true}
           type="text"
         />
-        <label htmlFor={callback.payload.input[1].name}>Security Answer</label>
+        <label htmlFor={inputNameAnswer}>Security Answer</label>
       </div>
     </Fragment>
   );

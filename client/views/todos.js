@@ -72,7 +72,7 @@ export default function Todos() {
        * We we've fetched the todos, iterate over them for display.
        * If no todos were returned, show the "no todos" message.
        */}
-      {todos.length > 0 ? (
+      {todos.length ? (
         todos.map((item) => {
           return (
             <Todo
@@ -105,7 +105,7 @@ export default function Todos() {
 
   return (
     <Fragment>
-      <div className={`cstm_container_max-width container-fluid`}>
+      <div className={`cstm_container container-fluid`}>
         <h1 className={`mt-5 ${state.theme.textClass}`}>Your Todos</h1>
         <p className="fs-6 text-muted">Create and manage your todos.</p>
         <div className={`card shadow-sm mb-5 ${state.theme.cardBgClass}`}>
