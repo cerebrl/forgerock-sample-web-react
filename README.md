@@ -37,8 +37,8 @@ This project requires HTTPS (secure protocol) which means security (SSL/TLS) cer
 
 #### Create Your OAuth Clients
 
-1. Create a public OAuth client for the web app
-2. Create a confidential OAuth client for the API server (one with a secret)
+1. Create a public (SPA) OAuth client for the web app: no secret, scopes of `openid profile email`, implicit consent enabled, and no "token authentication endpoint method".
+2. Create a confidential (Node.js) OAuth client for the API server: with a secret, default scope of `am-introspect-all-tokens`, and `client_secret_basic` as the "token authentication endpoint method".
 
 #### Create your Authentication Journeys/Trees
 
@@ -64,36 +64,36 @@ Change the name of `.env.example` to `.env` and replace the bracketed values (e.
 Example with annotations
 
 ```
-AM_URL=https://example-am-instance.forgerock.com/am (important that you include the /am)
-APP_URL=https://react.example.com:8443 (your public application url)
-API_URL=https://api.example.com:9443 (your private application url, the server)
+AM_URL=https://example-am-instance.forgerock.com/am (include the /am)
+APP_URL=https://react.example.com:8443 (your SPA's URL)
+API_URL=https://api.example.com:9443 (your resource API server's URL)
 DEBUGGER_OFF=false
 DEVELOPMENT=true
-JOURNEY_LOGIN=Login (name of Journey for Login)
-JOURNEY_REGISTER=Registration (name of Journey for Register)
+JOURNEY_LOGIN=Login (name of journey/tree for Login)
+JOURNEY_REGISTER=Registration (name of journey/tree for Register)
 SEC_KEY_FILE=./key.pem
 SEC_CERT_FILE=./cert.pem
 REALM_PATH=alpha
-REST_OAUTH_CLIENT=sample-app-server (name of private oauth application)
-REST_OAUTH_SECRET=secret (the secret you chose for the private application)
-WEB_OAUTH_CLIENT=example-react-app (the name of the public oauth application)
+REST_OAUTH_CLIENT=sample-app-server (name of private OAuth 2.0 client/application)
+REST_OAUTH_SECRET=secret (the secret for the private OAuth 2.0 client/application)
+WEB_OAUTH_CLIENT=example-react-app (the name of the public OAuth 2.0 client/application)
 ```
 
 ### Installing Dependencies and Run Build
 
 ```sh
 # Install the project dependencies
-npm install
+$ npm install
 
 # Build the client project
-npm run build
+$ npm run build
 ```
 
 ### Update Your `/etc/hosts` File
 
 Now you'll need to update your `hosts` (`/etc/hosts` if on a Mac) to allow for domain aliases:
 
-```
+```sh
 $ sudo vim /etc/hosts
 ```
 

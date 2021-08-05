@@ -17,6 +17,7 @@ import {
   AM_URL,
   APP_URL,
   DEBUGGER,
+  JOURNEY_LOGIN,
   REALM_PATH,
   WEB_OAUTH_CLIENT,
 } from './constants';
@@ -53,7 +54,7 @@ Config.set({
     timeout: '5000',
   },
   realmPath: REALM_PATH,
-  tree: 'Login',
+  tree: JOURNEY_LOGIN,
 });
 
 /**
