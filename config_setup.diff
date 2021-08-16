@@ -1,0 +1,23 @@
+diff --git a/client/index.js b/client/index.js
+index b9ee577..1356bde 100755
+--- a/client/index.js
++++ b/client/index.js
+@@ -70,7 +70,17 @@ if (DEBUGGER) debugger;
+    * authenticated.
+    ************************************************************************* */
+   if (DEBUGGER) debugger;
+-
++  Config.set({
++    clientId: WEB_OAUTH_CLIENT,
++    redirectUri: `${APP_URL}/callback`,
++    scope: 'openid profile email',
++    serverConfig: {
++      baseUrl: AM_URL,
++      timeout: '5000',
++    },
++    realmPath: REALM_PATH,
++    tree: JOURNEY_LOGIN,
++  });
+   /**
+    * Pull custom values from outside of the app to (re)hydrate state.
+    */

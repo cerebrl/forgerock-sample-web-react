@@ -1,0 +1,24 @@
+diff --git a/client/components/journey/form.js b/client/components/journey/form.js
+index 1d65389..04b213f 100644
+--- a/client/components/journey/form.js
++++ b/client/components/journey/form.js
+@@ -57,5 +57,18 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
+     }
+   }
+ 
+-  return <Loading message="Checking your session ..." />;
++  if (!step) {
++    return <Loading message="Checking your session ..." />;
++  } else if (step?.callbacks?.length) {
++    return (
++      <form className="cstm_form">
++        {step.callbacks.map(mapCallbacksToComponents)}
++        <button className="btn btn-primary w-100" type="submit">
++          Sign In
++        </button>
++      </form>
++    );
++  } else {
++    return <Error message={renderStep.payload.message} />;
++  }
+ }
