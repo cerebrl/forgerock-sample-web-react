@@ -11,7 +11,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
 
-import { ProtectedRoute } from './utilities/route';
 import Todos from './views/todos';
 import Footer from './components/layout/footer';
 import Header from './components/layout/header';
@@ -44,11 +43,9 @@ export default function Router() {
         <Route path="/register">
           <Register />
         </Route>
-        <ProtectedRoute path="/todos">
-          <Header />
+        <Route path="/todos">
           <Todos />
-          <Footer />
-        </ProtectedRoute>
+        </Route>
         <Route path="/logout">
           <Logout />
         </Route>

@@ -8,10 +8,8 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 
-import { AppContext } from '../global-state';
 import Loading from '../components/utilities/loading';
 
 /**
@@ -25,31 +23,6 @@ export default function Logout() {
    */
   const [_, { setAuthentication, setEmail, setUser }] = useContext(AppContext);
   const history = useHistory();
-
-  useEffect(() => {
-    async function logout() {
-      try {
-        /**
-         * Logout and clear existing, stored data
-         * Note that the setAuthentication method below calls the FRUser.logout
-         * method, ensuring the access artifacts are revoked on ForgeRock.
-         */
-        setAuthentication(false);
-        setEmail('');
-        setUser('');
-
-        // Allow for enough time to communicate the action
-        setTimeout(() => history.push('/?action=logout'), 1000);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    logout();
-
-    // All methods/functions used herein are are "stable"
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return <Loading classes="pt-5" message="You're being logged out ..." />;
 }
