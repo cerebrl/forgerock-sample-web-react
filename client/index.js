@@ -8,7 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { Config, TokenStorage } from '@forgerock/javascript-sdk';
+import { Config } from '@forgerock/javascript-sdk';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -45,17 +45,7 @@ import './styles/index.scss';
  * - tree: The authentication journey/tree that you are wanting to use
  *************************************************************************** */
 if (DEBUGGER) debugger;
-Config.set({
-  clientId: WEB_OAUTH_CLIENT,
-  redirectUri: `${APP_URL}/callback`,
-  scope: 'openid profile email',
-  serverConfig: {
-    baseUrl: AM_URL,
-    timeout: '5000',
-  },
-  realmPath: REALM_PATH,
-  tree: JOURNEY_LOGIN,
-});
+// config
 
 /**
  * Initialize the React application
@@ -70,7 +60,6 @@ Config.set({
    * authenticated.
    ************************************************************************* */
   if (DEBUGGER) debugger;
-  const isAuthenticated = !!(await TokenStorage.get());
 
   /**
    * Pull custom values from outside of the app to (re)hydrate state.
@@ -78,9 +67,6 @@ Config.set({
   const prefersDarkTheme = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches;
-  const email = window.sessionStorage.getItem('sdk_email');
-  const username = window.sessionStorage.getItem('sdk_username');
-  const rootEl = document.getElementById('root');
 
   if (prefersDarkTheme) {
     document.body.classList.add('cstm_bg-dark', 'bg-dark');
@@ -100,12 +86,7 @@ Config.set({
      * If global state becomes a more complex function of the app,
      * something like Redux might be a better option.
      */
-    const stateMgmt = useGlobalStateMgmt({
-      email,
-      isAuthenticated,
-      prefersDarkTheme,
-      username,
-    });
+    const stateMgmt = useGlobalStateMgmt({});
 
     return (
       <AppContext.Provider value={stateMgmt}>
