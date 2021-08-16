@@ -1,0 +1,28 @@
+diff --git a/client/components/journey/form.js b/client/components/journey/form.js
+index b2ceba0..6f79606 100644
+--- a/client/components/journey/form.js
++++ b/client/components/journey/form.js
+@@ -8,8 +8,9 @@
+  * of the MIT license. See the LICENSE file for details.
+  */
+ 
+-import React, { useContext } from 'react';
++import React, { useEffect, useState, useContext } from 'react';
+ // import { DEBUGGER } from '../../constants';
++import { FRAuth } from '@forgerock/javascript-sdk';
+ import Loading from '../utilities/loading';
+ import { AppContext } from '../../global-state';
+ 
+@@ -33,5 +34,12 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
+   // Used for setting global authentication state
+   const [state, methods] = useContext(AppContext);
+ 
++  const [step, setStep] = useState(null);
++  console.log(step);
++  useEffect(() => {
++    const nextStep = FRAuth.start();
++    setStep(nextStep);
++  }, []);
++
+   return <Loading message="Checking your session ..." />;
+ }
