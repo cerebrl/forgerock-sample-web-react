@@ -8,9 +8,9 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { UserManager } from '@forgerock/javascript-sdk';
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { TokenStorage } from '@forgerock/javascript-sdk';
 
 import { DEBUGGER } from '../constants';
 import Loading from '../components/utilities/loading';
@@ -50,7 +50,7 @@ function useAuthValidation(auth, setAuth) {
            * ensure valid tokens before continuing, but it's optional.
            ***************************************************************** */
           if (DEBUGGER) debugger;
-          await UserManager.getCurrentUser();
+          await TokenStorage.get();
           setValid('valid');
         } catch (err) {
           setAuth(false);
