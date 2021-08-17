@@ -16,6 +16,7 @@ import { AppContext } from '../../global-state';
 import Password from './password';
 import Text from './text';
 import Unknown from './unknown';
+import Alert from './alert';
 
 /**
  * @function Form - React component for managing the user authentication journey
@@ -63,9 +64,18 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
 
   if (!step) {
     return <Loading message="Checking your session ..." />;
-  } else if (step?.callbacks?.length) {
+  } else if (step.type === 'LoginSuccess') {
+    return <Alert message="Success! You're logged in." type="success" />;
+  } else if (step.type === 'Step') {
     return (
-      <form className="cstm_form">
+      <form
+        className="cstm_form"
+        onSubmit={async (event) => {
+          event.preventDefault();
+          const nextStep = await FRAuth.next(step);
+          setStep(nextStep);
+        }}
+      >
         {step.callbacks.map(mapCallbacksToComponents)}
         <button className="btn btn-primary w-100" type="submit">
           Sign In
