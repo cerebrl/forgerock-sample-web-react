@@ -45,7 +45,17 @@ import './styles/index.scss';
  * - tree: The authentication journey/tree that you are wanting to use
  *************************************************************************** */
 if (DEBUGGER) debugger;
-// config
+Config.set({
+  clientId: WEB_OAUTH_CLIENT,
+  redirectUri: `${APP_URL}/callback`,
+  scope: 'openid profile email',
+  serverConfig: {
+    baseUrl: AM_URL,
+    timeout: '5000',
+  },
+  realmPath: REALM_PATH,
+  tree: JOURNEY_LOGIN,
+});
 
 /**
  * Initialize the React application
