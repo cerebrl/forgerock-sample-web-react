@@ -8,9 +8,10 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useCallback, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 // import { DEBUGGER } from '../../constants';
-import { FRAuth } from '@forgerock/javascript-sdk';
+import { FRAuth, TokenManager, UserManager } from '@forgerock/javascript-sdk';
 import Loading from '../utilities/loading';
 import { AppContext } from '../../global-state';
 import Password from './password';
@@ -27,7 +28,7 @@ import Alert from './alert';
  * @returns {Object} - React component object
  */
 export default function Form({ action, bottomMessage, followUp, topMessage }) {
-  /**
+  /*i
    * Compose the state used in this view.
    * First, we will use the global state methods found in the App Context.
    * Then, we will create local state to manage the login journey.
@@ -37,9 +38,39 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
    */
   // Used for setting global authentication state
   const [state, methods] = useContext(AppContext);
+  const history = useHistory();
+  const [isAuthenticated, setAuthentication] = useState(false);
 
   const [step, setStep] = useState(null);
   console.log(step);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const nextStep = await FRAuth.next(step);
+    if (nextStep.type === 'LoginSuccess') {
+      setAuthentication(true);
+    }
+    setStep(nextStep);
+  };
+
+  useEffect(() => {
+    async function oauthFlow() {
+      const tokens = await TokenManager.getTokens();
+      console.log(tokens);
+
+      const user = await UserManager.getCurrentUser();
+      console.log(user);
+      if (user) {
+        methods.setUser(user.name);
+        methods.setEmail(user.email);
+        methods.setAuthentication(true);
+        history.push('/');
+      }
+    }
+    if (isAuthenticated) {
+      oauthFlow();
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     async function getStep() {
@@ -68,14 +99,7 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
     return <Alert message="Success! You're logged in." type="success" />;
   } else if (step.type === 'Step') {
     return (
-      <form
-        className="cstm_form"
-        onSubmit={async (event) => {
-          event.preventDefault();
-          const nextStep = await FRAuth.next(step);
-          setStep(nextStep);
-        }}
-      >
+      <form className="cstm_form" onSubmit={handleSubmit}>
         {step.callbacks.map(mapCallbacksToComponents)}
         <button className="btn btn-primary w-100" type="submit">
           Sign In
