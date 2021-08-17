@@ -1,0 +1,15 @@
+diff --git a/client/components/journey/form.js b/client/components/journey/form.js
+index 4a00659..dd389b3 100644
+--- a/client/components/journey/form.js
++++ b/client/components/journey/form.js
+@@ -63,7 +63,9 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
+ 
+   if (!step) {
+     return <Loading message="Checking your session ..." />;
+-  } else if (step?.callbacks?.length) {
++  } else if (step.type === 'LoginSuccess') {
++    return <Alert message="Success! You're logged in." type="success" />;
++  } else if (step.type === 'Step') {
+     return (
+       <form
+         className="cstm_form"

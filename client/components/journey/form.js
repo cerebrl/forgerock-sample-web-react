@@ -8,8 +8,9 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 // import { DEBUGGER } from '../../constants';
+import { FRAuth } from '@forgerock/javascript-sdk';
 import Loading from '../utilities/loading';
 import { AppContext } from '../../global-state';
 
@@ -32,6 +33,17 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
    */
   // Used for setting global authentication state
   const [state, methods] = useContext(AppContext);
+
+  const [step, setStep] = useState(null);
+  console.log(step);
+
+  useEffect(() => {
+    async function getStep() {
+      const step = await FRAuth.start();
+      setStep(step);
+    }
+    getStep();
+  }, []);
 
   return <Loading message="Checking your session ..." />;
 }
