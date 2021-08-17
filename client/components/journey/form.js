@@ -61,5 +61,18 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
     }
   }
 
-  return <Loading message="Checking your session ..." />;
+  if (!step) {
+    return <Loading message="Checking your session ..." />;
+  } else if (step?.callbacks?.length) {
+    return (
+      <form className="cstm_form">
+        {step.callbacks.map(mapCallbacksToComponents)}
+        <button className="btn btn-primary w-100" type="submit">
+          Sign In
+        </button>
+      </form>
+    );
+  } else {
+    return <Error message={step.payload.message} />;
+  }
 }
