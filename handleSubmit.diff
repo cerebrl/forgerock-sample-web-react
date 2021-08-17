@@ -1,0 +1,20 @@
+diff --git a/client/components/journey/form.js b/client/components/journey/form.js
+index 5126f08..4a00659 100644
+--- a/client/components/journey/form.js
++++ b/client/components/journey/form.js
+@@ -65,7 +65,14 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
+     return <Loading message="Checking your session ..." />;
+   } else if (step?.callbacks?.length) {
+     return (
+-      <form className="cstm_form">
++      <form
++        className="cstm_form"
++        onSubmit={(event) => {
++          event.preventDefault();
++          const nextStep = FRAuth.next(step);
++          setStep(nextStep);
++        }}
++      >
+         {step.callbacks.map(mapCallbacksToComponents)}
+         <button className="btn btn-primary w-100" type="submit">
+           Sign In
