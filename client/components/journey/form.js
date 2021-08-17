@@ -13,6 +13,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { FRAuth } from '@forgerock/javascript-sdk';
 import Loading from '../utilities/loading';
 import { AppContext } from '../../global-state';
+import Password from './password';
+import Text from './text';
+import Unknown from './unknown';
 
 /**
  * @function Form - React component for managing the user authentication journey
@@ -44,6 +47,19 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
     }
     getStep();
   }, []);
+
+  function mapCallbacksToComponents(cb, idx) {
+    const name = cb?.payload?.input?.[0].name;
+    switch (cb.getType()) {
+      case 'NameCallback':
+        return <Text callback={cb} inputName={name} key="username" />;
+      case 'PasswordCallback':
+        return <Password callback={cb} inputName={name} key="password" />;
+      default:
+        // If current callback is not supported, render a warning mess
+        return <Unknown callback={cb} key={`unknown-${idx}`} />;
+    }
+  }
 
   return <Loading message="Checking your session ..." />;
 }
