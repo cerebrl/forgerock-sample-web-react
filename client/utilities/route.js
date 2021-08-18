@@ -10,7 +10,7 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { TokenStorage } from '@forgerock/javascript-sdk';
+import { TokenStorage, UserManager } from '@forgerock/javascript-sdk';
 
 import { DEBUGGER } from '../constants';
 import Loading from '../components/utilities/loading';
@@ -51,6 +51,7 @@ function useAuthValidation(auth, setAuth) {
            ***************************************************************** */
           if (DEBUGGER) debugger;
           await TokenStorage.get();
+          await UserManager.getCurrentUser();
           setValid('valid');
         } catch (err) {
           setAuth(false);
