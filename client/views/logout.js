@@ -8,8 +8,10 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React from 'react';
-
+import React, { useContext, useEffect } from 'react';
+import { FRUser } from '@forgerock/javascript-sdk';
+import { useHistory } from 'react-router-dom';
+import { AppContext } from '../global-state';
 import Loading from '../components/utilities/loading';
 
 /**
@@ -23,6 +25,23 @@ export default function Logout() {
    */
   const [_, { setAuthentication, setEmail, setUser }] = useContext(AppContext);
   const history = useHistory();
+
+  useEffect(() => {
+    async function logout() {
+      try {
+        await FRUser.logout();
+
+        setAuthentication(false);
+        setEmail('');
+        setUser('');
+        history.push('/');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    logout();
+  }, []);
 
   return <Loading classes="pt-5" message="You're being logged out ..." />;
 }
