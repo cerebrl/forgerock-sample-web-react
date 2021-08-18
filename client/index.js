@@ -8,7 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { Config } from '@forgerock/javascript-sdk';
+import { Config, TokenStorage } from '@forgerock/javascript-sdk';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -70,6 +70,10 @@ Config.set({
    * authenticated.
    ************************************************************************* */
   if (DEBUGGER) debugger;
+  const isAuthenticated = !!(await TokenStorage.get());
+  const email = window.sessionStorage.getItem('sdk_username');
+  const username = window.sessionStorage.getItem('sdk_username');
+  const rootEl = document.getElementById('root');
 
   /**
    * Pull custom values from outside of the app to (re)hydrate state.
@@ -96,7 +100,12 @@ Config.set({
      * If global state becomes a more complex function of the app,
      * something like Redux might be a better option.
      */
-    const stateMgmt = useGlobalStateMgmt({});
+    const stateMgmt = useGlobalStateMgmt({
+      email,
+      isAuthenticated,
+      prefersDarkTheme,
+      username,
+    });
 
     return (
       <AppContext.Provider value={stateMgmt}>
