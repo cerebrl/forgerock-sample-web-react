@@ -9,6 +9,7 @@
  */
 
 import { API_URL, DEBUGGER } from '../constants';
+import { HttpClient } from '@forgerock/javascript-sdk';
 
 /**
  * @function request - A convenience function for wrapping around HttpClient
@@ -21,13 +22,17 @@ export default async function apiRequest(resource, method, data) {
   let json;
   if (DEBUGGER) debugger;
   try {
-    const response = await fetch(`${API_URL}/${resource}`, {
-      body: data && JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await HttpClient.request({
+      url: `${API_URL}/${resource}`,
+      init: {
+        body: data && JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
       method: method,
     });
+
     if (!response.ok) {
       throw new Error(`Status ${response.status}: API request failed`);
     }
