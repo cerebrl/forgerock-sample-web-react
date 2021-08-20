@@ -7,7 +7,6 @@
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
  */
-
 import { API_URL, DEBUGGER } from '../constants';
 
 /**
@@ -33,6 +32,8 @@ export default async function apiRequest(resource, method, data) {
     }
     json = await response.json();
   } catch (err) {
+    console.error(`Error: API request; ${err}`);
+
     json = {
       error: err.message,
     };

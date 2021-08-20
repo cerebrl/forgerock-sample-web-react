@@ -10,7 +10,6 @@
 
 import React, { useContext } from 'react';
 
-import { DEBUGGER } from '../../constants';
 import { AppContext } from '../../global-state';
 
 /**
