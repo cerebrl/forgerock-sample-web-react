@@ -10,7 +10,6 @@
 import { HttpClient } from '@forgerock/javascript-sdk';
 
 import { API_URL, DEBUGGER } from '../constants';
-import { HttpClient } from '@forgerock/javascript-sdk';
 
 /**
  * @function request - A convenience function for wrapping around HttpClient
