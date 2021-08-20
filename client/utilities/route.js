@@ -10,9 +10,8 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { TokenStorage, UserManager } from '@forgerock/javascript-sdk';
+import { UserManager } from '@forgerock/javascript-sdk';
 
-import { DEBUGGER } from '../constants';
 import Loading from '../components/utilities/loading';
 import { AppContext } from '../global-state';
 
@@ -40,20 +39,11 @@ function useAuthValidation(auth, setAuth) {
          * If we they have been authenticated, validate that assumption
          */
         try {
-          /** *****************************************************************
-           * SDK INTEGRATION POINT
-           * Summary: Optional client-side route access validation
-           * ------------------------------------------------------------------
-           * Details: Here, you could just make sure tokens exist –
-           * TokenStorage.get() – or, validate tokens, renew expiry timers,
-           * session checks ... Below, we are calling the userinfo endpoint to
-           * ensure valid tokens before continuing, but it's optional.
-           ***************************************************************** */
-          if (DEBUGGER) debugger;
-          await TokenStorage.get();
           await UserManager.getCurrentUser();
           setValid('valid');
         } catch (err) {
+          console.info(`Info: route validation; ${err}`);
+
           setAuth(false);
           setValid('invalid');
         }
@@ -105,7 +95,7 @@ export function ProtectedRoute({ children, path }) {
             return <Redirect to="/login" />;
           default:
             // State is 'unknown', so we are waiting on token validation
-            return <Loading classes="pt-5" message="Validating session ... " />;
+            return <Loading classes="pt-5" message="Verifying access ... " />;
         }
       }}
     />
