@@ -7,78 +7,61 @@
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
  */
-
-import React, { useEffect, useCallback, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-// import { DEBUGGER } from '../../constants';
 import { FRAuth, TokenManager, UserManager } from '@forgerock/javascript-sdk';
-import Loading from '../utilities/loading';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import Alert from './alert';
 import { AppContext } from '../../global-state';
 import Password from './password';
 import Text from './text';
 import Unknown from './unknown';
-import Alert from './alert';
+import Loading from '../utilities/loading';
 
 /**
  * @function Form - React component for managing the user authentication journey
- * @param {Object} props - props object from React
- * @param {Object} props.action - Action object for a "reducer" pattern
- * @param {string} props.action.type - Action type string that represents the action
- * @param {Object} props.followUp - A function that should be run after successful authentication
  * @returns {Object} - React component object
  */
-export default function Form({ action, bottomMessage, followUp, topMessage }) {
-  /*i
-   * Compose the state used in this view.
-   * First, we will use the global state methods found in the App Context.
-   * Then, we will create local state to manage the login journey.
-   *
-   * The destructing of the hook's array results in index 0 having the state value,
-   * and index 1 having the "setter" method to set new state values.
-   */
-  // Used for setting global authentication state
-  const [state, methods] = useContext(AppContext);
-  const history = useHistory();
-  const [isAuthenticated, setAuthentication] = useState(false);
-
+export default function Form() {
   const [step, setStep] = useState(null);
-  console.log(step);
+  const [isAuthenticated, setAuthentication] = useState(false);
+  const [_, methods] = useContext(AppContext);
+  const history = useHistory();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const nextStep = await FRAuth.next(step);
-    if (nextStep.type === 'LoginSuccess') {
-      setAuthentication(true);
+  useEffect(() => {
+    async function getStep() {
+      try {
+        const initialStep = await FRAuth.start();
+        console.log(initialStep);
+        setStep(initialStep);
+      } catch (err) {
+        console.error(`Error: request for initial step; ${err}`);
+      }
     }
-    setStep(nextStep);
-  };
+    getStep();
+  }, []);
 
   useEffect(() => {
     async function oauthFlow() {
-      const tokens = await TokenManager.getTokens();
-      console.log(tokens);
+      try {
+        const tokens = await TokenManager.getTokens();
+        console.log(tokens);
+        const user = await UserManager.getCurrentUser();
+        console.log(user);
 
-      const user = await UserManager.getCurrentUser();
-      console.log(user);
-      if (user) {
         methods.setUser(user.name);
         methods.setEmail(user.email);
         methods.setAuthentication(true);
+
         history.push('/');
+      } catch (err) {
+        console.error(`Error: token or userinfo request; ${err}`);
       }
     }
     if (isAuthenticated) {
       oauthFlow();
     }
   }, [isAuthenticated]);
-
-  useEffect(() => {
-    async function getStep() {
-      const step = await FRAuth.start();
-      setStep(step);
-    }
-    getStep();
-  }, []);
 
   function mapCallbacksToComponents(cb, idx) {
     const name = cb?.payload?.input?.[0].name;
@@ -88,7 +71,7 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
       case 'PasswordCallback':
         return <Password callback={cb} inputName={name} key="password" />;
       default:
-        // If current callback is not supported, render a warning mess
+        // If current callback is not supported, render a warning message
         return <Unknown callback={cb} key={`unknown-${idx}`} />;
     }
   }
@@ -97,9 +80,27 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
     return <Loading message="Checking your session ..." />;
   } else if (step.type === 'LoginSuccess') {
     return <Alert message="Success! You're logged in." type="success" />;
-  } else if (step.type === 'Step') {
+  } else if (step.callbacks?.length) {
     return (
-      <form className="cstm_form" onSubmit={handleSubmit}>
+      <form
+        className="cstm_form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          async function getStep() {
+            try {
+              const nextStep = await FRAuth.next(step);
+              if (nextStep.type === 'LoginSuccess') {
+                setAuthentication(true);
+              }
+              console.log(nextStep);
+              setStep(nextStep);
+            } catch (err) {
+              console.error(`Error: form submission; ${err}`);
+            }
+          }
+          getStep();
+        }}
+      >
         {step.callbacks.map(mapCallbacksToComponents)}
         <button className="btn btn-primary w-100" type="submit">
           Sign In
@@ -107,6 +108,6 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
       </form>
     );
   } else {
-    return <Error message={step.payload.message} />;
+    return <Alert message={step.payload.message} />;
   }
 }

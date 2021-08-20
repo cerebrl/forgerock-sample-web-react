@@ -13,6 +13,9 @@
     "watch": "webpack -w"
   },
   "author": "Justin Lowery <justin.lowery@forgerock.com>",
+  "contributors": [
+    "Ryan Basmajian <ryan.basmajian@forgerock.com>"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.14.5",
