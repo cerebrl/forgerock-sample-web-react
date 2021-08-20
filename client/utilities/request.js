@@ -7,6 +7,7 @@
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
  */
+import { HttpClient } from '@forgerock/javascript-sdk';
 
 import { API_URL, DEBUGGER } from '../constants';
 import { HttpClient } from '@forgerock/javascript-sdk';
@@ -29,8 +30,8 @@ export default async function apiRequest(resource, method, data) {
         headers: {
           'Content-Type': 'application/json',
         },
+        method: method,
       },
-      method: method,
     });
 
     if (!response.ok) {
@@ -38,6 +39,8 @@ export default async function apiRequest(resource, method, data) {
     }
     json = await response.json();
   } catch (err) {
+    console.error(`Error: API request; ${err}`);
+
     json = {
       error: err.message,
     };

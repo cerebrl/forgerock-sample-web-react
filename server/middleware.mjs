@@ -46,7 +46,7 @@ export async function auth(req, res, next) {
     };
   }
 
-  if (response.body.active || response.body.valid) {
+  if (response?.body?.active) {
     req.user = response.body;
     next();
   } else {
