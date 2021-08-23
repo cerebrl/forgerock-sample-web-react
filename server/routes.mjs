@@ -74,4 +74,8 @@ export default async function routes(app) {
 
     res.status(204).send('OK');
   });
+
+  app.get('/healthcheck', (_, res) => {
+    res.status(204).send('Ok');
+  });
 }
