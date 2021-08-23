@@ -36,6 +36,9 @@ export default async function apiRequest(resource, method, data) {
     if (!response.ok) {
       throw new Error(`Status ${response.status}: API request failed`);
     }
+    if (response.status === 204) {
+      return response;
+    }
     json = await response.json();
   } catch (err) {
     console.error(`Error: API request; ${err}`);

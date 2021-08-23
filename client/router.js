@@ -17,6 +17,7 @@ import Home from './views/home';
 import Login from './views/login';
 import Logout from './views/logout';
 import Register from './views/register';
+import HealthCheck from './views/healthcheck';
 import { ProtectedRoute } from './utilities/route';
 import Todos from './views/todos';
 
@@ -51,6 +52,9 @@ export default function Router() {
         </ProtectedRoute>
         <Route path="/logout">
           <Logout />
+        </Route>
+        <Route path="/health-check">
+          <HealthCheck />
         </Route>
         <Route path="/">
           <ScrollToTop />
