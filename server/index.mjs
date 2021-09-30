@@ -39,6 +39,7 @@ app.use(
  */
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
+  console.log(`BODY: ${JSON.stringify(req.body)}`);
   next();
 });
 
