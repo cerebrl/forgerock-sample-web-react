@@ -10,8 +10,16 @@
 
 import React, { useContext } from 'react';
 
+import GithubIcon from '../icons/github-icon';
 import GoogleIcon from '../icons/google-icon';
+import LinkedInIcon from '../icons/linkedin-icon';
 import { AppContext } from '../../global-state';
+
+const icons = {
+  github_sdk: GithubIcon,
+  google_sdk: GoogleIcon,
+  linkedin_sdk: LinkedInIcon,
+};
 
 export default function SelectIdp({ callback, submitForm }) {
   const [state] = useContext(AppContext);
@@ -44,7 +52,7 @@ export default function SelectIdp({ callback, submitForm }) {
             } w-100 my-4`}
             key={idx}
           >
-            <GoogleIcon />
+            {icons[provider.provider]()}
             <span
               className={`${state.theme.textClass} ${state.theme.borderClass}`}
             >
