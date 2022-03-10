@@ -20,9 +20,10 @@ import { htmlDecode } from '../../utilities/decode';
  * @param {Object} props.action - Action object for a "reducer" pattern
  * @param {string} props.action.type - Action type string that represents the action
  * @param {Object} props.form - The form metadata object
+ * @param {string} props.url - current url
  * @returns {Object} - React component object
  */
-export default function useJourneyHandler({ action, form }) {
+export default function useJourneyHandler({ action, form, url }) {
   /**
    * Compose the state used in this view.
    * First, we will use the global state methods found in the App Context.
@@ -90,16 +91,26 @@ export default function useJourneyHandler({ action, form }) {
       const previousStage = prev?.getStage && prev.getStage();
       const previousCallbacks = prev?.callbacks;
       const previousPayload = prev?.payload;
+      let nextStep;
 
       /** *********************************************************************
        * SDK INTEGRATION POINT
        * Summary: Call the SDK's next method to submit the current step.
        * ----------------------------------------------------------------------
        * Details: This calls the next method with the previous step, expecting
-       * the next step to be returned, or a success or failure.
+       * the next step to be returned, or a success or failure. Or, it calls
+       * resume with the current URL.
        ********************************************************************* */
       if (DEBUGGER) debugger;
-      const nextStep = await FRAuth.next(prev, { tree: form.tree });
+      /**
+       * If we are returning from an auth code redirect, resume with code and state.
+       * If not, call FRAuth.next as usual.
+       */
+      if (url.includes('code=') && url.includes('state=')) {
+        nextStep = await FRAuth.resume(url);
+      } else {
+        nextStep = await FRAuth.next(prev, { tree: form.tree });
+      }
 
       /**
        * Condition for handling start, error handling and completion
@@ -151,6 +162,10 @@ export default function useJourneyHandler({ action, form }) {
          * If we got here, then the form submission was both successful
          * and requires additional step rendering.
          */
+        const redirectCb = nextStep.getCallbacksOfType('RedirectCallback');
+        if (redirectCb.length) {
+          return FRAuth.redirect(nextStep);
+        }
         setRenderStep(nextStep);
         setSubmittingForm(false);
       }

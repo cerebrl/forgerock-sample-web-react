@@ -9,7 +9,7 @@
  */
 
 import React, { Fragment, useEffect, useContext, useReducer } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import Boolean from './boolean';
 import { DEBUGGER } from '../../constants';
@@ -21,6 +21,7 @@ import Password from './password';
 import treeReducer from './tree-reducer';
 import useJourneyHandler from './journey-state';
 import { AppContext } from '../../global-state';
+import SelectIdp from './select-idp';
 import TermsConditions from './terms-conditions';
 import Text from './text';
 import Unknown from './unknown';
@@ -49,6 +50,8 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
   const [form] = useReducer(treeReducer, treeReducer(null, action));
   // Used for redirection after success
   const history = useHistory();
+  // Get location object
+  const url = window.location.href;
 
   /**
    * Custom "hook" for handling form orchestration
@@ -56,7 +59,7 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
   const [
     { formFailureMessage, renderStep, submittingForm, user },
     { setSubmissionStep, setSubmittingForm },
-  ] = useJourneyHandler({ action, form });
+  ] = useJourneyHandler({ action, form, url });
 
   /**
    * If the user successfully authenticates, let React complete
@@ -91,6 +94,26 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
   }, [user]);
 
   /**
+   * Submit form and step back to ForgeRock server.
+   */
+  function submitForm(isLocalAuth) {
+    // Indicate form processing
+    setSubmittingForm(true);
+    const selectIdPCb = renderStep.getCallbacksOfType('SelectIdPCallback');
+
+    /**
+     * If SelectIdPCallback is present, and the user submitted local credentials,
+     * set the provider to 'localAuthentication'.
+     */
+    if (selectIdPCb.length && isLocalAuth) {
+      selectIdPCb[0].setProvider('localAuthentication');
+    }
+
+    // set currently rendered step as step to be submitted
+    setSubmissionStep(renderStep);
+  }
+
+  /**
    * Iterate through callbacks received from AM and map the callback to the
    * appropriate callback component, pushing that component
    * the StepComponent's array.
@@ -117,6 +140,15 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
         return <Password callback={cb} inputName={name} key={name} />;
       case 'BooleanAttributeInputCallback':
         return <Boolean callback={cb} inputName={name} key={name} />;
+      case 'SelectIdPCallback':
+        return (
+          <SelectIdp
+            callback={cb}
+            inputName={name}
+            key={name}
+            submitForm={submitForm}
+          />
+        );
       case 'TermsAndConditionsCallback':
         return <TermsConditions callback={cb} inputName={name} key={name} />;
       case 'KbaCreateCallback':
@@ -164,10 +196,7 @@ export default function Form({ action, bottomMessage, followUp, topMessage }) {
           className="cstm_form"
           onSubmit={(event) => {
             event.preventDefault();
-            // Indicate form processing
-            setSubmittingForm(true);
-            // set currently rendered step as step to be submitted
-            setSubmissionStep(renderStep);
+            submitForm(true);
           }}
         >
           {formFailureMessage ? (
