@@ -10,6 +10,7 @@
 
 import { FRAuth, TokenManager, UserManager } from '@forgerock/javascript-sdk';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { DEBUGGER } from '../../constants';
 import { htmlDecode } from '../../utilities/decode';
@@ -43,6 +44,8 @@ export default function useJourneyHandler({ action, form, url }) {
   const [submittingForm, setSubmittingForm] = useState(false);
   // User state
   const [user, setUser] = useState(null);
+  // Get history object from router
+  const history = useHistory();
 
   /**
    * Since we have API calls to AM, we need to handle these requests as side-effects.
@@ -108,6 +111,7 @@ export default function useJourneyHandler({ action, form, url }) {
        */
       if (url.includes('code=') && url.includes('state=')) {
         nextStep = await FRAuth.resume(url);
+        history.replace('/login');
       } else {
         nextStep = await FRAuth.next(prev, { tree: form.tree });
       }
