@@ -33,7 +33,7 @@ export default function SelectIdp({ callback, submitForm }) {
   }
 
   return (
-    <div className="mb-1">
+    <div className="mt-4 mb-1">
       {providers.map((provider, idx) => {
         if (provider.provider === 'localAuthentication') {
           // don't render anything
@@ -49,7 +49,7 @@ export default function SelectIdp({ callback, submitForm }) {
               state.theme.mode === 'light'
                 ? 'btn-outline-secondary'
                 : 'btn-outline-dark'
-            } w-100 my-4`}
+            } w-100 my-2`}
             key={idx}
           >
             {icons[provider.provider]()}
