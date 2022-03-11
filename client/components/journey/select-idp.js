@@ -15,16 +15,22 @@ import GoogleIcon from '../icons/google-icon';
 import LinkedInIcon from '../icons/linkedin-icon';
 import { AppContext } from '../../global-state';
 
-const icons = {
-  github_sdk: GithubIcon,
-  google_sdk: GoogleIcon,
-  linkedin_sdk: LinkedInIcon,
-};
-
 export default function SelectIdp({ callback, submitForm }) {
   const [state] = useContext(AppContext);
 
   const providers = callback.getProviders();
+
+  function getProviderIcon(provider) {
+    if (provider.includes('github')) {
+      return <GithubIcon />;
+    } else if (provider.includes('google')) {
+      return <GoogleIcon />;
+    } else if (provider.includes('linkedin')) {
+      return <LinkedInIcon />;
+    } else {
+      return null;
+    }
+  }
 
   function selectProvider(provider, submit) {
     callback.setProvider(provider);
@@ -52,7 +58,7 @@ export default function SelectIdp({ callback, submitForm }) {
             } w-100 my-2`}
             key={idx}
           >
-            {icons[provider.provider]()}
+            {getProviderIcon(provider.provider)}
             <span
               className={`${state.theme.textClass} ${state.theme.borderClass}`}
             >
