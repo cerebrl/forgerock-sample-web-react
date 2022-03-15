@@ -51,9 +51,11 @@ Config.set({
   scope: 'openid profile email',
   serverConfig: {
     baseUrl: AM_URL,
+    sessionCookieName: 'e1babb394ea5130',
     timeout: '5000',
   },
   realmPath: REALM_PATH,
+  support: 'modern',
   tree: JOURNEY_LOGIN,
 });
 

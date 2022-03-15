@@ -98,5 +98,10 @@ module.exports = () => {
         'process.env.REALM_PATH': JSON.stringify(REALM_PATH),
       }),
     ],
+    resolve: {
+      alias: {
+        '@forgerock/javascript-sdk': path.resolve(__dirname, 'lib/index.js'),
+      },
+    },
   };
 };
