@@ -62,7 +62,11 @@ export default function useJourneyHandler({ action, form }) {
        * ensure we get fresh tokens, regardless of existing tokens.
        ************************************************************************* */
       if (DEBUGGER) debugger;
-      await TokenManager.getTokens({ forceRenew: true });
+      try {
+        await TokenManager.getTokens({ forceRenew: true });
+      } catch (err) {
+        console.info(`Error: get tokens; ${err}`);
+      }
 
       /** *********************************************************************
        * SDK INTEGRATION POINT
@@ -73,8 +77,14 @@ export default function useJourneyHandler({ action, form }) {
        * user info in the UI.
        ********************************************************************* */
       if (DEBUGGER) debugger;
-      const user = await UserManager.getCurrentUser();
-      setUser(user);
+      try {
+        const user = await UserManager.getCurrentUser();
+        setUser(user);
+      } catch (err) {
+        console.error(`Error: get current user; ${err}`);
+
+        setUser({});
+      }
     }
 
     /**
@@ -99,7 +109,22 @@ export default function useJourneyHandler({ action, form }) {
        * the next step to be returned, or a success or failure.
        ********************************************************************* */
       if (DEBUGGER) debugger;
-      const nextStep = await FRAuth.next(prev, { tree: form.tree });
+      let nextStep;
+      try {
+        nextStep = await FRAuth.next(prev, { tree: form.tree });
+      } catch (err) {
+        console.error(`Error: failure in next step request; ${err}`);
+
+        /**
+         * Setup an object to display failure message
+         */
+        nextStep = {
+          type: 'LoginFailure',
+          payload: {
+            message: 'Unknown request failure',
+          },
+        };
+      }
 
       /**
        * Condition for handling start, error handling and completion
@@ -122,7 +147,22 @@ export default function useJourneyHandler({ action, form }) {
          * function again but with no step (null) to get a fresh authId.
          ******************************************************************* */
         if (DEBUGGER) debugger;
-        const newStep = await FRAuth.next(null, { tree: form.tree });
+        let newStep;
+        try {
+          newStep = await FRAuth.next(null, { tree: form.tree });
+        } catch (err) {
+          console.error(`Error: failure in new step request; ${err}`);
+
+          /**
+           * Setup an object to display failure message
+           */
+          newStep = {
+            type: 'LoginFailure',
+            payload: {
+              message: 'Unknown request failure',
+            },
+          };
+        }
 
         /** *******************************************************************
          * SDK INTEGRATION POINT

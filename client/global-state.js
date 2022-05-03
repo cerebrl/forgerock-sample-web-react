@@ -22,12 +22,7 @@ import { DEBUGGER } from './constants';
  * @param {Object} props.username - User's username
  * @returns {Array} - Global state values and state methods
  */
-export function useGlobalStateMgmt({
-  email,
-  isAuthenticated,
-  prefersDarkTheme,
-  username,
-}) {
+export function useGlobalStateMgmt({ email, isAuthenticated, prefersDarkTheme, username }) {
   /**
    * Create state properties for "global" state.
    * Using internal names that differ from external to prevent shadowing.
@@ -56,7 +51,11 @@ export function useGlobalStateMgmt({
        * APIs are called and we get a 401 response.
        ********************************************************************* */
       if (DEBUGGER) debugger;
-      await FRUser.logout();
+      try {
+        await FRUser.logout();
+      } catch (err) {
+        console.error(`Error: logout did not successfully complete; ${err}`);
+      }
     }
     setAuthentication(value);
   }
