@@ -8,7 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { FRUser } from '@forgerock/javascript-sdk';
+// import { FRUser } from '@forgerock/javascript-sdk';
 import React, { useState } from 'react';
 
 import { DEBUGGER } from './constants';

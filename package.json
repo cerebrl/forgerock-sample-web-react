@@ -8,7 +8,7 @@
     "clean": "shx rm -rf \"./public/app*\" ./node_modules ./package-lock.json",
     "lint": "eslint './{client,server}/**/*.{js,mjs}' --fix",
     "reset": "shx rm -rf ./todos ./users && npm run clean && git clean -fX -e \"!.env\" -e \"!*.pem\"",
-    "start": "ws --https -d public/ --spa index.html -p 8443 & node -r dotenv/config ./server/index.mjs",
+    "start": "ws -d public/ --https -p 8443 & node -r dotenv/config ./server/index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack -w"
   },
@@ -43,7 +43,6 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "@forgerock/javascript-sdk": "^3.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

@@ -8,7 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import AccountIcon from '../icons/account-icon';
@@ -17,6 +17,9 @@ import ForgeRockIcon from '../icons/forgerock-icon';
 import HomeIcon from '../icons/home-icon';
 import ReactIcon from '../icons/react-icon';
 import TodosIcon from '../icons/todos-icon';
+
+import LoginWidget, { modal, user } from 'forgerock-web-login-widget/modal';
+import 'forgerock-web-login-widget/widget.css';
 
 /**
  * @function Header - Header React view
@@ -29,11 +32,41 @@ export default function Header() {
    * The destructing of the hook's array results in index 0 having the state value,
    * and index 1 having the "setter" method to set new state values.
    */
-  const [state] = useContext(AppContext);
+  const [state, methods] = useContext(AppContext);
   const location = useLocation();
 
   let TodosItem;
   let LoginOrOutItem;
+
+  useEffect(() => {
+    new LoginWidget({
+      target: document.getElementById('login-widget'),
+      props: {
+        config: {
+          clientId: 'WebOAuthClient', // e.g. 'ForgeRockSDKClient'
+          // redirectUri: 'https://react.crbrl.ngrok.io/callback',
+          redirectUri: 'https://react.example.com/8443',
+          scope: 'openid profile me.read', // e.g. 'openid profile me.read'
+          serverConfig: {
+            baseUrl: 'https://openam-crbrl-01.forgeblocks.com/am',
+            // baseUrl: 'https://crbrl.ngrok.io/proxy', // e.g. 'https://openam.example.com:9443/openam/'
+            timeout: 30000, // 90000 or less
+            // paths: {
+            //   authenticate: 'authenticate',
+            //   authorize: 'authorize',
+            //   accessToken: 'access-token',
+            //   endSession: 'end-session',
+            //   userInfo: 'userinfo',
+            //   revoke: 'revoke',
+            //   sessions: 'sessions',
+            // },
+          },
+          realmPath: 'alpha', // e.g. 'root'
+          tree: 'Login', // e.g. 'Login'
+        },
+      },
+    });
+  }, []);
 
   /**
    * Render different navigational items depending on authenticated status
@@ -99,9 +132,9 @@ export default function Header() {
               </div>
             </li>
             <li>
-              <Link className="dropdown-item py-2" to="/logout">
+              <button className="dropdown-item py-2" onClick={User.logout}>
                 Sign Out
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
@@ -111,14 +144,14 @@ export default function Header() {
     TodosItem = null;
     LoginOrOutItem = (
       <div className="d-flex py-3">
-        <Link
-          className={`cstm_login-link py-2 px-3 mx-1 ${
+        <button
+          className={`btn btn-link cstm_login-link py-2 px-3 mx-1 ${
             state.theme.mode === 'dark' ? 'cstm_login-link_dark' : ''
           }`}
-          to="/login"
+          onClick={modal.open}
         >
           Sign In
-        </Link>
+        </button>
         <Link className="btn btn-primary" to="/register">
           Sign Up
         </Link>

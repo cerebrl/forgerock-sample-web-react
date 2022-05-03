@@ -11,14 +11,14 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
 
-import { ProtectedRoute } from './utilities/route';
-import Todos from './views/todos';
+// import { ProtectedRoute } from './utilities/route';
+// import Todos from './views/todos';
 import Footer from './components/layout/footer';
 import Header from './components/layout/header';
 import Home from './views/home';
-import Login from './views/login';
-import Logout from './views/logout';
-import Register from './views/register';
+// import Login from './views/login';
+// import Logout from './views/logout';
+// import Register from './views/register';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -38,7 +38,7 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/login">
+        {/* <Route path="/login">
           <Login />
         </Route>
         <Route path="/register">
@@ -51,7 +51,7 @@ export default function Router() {
         </ProtectedRoute>
         <Route path="/logout">
           <Logout />
-        </Route>
+        </Route> */}
         <Route path="/">
           <ScrollToTop />
           <Header />

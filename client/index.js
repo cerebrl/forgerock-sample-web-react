@@ -8,7 +8,7 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-import { Config, TokenStorage } from '@forgerock/javascript-sdk';
+// import { Config, TokenStorage } from '@forgerock/javascript-sdk';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -45,17 +45,17 @@ import './styles/index.scss';
  * - tree: The authentication journey/tree that you are wanting to use
  *************************************************************************** */
 if (DEBUGGER) debugger;
-Config.set({
-  clientId: WEB_OAUTH_CLIENT,
-  redirectUri: `${APP_URL}/callback`,
-  scope: 'openid profile email',
-  serverConfig: {
-    baseUrl: AM_URL,
-    timeout: '5000',
-  },
-  realmPath: REALM_PATH,
-  tree: JOURNEY_LOGIN,
-});
+// Config.set({
+//   clientId: WEB_OAUTH_CLIENT,
+//   redirectUri: `${APP_URL}/callback`,
+//   scope: 'openid profile email',
+//   serverConfig: {
+//     baseUrl: AM_URL,
+//     timeout: '5000',
+//   },
+//   realmPath: REALM_PATH,
+//   tree: JOURNEY_LOGIN,
+// });
 
 /**
  * Initialize the React application
@@ -70,7 +70,7 @@ Config.set({
    * authenticated.
    ************************************************************************* */
   if (DEBUGGER) debugger;
-  const isAuthenticated = !!(await TokenStorage.get());
+  const isAuthenticated = false; // !!(await TokenStorage.get());
 
   /**
    * Pull custom values from outside of the app to (re)hydrate state.

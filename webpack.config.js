@@ -14,8 +14,10 @@ module.exports = () => {
   const DEBUGGER_OFF = process.env.DEBUGGER_OFF || localEnv.DEBUGGER_OFF;
   const DEVELOPMENT = process.env.DEVELOPMENT || localEnv.DEVELOPMENT;
   const JOURNEY_LOGIN = process.env.JOURNEY_LOGIN || localEnv.JOURNEY_LOGIN;
-  const JOURNEY_REGISTER = process.env.JOURNEY_REGISTER || localEnv.JOURNEY_REGISTER;
-  const WEB_OAUTH_CLIENT = process.env.WEB_OAUTH_CLIENT || localEnv.WEB_OAUTH_CLIENT;
+  const JOURNEY_REGISTER =
+    process.env.JOURNEY_REGISTER || localEnv.JOURNEY_REGISTER;
+  const WEB_OAUTH_CLIENT =
+    process.env.WEB_OAUTH_CLIENT || localEnv.WEB_OAUTH_CLIENT;
   const REALM_PATH = process.env.REALM_PATH || localEnv.REALM_PATH;
 
   return {
@@ -81,6 +83,10 @@ module.exports = () => {
             // Processes SCSS into CSS
             'sass-loader',
           ],
+        },
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
         },
       ],
     },
