@@ -70,14 +70,17 @@ Config.set({
    * authenticated.
    ************************************************************************* */
   if (DEBUGGER) debugger;
-  const isAuthenticated = !!(await TokenStorage.get());
+  let isAuthenticated;
+  try {
+    isAuthenticated = !!(await TokenStorage.get());
+  } catch (err) {
+    console.error(`Error: token retrieval for hydration; ${err}`);
+  }
 
   /**
    * Pull custom values from outside of the app to (re)hydrate state.
    */
-  const prefersDarkTheme = window.matchMedia(
-    '(prefers-color-scheme: dark)'
-  ).matches;
+  const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const email = window.sessionStorage.getItem('sdk_email');
   const username = window.sessionStorage.getItem('sdk_username');
   const rootEl = document.getElementById('root');

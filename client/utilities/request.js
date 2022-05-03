@@ -47,6 +47,8 @@ export default async function apiRequest(resource, method, data) {
     }
     json = await response.json();
   } catch (err) {
+    console.error(`Error: API request; ${err}`);
+
     json = {
       error: err.message,
     };

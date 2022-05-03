@@ -53,6 +53,8 @@ function useAuthValidation(auth, setAuth) {
           await UserManager.getCurrentUser();
           setValid('valid');
         } catch (err) {
+          console.info(`Info: route validation; ${err}`);
+
           setAuth(false);
           setValid('invalid');
         }
@@ -104,7 +106,7 @@ export function ProtectedRoute({ children, path }) {
             return <Redirect to="/login" />;
           default:
             // State is 'unknown', so we are waiting on token validation
-            return <Loading classes="pt-5" message="Validating session ... " />;
+            return <Loading classes="pt-5" message="Verifying access ... " />;
         }
       }}
     />
