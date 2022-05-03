@@ -7,15 +7,12 @@
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE file for details.
  */
-
 import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { createServer } from 'http';
-import { createServer as createSecureServer } from 'https';
-import { env } from 'process';
 
-import { PORT, SEC_CERT, SEC_KEY } from './constants.mjs';
+import { AM_URL, PORT } from './constants.mjs';
 import routes from './routes.mjs';
 
 /**
@@ -31,7 +28,7 @@ app.use(
       // DON'T DO THIS IN PRODUCTION!
       return callback(null, true);
     },
-  })
+  }),
 );
 
 /**
@@ -39,7 +36,6 @@ app.use(
  */
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
-  console.log(`BODY: ${JSON.stringify(req.body)}`);
   next();
 });
 
@@ -51,18 +47,20 @@ routes(app);
 /**
  * Attach application to port and listen for requests
  */
-if (process.env.DEVELOPMENT) {
-  /**
-   * Ignore self-signed cert warning
-   */
-  env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+if (!AM_URL) {
+  createServer(() => null).listen(PORT);
 
-  console.log('Creating secure server');
-  createSecureServer({ cert: SEC_CERT, key: SEC_KEY }, app).listen(PORT);
+  console.error(
+    'ERROR: Missing .env value. Ensure you have an .env file within the dir of this sample app.',
+  );
+  console.error(
+    'Ensure you have a .env file with appropriate values and the proper security certificate and key.',
+  );
+  console.error('Please stop this process.');
 } else {
   // Prod uses Nginx, so run regular server
-  console.log('Creating regular server');
+  console.log('Creating Node HTTP server');
   createServer(app).listen(PORT);
-}
 
-console.log(`Listening to HTTPS on secure port: ${PORT}`);
+  console.log(`Node server listening on port: ${PORT}.`);
+}

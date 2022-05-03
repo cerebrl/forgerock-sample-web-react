@@ -10,14 +10,7 @@
 
 import request from 'superagent';
 
-import {
-  AM_URL,
-  CONFIDENTIAL_CLIENT,
-  REALM_PATH,
-  SEC_KEY,
-  SEC_CERT,
-} from './constants.mjs';
-
+import { AM_URL, CONFIDENTIAL_CLIENT, REALM_PATH } from './constants.mjs';
 /**
  * @function auth - Auth middleware for checking the validity of user's auth
  * @param {Object} req - Node.js' req object
@@ -33,20 +26,19 @@ export async function auth(req, res, next) {
       const [_, token] = req.headers.authorization.split(' ');
       response = await request
         .post(`${AM_URL}oauth2/realms/root/realms/${REALM_PATH}/introspect`)
-        .key(SEC_KEY)
-        .cert(SEC_CERT)
         .set('Content-Type', 'application/json')
         .set('Authorization', `Basic ${CONFIDENTIAL_CLIENT}`)
         .query({ token });
     }
   } catch (err) {
+    console.log(JSON.stringify(err));
     console.log(`Error: auth middleware: ${err}`);
     response = {
       body: {},
     };
   }
 
-  if (response.body.active || response.body.valid) {
+  if (response?.body?.active) {
     req.user = response.body;
     next();
   } else {

@@ -50,10 +50,7 @@ export default async function routes(app) {
   app.post('/todos/:id', auth, async (req, res) => {
     const ref = await db.get(req.user, req.params.id);
 
-    const completed =
-      typeof req.body.completed === 'boolean'
-        ? req.body.completed
-        : ref.completed;
+    const completed = typeof req.body.completed === 'boolean' ? req.body.completed : ref.completed;
 
     await db.put(req.user, {
       _id: ref._id,
@@ -73,5 +70,9 @@ export default async function routes(app) {
     await db.put(req.user, todo);
 
     res.status(204).send('OK');
+  });
+
+  app.get('/healthcheck', (_, res) => {
+    res.status(200).send('Ok');
   });
 }
